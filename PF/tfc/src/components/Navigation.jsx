@@ -36,10 +36,20 @@ const Navigation = () => {
           </div>
         </div>
         <div>
-          <Link
-            to="/login/"
-            className="block text-gray-700 hover:text-blue-600 p-0 text-sm"
-          >Login</Link>
+          <ul className="flex p-4 flex-row space-x-8 mt-0 text-sm font-medium border-0">
+              <li>
+                <Link
+                  to="/register/"
+                  className="block text-gray-700 hover:text-blue-600 p-0 text-sm"
+                >Register</Link>
+              </li>
+              <li>
+                <Link
+                  to="/login/"
+                  className="block text-gray-700 hover:text-blue-600 p-0 text-sm"
+                >Login</Link>
+              </li>
+            </ul>
         </div>
       </div>
     </nav>
