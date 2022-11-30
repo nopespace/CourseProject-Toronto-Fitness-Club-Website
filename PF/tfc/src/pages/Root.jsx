@@ -5,7 +5,7 @@ const Root = () => {
   return (
     <>
       <Navigation />
-      <div>
+      <div className="grid place-items-center my-20">
         Welcome to the main page!
       </div>
     </>
