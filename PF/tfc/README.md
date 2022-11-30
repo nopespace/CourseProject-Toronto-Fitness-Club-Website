@@ -1,6 +1,5 @@
 # CSC309 Frontend project
 
-
 ## Available Scripts
 
 In the project directory, you can run:
