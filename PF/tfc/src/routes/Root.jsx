@@ -1,8 +1,10 @@
 import * as React from 'react';
+import Navigation from '../components/Navigation';
 
-function App() {
+function Root() {
   return (
     <div className="App">
+      <Navigation />
       <header className="App-header">
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -20,12 +22,12 @@ function App() {
         </div>
         <div>
           <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+            Hello world!
+          </h1>
         </div>
       </header>
     </div>
   );
 }
 
-export default App;
+export default Root;
