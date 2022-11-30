@@ -1,6 +1,5 @@
-# Getting Started with Create React App
+# CSC309 Frontend project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
