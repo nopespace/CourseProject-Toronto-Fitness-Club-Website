@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Navigation from './Navigation';
+import Navigation from '../components/Navigation';
+import SearchBar from '../components/SearchBar';
 
 const Subscriptions = () => {
 return (
