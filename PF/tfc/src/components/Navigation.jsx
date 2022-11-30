@@ -36,7 +36,6 @@ const Navigation = () => {
                   Subscriptions
                 </Link>
               </li>
-              <li></li>
             </ul>
           </div>
         </div>

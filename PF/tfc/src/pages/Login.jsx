@@ -1,10 +1,13 @@
 import * as React from "react";
-import LoginComp from "../components/LoginComp";
+import Navigation from "../components/Navigation";
 
 const Login = () => {
   return (
     <>
-      <LoginComp />
+      <Navigation />
+      <div>
+        
+      </div>
     </>
   );
 };
