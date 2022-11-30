@@ -3,45 +3,43 @@ import { Link } from "react-router-dom";
 
 const Navigation = () => {
   return (
-    <nav class="bg-orange-400 px-2 py-2.5">
-      <div class="container flex flex-wrap items-center justify-between mx-auto">
-        <Link to="/" class="flex items-center">
-          <img src="/logo.png" class="h-14 mr-2" alt="TFC Logo" />
-        </Link>
-        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul class="flex flex-col p-4 mt-4 border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
-            <li>
-              <Link
-                to="/" 
-                class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 md:p-0"
-                aria-current="page"
-              >Home</Link>
-            </li>
-            <li>
-              <Link
-                to="/"
-                class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 md:p-0"
-              >Home</Link>
-            </li>
-            <li>
-              <Link
-                to="/"
-                class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 md:p-0"
-              >Home</Link>
-            </li>
-            <li>
-              <Link
-                to="/"
-                class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 md:p-0"
-              >Home</Link>
-            </li>
-            <li>
-              <Link
-                to="login/"
-                class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 md:p-0"
-              >Login</Link>
-            </li>
-          </ul>
+    <nav className="bg-orange-400 px-2 py-2.5">
+      <div className="container flex flex-wrap items-center justify-between w-full">
+        <div className="flex ml-8">
+          <Link to="/" className="flex items-center mr-10">
+            <img src="/logo.png" className="h-14" alt="TFC Logo" />
+          </Link>
+          <div className="md:block md:w-auto" id="navbar-default">
+            <ul className="flex p-4 flex-row space-x-8 mt-0 text-sm font-medium border-0">
+              <li>
+                <Link
+                  to="/" 
+                  className="block text-gray-700 hover:text-blue-700 p-0"
+                  aria-current="page"
+                >Studios</Link>
+              </li>
+              <li>
+                <Link
+                  to="/"
+                  className="block text-gray-700 hover:text-blue-700 p-0"
+                >Classes</Link>
+              </li>
+              <li>
+                <Link
+                  to="/"
+                  className="block text-gray-700 hover:text-blue-700 p-0"
+                >Subscriptions</Link>
+              </li>
+              <li>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <Link
+            to="/login/"
+            className="block text-gray-700 hover:text-blue-700 p-0 text-sm"
+          >Login</Link>
         </div>
       </div>
     </nav>
