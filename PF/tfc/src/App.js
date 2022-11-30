@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import * as React from 'react';
+import Button from '@mui/material/Button';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -22,6 +24,9 @@ function App() {
         >
           Learn React
         </a>
+        <div>
+          <Button variant="contained">Hello World</Button>
+        </div>
       </header>
     </div>
   );
