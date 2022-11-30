@@ -2,7 +2,8 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import './index.css';
 
-import Root from "./routes/Root.jsx";
+import Root from "./pages/Root.jsx";
+import Login from "./pages/Login";
 
 import {
   createBrowserRouter,
@@ -15,8 +16,8 @@ const router = createBrowserRouter([
     element: <Root/>,
   },
   {
-    path: "about",
-    element: <div>About</div>,
+    path: "login",
+    element: <Login />,
   },
 ]);
 
