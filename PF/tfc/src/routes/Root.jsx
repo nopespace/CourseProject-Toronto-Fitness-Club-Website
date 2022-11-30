@@ -1,18 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -24,8 +15,13 @@ function App() {
         >
           Learn React
         </a>
+        <div className="text-3xl font-bold underline">
+          hellooo this is a testtte
+        </div>
         <div>
-          <Button variant="contained">Hello World</Button>
+          <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1>
         </div>
       </header>
     </div>
