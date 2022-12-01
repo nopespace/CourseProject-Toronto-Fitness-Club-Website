@@ -23,10 +23,6 @@ const router = createBrowserRouter([
     element: <Studios />,
   },
   {
-    path: "classes/",
-    element: <Classes />,
-  },
-  {
     path: "subscriptions/",
     element: <Subscriptions />,
   },
