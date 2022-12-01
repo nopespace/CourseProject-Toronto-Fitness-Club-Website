@@ -1,10 +1,8 @@
 import * as React from 'react';
-import Navigation from './Navigation';
 
-const RegisterComp = () => {
+const RegisterBox = () => {
   return (
     <>
-    <Navigation />
       <div className="grid place-items-center my-20">
         <div className="my-20 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
           <form class="space-y-6" action="#">
@@ -117,4 +115,4 @@ const RegisterComp = () => {
   );
 }
 
-export default RegisterComp;
+export default RegisterBox;

@@ -1,10 +1,12 @@
 import * as React from 'react';
-import RegisterComp from '../components/RegisterComp';
+import RegisterBox from '../components/RegisterBox';
+import Navigation from '../components/Navigation';
 
 const Register = () => {
   return (
     <>
-      <RegisterComp />
+      <Navigation />
+      <RegisterBox />
     </>
   );
 }
