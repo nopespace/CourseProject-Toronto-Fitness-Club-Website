@@ -1,13 +1,10 @@
 import * as React from 'react';
-import Navigation from '../components/Navigation';
+import RegisterComp from '../components/RegisterComp';
 
 const Register = () => {
   return (
     <>
-      <Navigation />
-      <div className="grid place-items-center my-20"> 
-        Welcome to the register page!
-      </div>
+      <RegisterComp />
     </>
   );
 }
