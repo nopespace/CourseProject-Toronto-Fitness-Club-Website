@@ -1,15 +1,12 @@
-import * as React from 'react';
-import Navigation from '../components/Navigation';
+import * as React from "react";
+import StudiosComp from "../components/StudiosComp";
 
 const Studios = () => {
   return (
     <>
-      <Navigation />
-      <div className="grid place-items-center my-20"> 
-        Welcome to the studios page!
-      </div>
+      <StudiosComp />
     </>
   );
-}
+};
 
 export default Studios;
