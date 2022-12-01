@@ -1,0 +1,937 @@
+{
+	"info": {
+		"_postman_id": "09910737-f6df-4d62-8868-2c008425e340",
+		"name": "csc309-project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24344253"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "abcddd",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "baaaa@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "first_name",
+							"value": "daniel",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "jinjin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "asdfasdfasdf",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "111-111-1111",
+							"description": "xxx-xxx-xxxx",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/accounts/register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"accounts",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var res = pm.response.json();",
+							"pm.environment.set('token', res.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "abcdd",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "asdfasdfasdf",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/accounts/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"accounts",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit profile",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "abcdddd",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "chloe@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "first_name",
+							"value": "jin",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "jinjin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "asdfasdfasdf",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "111-111-1111",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/accounts/edit/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"accounts",
+						"edit",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/accounts/logout/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"accounts",
+						"logout",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list all studios",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/studios/list/?lat=43.66&lon=-79.40",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"studios",
+						"list",
+						""
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "43.66"
+						},
+						{
+							"key": "lon",
+							"value": "-79.40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search all studios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/studios/list/?keyword=S&criterion=studio name&lat=46.33&lon=-79.99",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"studios",
+						"list",
+						""
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "S",
+							"description": "(optional)"
+						},
+						{
+							"key": "criterion",
+							"value": "studio name",
+							"description": "(optional) studio name, amenity, class name, coach name\n"
+						},
+						{
+							"key": "lat",
+							"value": "46.33"
+						},
+						{
+							"key": "lon",
+							"value": "-79.99"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "specific studio",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/studios/2/?lat=43.81&lon=-79.17",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"studios",
+						"2",
+						""
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "43.81"
+						},
+						{
+							"key": "lon",
+							"value": "-79.17"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list classes of a studio",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/classes/schedule/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"classes",
+						"schedule",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search class in a studio(1)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/classes/search/?keyword=C&criterion=class name&studio_id=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"classes",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "C"
+						},
+						{
+							"key": "criterion",
+							"value": "class name",
+							"description": "class name, coach name, date, date range, time range"
+						},
+						{
+							"key": "studio_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search class in a studio(2)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/classes/search/?start_var=16:00&end_var=20:00&criterion=time range&studio_id=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"classes",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "start_var",
+							"value": "16:00",
+							"description": "yyyy-mm-dd for date, hh:mm:ss for time"
+						},
+						{
+							"key": "end_var",
+							"value": "20:00",
+							"description": "yyyy-mm-dd for date, hh:mm:ss for time"
+						},
+						{
+							"key": "criterion",
+							"value": "time range",
+							"description": "date range, time range"
+						},
+						{
+							"key": "studio_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "enroll class",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "class_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "2022-11-18",
+							"type": "text"
+						},
+						{
+							"key": "all",
+							"value": "True",
+							"description": "True if enroll all future occurrences",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/classes/enroll/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"classes",
+						"enroll",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "drop class",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "class_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "2022-11-29",
+							"type": "text"
+						},
+						{
+							"key": "all",
+							"value": "True",
+							"description": "drop all future occurrences",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/classes/drop/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"classes",
+						"drop",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list user future class",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/classes/user/future/schedule/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"classes",
+						"user",
+						"future",
+						"schedule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list user past class",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/classes/user/past/schedule/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"classes",
+						"user",
+						"past",
+						"schedule",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add payment card",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "card_num",
+							"value": "1111",
+							"type": "text"
+						},
+						{
+							"key": "cardholder",
+							"value": "Daniel",
+							"type": "text"
+						},
+						{
+							"key": "expiry_date",
+							"value": "2030-09-11",
+							"type": "text"
+						},
+						{
+							"key": "CVV",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/subscriptions/card/add/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"subscriptions",
+						"card",
+						"add",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get cur payment card",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/subscriptions/card/update/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"subscriptions",
+						"card",
+						"update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update payment card",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "card_num",
+							"value": "1231233",
+							"type": "text"
+						},
+						{
+							"key": "cardholder",
+							"value": "A",
+							"type": "text"
+						},
+						{
+							"key": "expiry_date",
+							"value": "2030-09-21",
+							"type": "text"
+						},
+						{
+							"key": "CVV",
+							"value": "111",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/subscriptions/card/update/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"subscriptions",
+						"card",
+						"update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user add plan",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "plan_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/subscriptions/add/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"subscriptions",
+						"add",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list gym's all plans",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/subscriptions/add/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"subscriptions",
+						"add",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user update plan",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "plan_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "cancelled",
+							"value": "False",
+							"description": "True if you want to cancel current plan",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/subscriptions/update/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"subscriptions",
+						"update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retrieve user's current plan",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/subscriptions/update/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"subscriptions",
+						"update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payment history",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/subscriptions/paymentsHistory/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"subscriptions",
+						"paymentsHistory",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
