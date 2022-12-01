@@ -1,14 +1,10 @@
 import * as React from 'react';
-import Navigation from '../components/Navigation';
-import Test from '../components/LoginComp';
+import ClassComp from '../components/ClassComp';
 
 const Classes = () => {
   return (
     <>
-    <Navigation />
-      <div className="grid place-items-center my-20"> 
-        Welcome to the classes page!
-      </div>
+      <ClassComp />
     </>
   );
 }

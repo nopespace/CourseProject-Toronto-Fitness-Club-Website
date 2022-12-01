@@ -1,7 +1,7 @@
 import * as React from "react";
 import Navigation from "./Navigation";
 
-const StudiosComp = () => {
+const ClassComp = () => {
   return (
     <>
       <Navigation />
@@ -167,4 +167,4 @@ const StudiosComp = () => {
   );
 };
 
-export default StudiosComp;
+export default ClassComp;
