@@ -12,7 +12,7 @@ class Studios extends React.Component {
 
     axios({
       method: "get",
-      url: "http://127.0.0.1:8000/studios/list/?lat=1&lon=11"
+      url: "http://127.0.0.1:8000/studios/list/?lat=1&lon=11",
       // TODO: Add the lat and lon here
     })
       .then((res) => {
@@ -20,6 +20,7 @@ class Studios extends React.Component {
         this.setState({
           details: data,
         });
+        console.log(data);
       })
       .catch((err) => {});
   }
@@ -29,13 +30,12 @@ class Studios extends React.Component {
       <>
         <StudiosComp />
         <div>
-          {this.state.details}
-          {/* {this.state.details.map((item) => (
+          {this.state.details.map((item) => (
             <div key={item.id}>
               <p>{item.name}</p>
               <p>{item.address}</p>
             </div>
-          ))} */}
+          ))}
         </div>
       </>
     );
