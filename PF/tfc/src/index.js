@@ -4,7 +4,6 @@ import './index.css';
 
 import Root from "./pages/Root";
 import Studios from "./pages/Studios";
-import Classes from "./pages/Classes";
 import Subscriptions from "./pages/Subscriptions";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -21,10 +20,6 @@ const router = createBrowserRouter([
   {
     path: "studios/",
     element: <Studios />,
-  },
-  {
-    path: "classes/",
-    element: <Classes />,
   },
   {
     path: "subscriptions/",

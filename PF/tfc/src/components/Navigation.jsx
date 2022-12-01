@@ -22,14 +22,6 @@ const Navigation = () => {
               </li>
               <li>
                 <Link
-                  to="/classes/"
-                  className="block text-gray-700 hover:text-blue-600 p-0"
-                >
-                  Classes
-                </Link>
-              </li>
-              <li>
-                <Link
                   to="/subscriptions/"
                   className="block text-gray-700 hover:text-blue-600 p-0"
                 >
