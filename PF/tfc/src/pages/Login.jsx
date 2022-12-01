@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <>
       <Navigation />
-      <RegisterBox />
+      <RegisterBox login={true} />
     </>
   );
 };
