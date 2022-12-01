@@ -1,5 +1,6 @@
 import * as React from "react";
 import Navigation from "../components/Navigation";
+import StudioDisplay from "../components/StudioDisplay";
 import axios from "axios";
 
 // For Pagenation
@@ -8,15 +9,16 @@ import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
 
 
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+// const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 function Items({ currentItems }) {
   return (
     <>
       {currentItems &&
         currentItems.map((item) => (
-          <div>
-            <h3>Item #{item}</h3>
-          </div>
+          <StudioDisplay 
+            image = item.image
+            name = item.name
+            address = item.address/>
         ))}
     </>
   );
@@ -32,8 +34,8 @@ function PaginatedItems({ itemsPerPage }) {
   // from an API endpoint with useEffect and useState)
   const endOffset = itemOffset + itemsPerPage;
   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / itemsPerPage);
+  const currentItems = details.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(details.length / itemsPerPage);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
