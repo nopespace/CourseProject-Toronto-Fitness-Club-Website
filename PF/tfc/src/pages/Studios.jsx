@@ -1,13 +1,7 @@
 import * as React from "react";
 import Navigation from "../components/Navigation";
 import StudioDisplay from "../components/StudioDisplay";
-// import PaginatedItems from "../components/Pagixnation";
 import axios from "axios";
-
-// For Pagenation
-import { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
-import ReactPaginate from 'react-paginate';
 
 
 class Studios extends React.Component {
