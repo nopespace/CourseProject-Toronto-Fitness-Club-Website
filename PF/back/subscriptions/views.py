@@ -30,7 +30,7 @@ class UpdateUserCardView(RetrieveAPIView, UpdateAPIView):
 
 
 # add subscription to a studio
-class AddSubscriptionView(CreateAPIView, ListAPIView):
+class AddSubscriptionView(CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
@@ -38,6 +38,13 @@ class AddSubscriptionView(CreateAPIView, ListAPIView):
             return SubscriptionPlanSerializer
         else:
             return UserSubscriptionSerializer
+
+    # def get_queryset(self):
+    #     self.serializer_class = SubscriptionPlanSerializer
+    #     return SubscriptionPlan.objects.all()
+
+class ListSubscriptionView(ListAPIView):
+    permission_classes = (AllowAny,)
 
     def get_queryset(self):
         self.serializer_class = SubscriptionPlanSerializer
