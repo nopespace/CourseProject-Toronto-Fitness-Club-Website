@@ -88,7 +88,7 @@
 					"formdata": [
 						{
 							"key": "username",
-							"value": "abcdd",
+							"value": "abcddd",
 							"type": "text"
 						},
 						{
@@ -133,7 +133,7 @@
 					"formdata": [
 						{
 							"key": "username",
-							"value": "abcdddd",
+							"value": "abcddd",
 							"type": "text"
 						},
 						{
@@ -310,7 +310,7 @@
 					"formdata": []
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/studios/2/?lat=43.81&lon=-79.17",
+					"raw": "http://127.0.0.1:8000/studios/1/?lat=43.81&lon=-79.17",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -321,7 +321,7 @@
 					"port": "8000",
 					"path": [
 						"studios",
-						"2",
+						"1",
 						""
 					],
 					"query": [
@@ -369,7 +369,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/classes/search/?keyword=C&criterion=class name&studio_id=1",
+					"raw": "http://127.0.0.1:8000/classes/search/?keyword=2022-11-26&criterion=date&studio_id=1",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -386,11 +386,11 @@
 					"query": [
 						{
 							"key": "keyword",
-							"value": "C"
+							"value": "2022-11-26"
 						},
 						{
 							"key": "criterion",
-							"value": "class name",
+							"value": "date",
 							"description": "class name, coach name, date, date range, time range"
 						},
 						{
@@ -408,7 +408,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/classes/search/?start_var=16:00&end_var=20:00&criterion=time range&studio_id=1",
+					"raw": "http://127.0.0.1:8000/classes/search/?start_var=01:00&end_var=08:00&criterion=time range&studio_id=1",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -425,12 +425,12 @@
 					"query": [
 						{
 							"key": "start_var",
-							"value": "16:00",
+							"value": "01:00",
 							"description": "yyyy-mm-dd for date, hh:mm:ss for time"
 						},
 						{
 							"key": "end_var",
-							"value": "20:00",
+							"value": "08:00",
 							"description": "yyyy-mm-dd for date, hh:mm:ss for time"
 						},
 						{
@@ -463,12 +463,12 @@
 					"formdata": [
 						{
 							"key": "class_id",
-							"value": "1",
+							"value": "2",
 							"type": "text"
 						},
 						{
 							"key": "date",
-							"value": "2022-11-18",
+							"value": "2022-11-19",
 							"type": "text"
 						},
 						{
@@ -519,14 +519,15 @@
 						},
 						{
 							"key": "date",
-							"value": "2022-11-29",
+							"value": "2022-11-26",
 							"type": "text"
 						},
 						{
 							"key": "all",
 							"value": "True",
 							"description": "drop all future occurrences",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -804,11 +805,12 @@
 					{
 						"key": "Authorization",
 						"value": "Bearer {{token}}",
-						"type": "text"
+						"type": "text",
+						"disabled": true
 					}
 				],
 				"url": {
-					"raw": "http://127.0.0.1:8000/subscriptions/add/",
+					"raw": "http://127.0.0.1:8000/subscriptions/list/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -819,7 +821,7 @@
 					"port": "8000",
 					"path": [
 						"subscriptions",
-						"add",
+						"list",
 						""
 					]
 				}
@@ -847,7 +849,7 @@
 						},
 						{
 							"key": "cancelled",
-							"value": "False",
+							"value": "True",
 							"description": "True if you want to cancel current plan",
 							"type": "text"
 						}
