@@ -7,6 +7,7 @@ app_name = 'Subscriptions'
 urlpatterns = [
     path('card/add/', CreateUserCardView.as_view()),
     path('card/update/', UpdateUserCardView.as_view()),
+    path('list/', ListSubscriptionView.as_view()),
     path('add/', AddSubscriptionView.as_view()),
     path('update/', UpdateSubscriptionView.as_view()),
     path('paymentsHistory/', PaymentHistoryView.as_view()),
