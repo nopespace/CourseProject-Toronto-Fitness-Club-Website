@@ -7,8 +7,8 @@ class Studio(models.Model):
     address = models.TextField(max_length=400)
 
     # validate geographical location
-    latitude = models.DecimalField(max_digits=7, decimal_places=5)
-    longitude = models.DecimalField(max_digits=7, decimal_places=5)
+    latitude = models.DecimalField(max_digits=20, decimal_places=18)
+    longitude = models.DecimalField(max_digits=20, decimal_places=18)
     # geo_regex = RegexValidator(regex=r'^[1-9][0-9].[0-9]{2}, -?[1-9][0-9].[0-9]{2}$', message="Please follow this example format: (xx.xx, xx.xx)")
     # location = models.CharField(validators=[geo_regex], max_length=13, help_text="latitude, longitude. e.g. 43.66, -79.39")
 
