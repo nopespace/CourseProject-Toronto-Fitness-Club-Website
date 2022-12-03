@@ -21,7 +21,7 @@ const StudioPin = (props) => {
                 // onMouseEnter={()=>sMouseOn(true)}
                 // onMouseLeave={()=>sMouseOn(false)}
             >
-                {props.order}
+                {studio.order}
             </div>
         </>
     );
