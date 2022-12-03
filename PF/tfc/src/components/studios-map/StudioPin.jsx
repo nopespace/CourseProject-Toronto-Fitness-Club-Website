@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import './Pin.css'
-import Typography from '@mui/material/Typography';
 
 const StudioPin = (props) => {
     const studio = props.studio;

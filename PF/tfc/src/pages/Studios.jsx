@@ -9,7 +9,7 @@ import { Stack, Typography } from '@mui/material';
 // For Pagenation
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import ReactPaginate from 'react-paginate';
+import LocSort from "../components/studios-map/LocSort";
 
 const Studios = (props) => {
   const [pos, setPos] = useState({ lat: 43.653225, lon: -79.383186 })
@@ -47,8 +47,12 @@ const Studios = (props) => {
   return (
     <Box >
       <Navigation />
+      
+      <Stack style={{ display: 'flex', justifyContent: 'center', alignItems: "center", padding: 20}} spacing={2}>
+        <Typography variant='h4'>Check our studios</Typography>
+        <LocSort></LocSort>
+      </Stack>
 
-      <Typography variant='h4'>Check our studios</Typography>
       <Box style={{ display: 'flex', justifyContent: 'center', alignItems: "center" }}>
         {studios.length !== 0 && <StudiosList
           studios={studios}

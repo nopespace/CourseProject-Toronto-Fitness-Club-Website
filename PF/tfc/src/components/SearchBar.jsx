@@ -1,6 +1,11 @@
 import * as React from "react";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+  const {
+    placeholder,
+    options // TODO: options for searching criteria, e.g. studio name, class name
+  } = props
+
   return (
     <>
       <div>
@@ -33,7 +38,7 @@ const SearchBar = () => {
               type="search"
               id="default-search"
               class="block w-full p-4 pl-10 text-sm text-gray-900 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Search Criteria"
+              placeholder={placeholder}
               required
             />
             <button
