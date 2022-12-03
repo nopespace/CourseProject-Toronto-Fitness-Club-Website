@@ -2,13 +2,14 @@ import React from "react";
 
 const SubscriptionBox = (props) => {
   const {
-    planName,
+    id,
     price,
+    billingCycle,
   } = props;
   return (
       <div class="w-full max-w-sm p-4 bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
         <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
-          {planName}
+          {billingCycle}
         </h5>
         <div class="flex items-baseline text-gray-900 dark:text-white">
           <span class="text-3xl font-semibold">$</span>

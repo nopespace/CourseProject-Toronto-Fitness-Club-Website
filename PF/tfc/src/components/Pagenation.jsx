@@ -3,22 +3,23 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
 import SubscriptionBox from './SubscriptionBox';
+import PagenationBar from './PagenationBar';
 
-// const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-function Items({ currentItems }) {
+
+function SubscriptionItems({ currentItems }) {
   return (
-    <>
+    <div className='flex'>
       {currentItems.map((item) => (
-        <SubscriptionBox 
-        planName="Standard Plan"
-        price="49"
+        <SubscriptionBox key={item.id}
+        billingCycle={item.billing_cycle}
+        price={item.price}
         />
       ))}
-    </>
+    </div>
   );
 }
 
-function PaginatedItems({ items, itemsPerPage }) {
+function PaginatedItems({ items, itemsPerPage, type }) {
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
@@ -40,20 +41,16 @@ function PaginatedItems({ items, itemsPerPage }) {
     setItemOffset(newOffset);
   };
 
-  return (
-    <>
-      <Items currentItems={currentItems} />
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-      />
-    </>
-  );
+  if (type === 'subscription') {
+    return (
+        <>
+          <SubscriptionItems currentItems={currentItems} />
+          <PagenationBar handlePageClick={handlePageClick} pageCount={pageCount} />
+        </>
+      );
+  }
+  
+  
 }
 
 export default PaginatedItems;
