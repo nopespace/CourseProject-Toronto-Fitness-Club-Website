@@ -20,19 +20,18 @@ const Studios = (props) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setPos({ lat: position.coords.latitude, lon: position.coords.longitude })
-          // setLat(position.coords.latitude);
-          // setLon(position.coords.longitude);
-          listStudios(position.coords.latitude, position.coords.longitude)
         }
       )
-    } else {
-      listStudios(pos.lat, pos.lon);
     }
   }, [])
 
+  useEffect(() => {
+    listStudios(pos.lat, pos.lon);
+  }, [pos])
+
   const listStudios = async (lat, lon) => {
     let url = `http://127.0.0.1:8000/studios/list/`
-    const { data } = await axios.get(url, { params: { lat: pos.lat, lon: pos.lon } });
+    const { data } = await axios.get(url, { params: { lat: lat, lon: lon } });
     data.map((studio, index) => {
       studio['order'] = index + 1;
     })
