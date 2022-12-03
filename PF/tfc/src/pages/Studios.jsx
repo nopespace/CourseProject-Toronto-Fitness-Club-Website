@@ -1,47 +1,62 @@
 import * as React from "react";
 import Navigation from "../components/Navigation";
-import StudioDisplay from "../components/StudioDisplay";
+// import StudioDisplay from "../components/StudioDisplay";
+import StudiosMap from "../components/StudiosMap";
 import axios from "axios";
+import Box from '@mui/material/Box';
+// For Pagenation
+import { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import ReactPaginate from 'react-paginate';
 
+const Studios = (props) => {
+  const [lat, setLat] = useState(43.66);
+  const [lon, setLon] = useState(-79.38);
+  const [studios, setStudios] = useState([]);
 
-class Studios extends React.Component {
-  state = {
-    details: [],
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLat(position.coords.latitude);
+          setLon(position.coords.longitude);
+          listStudios(position.coords.latitude, position.coords.longitude)
+        }
+      )
+    } else {
+      listStudios(lat, lon);
+    }
+  }, [])
+
+  const listStudios = async (lat, lon) => {
+    let url = `http://127.0.0.1:8000/studios/list/`
+    const {data} = await axios.get(url, { params: { lat: lat, lon: lon } });
+    setStudios(data);
+  }
+
+  const mapDefaultProps = {
+    center: {
+      lat: lat,
+      lng: lon
+    },
+    zoom: 11
   };
-
-  componentDidMount() {
-    let data;
-
-    axios({
-      method: "get",
-      url: "http://127.0.0.1:8000/studios/list/?lat=1&lon=11",
-      // TODO: Add the lat and lon here
-    })
-      .then((res) => {
-        data = res.data;
-        this.setState({
-          details: data,
-        });
-        console.log(data);
-      })
-      .catch((err) => {});
+  
+  if (studios.length === 0) {
+    listStudios(lat, lon)
   }
+    
+  return (
+    <Box>
+      {studios.length !== 0 && <StudiosMap
+        mapDefaultProps={mapDefaultProps}
+        studios={studios}
+        />
+      }
+    </Box>
+  )
 
-  render() {
-    return (
-      <>
-      hello
-      </>
-    );
-    // return (
-    //   <>
-    //     <Navigation />
-    //     <PaginatedItems
-    //      items= {this.details}
-    //      itemsPerPage={4} />
-    //   </>
-    // );
-  }
 
 }
+
 export default Studios;

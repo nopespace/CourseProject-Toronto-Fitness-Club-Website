@@ -14,3 +14,5 @@ const StudioDisplay = (props) => {
         </div>
     )
 }
+
+export default StudioDisplay;
