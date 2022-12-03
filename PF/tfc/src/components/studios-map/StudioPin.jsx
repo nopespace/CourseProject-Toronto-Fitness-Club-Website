@@ -6,9 +6,8 @@ const StudioPin = (props) => {
     const studio = props.studio;
     // const [mouseOn, sMouseOn] = useState(false);
 
-    const showInfo = () => {
+    const showInfo = (id) => {
         // TODO:
-        console.log(studio)
     }
 
     return (
@@ -17,7 +16,7 @@ const StudioPin = (props) => {
             {mouseOn && <Typography>{studio.address}</Typography>} */}
             <div className='studio-pin'
                 key={studio.id}
-                onClick={showInfo}
+                // onClick={showInfo(studio.id)}
                 // onMouseEnter={()=>sMouseOn(true)}
                 // onMouseLeave={()=>sMouseOn(false)}
             >

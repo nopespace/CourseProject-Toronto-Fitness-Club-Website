@@ -17,12 +17,11 @@ const StudiosList = (props) => {
     }
 
     return (
-        <Box style={{ height: '50vh', width: '80%', margin: 20,  }}>
+        <Box style={{ height: '60vh', width: '80%', margin: 20,  }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
                 pageSize={5}
-                rowsPerPageOptions={[10]}
                 disableExtendRowFullWidth={false}
                 density='comfortable'
                 sx={{

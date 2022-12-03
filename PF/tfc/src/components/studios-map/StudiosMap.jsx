@@ -3,11 +3,17 @@ import StudioPin from "./StudioPin";
 import GoogleMapReact from 'google-map-react';
 import Box from '@mui/material/Box';
 import UserPin from './UserPin'
+import { stepIconClasses } from "@mui/material";
 
 
 const StudiosMap = (props) => {
-    const studios = props.studios;
-    const pos = props.pos;  //{lat:xxx, lon:xxx}
+    // const studios = props.studios;
+    // const pos = props.pos;  
+    const {
+        studios,
+        pos,//{lat:xxx, lon:xxx}
+        setPos
+    } = props
     const mapDefaultProps = {
         center: {
           lat: props.pos.lat,
@@ -15,13 +21,17 @@ const StudiosMap = (props) => {
         },
         zoom: 13
       };
-
+    
+    const handleClick = (e) => {
+        setPos({lat: e.lat, lon: e.lng})
+    }
     return (
         <Box style={{ height: '60vh', width: '80%', margin: 20,  }}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyDqCaJKiXq4ejDBTZOhV0Dbv-FCZiuKpLM' }}
                 defaultCenter={mapDefaultProps.center}
                 defaultZoom={mapDefaultProps.zoom}
+                onClick={(e) => handleClick(e)}
             >
                 
                 <UserPin

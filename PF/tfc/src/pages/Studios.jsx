@@ -13,8 +13,6 @@ import ReactPaginate from 'react-paginate';
 
 const Studios = (props) => {
   const [pos, setPos] = useState({ lat: 43.653225, lon: -79.383186 })
-  // const [lat, setLat] = useState(43.66);
-  // const [lon, setLon] = useState(-79.38);
   const [studios, setStudios] = useState([]);
 
   useEffect(() => {
@@ -50,20 +48,20 @@ const Studios = (props) => {
     <Box >
       <Navigation />
 
-      <Stack style={{ display: 'flex', justifyContent: 'center', alignItems: "center"}}>
-        <Typography variant='h4'>Check our studios</Typography>
-
-        {studios.length !== 0 && <StudiosMap
-          studios={studios}
-          pos={pos}
-          />
-        }
-
+      <Typography variant='h4'>Check our studios</Typography>
+      <Box style={{ display: 'flex', justifyContent: 'center', alignItems: "center" }}>
         {studios.length !== 0 && <StudiosList
           studios={studios}
         />
         }
-      </Stack>
+
+        {studios.length !== 0 && <StudiosMap
+          studios={studios}
+          pos={pos}
+          setPos={setPos}
+        />
+        }
+      </Box>
     </Box>
   )
 
