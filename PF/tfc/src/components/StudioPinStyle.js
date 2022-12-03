@@ -3,7 +3,7 @@
 const K_WIDTH = 30;
 const K_HEIGHT = 30;
 
-const StudioPinPointStyle = {
+const StudioPinStyle = {
   // initially any map object has left top corner at lat lng coordinates
   // it's on you to set object origin to 0,0 coordinates
   position: 'absolute',
@@ -22,4 +22,4 @@ const StudioPinPointStyle = {
   padding: 4,
 };
 
-export {StudioPinPointStyle};
+export {StudioPinStyle};

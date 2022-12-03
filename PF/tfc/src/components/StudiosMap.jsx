@@ -1,5 +1,5 @@
 import * as React from "react";
-import StudioPinPoint from "../components/StudioPinPoint";
+import StudioPin from "./StudioPin";
 import GoogleMapReact from 'google-map-react';
 import Box from '@mui/material/Box';
 
@@ -14,13 +14,14 @@ const StudiosMap = (props) => {
                 defaultCenter={props.mapDefaultProps.center}
                 defaultZoom={props.mapDefaultProps.zoom}
             >
-                {studios && studios.map(studio => {
+                {studios && studios.map((studio, index) => {
                     return (
-                        <StudioPinPoint
+                        <StudioPin
                             key={studio.id}
                             lat={studio.latitude}
                             lng={studio.longitude}
                             studio={studio}
+                            order={index+1}
                         />
                     )
                 })}
