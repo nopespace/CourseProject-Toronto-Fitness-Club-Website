@@ -4,6 +4,8 @@ import StudiosList from "../components/studios-map/StudiosList";
 import StudiosMap from "../components/studios-map/StudiosMap";
 import axios from "axios";
 import Box from '@mui/material/Box';
+import { Stack, Typography } from '@mui/material';
+
 // For Pagenation
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -38,13 +40,7 @@ const Studios = (props) => {
     setStudios(data);
   }
 
-  const mapDefaultProps = {
-    center: {
-      lat: pos.lat,
-      lng: pos.lon
-    },
-    zoom: 13
-  };
+
 
   if (studios.length === 0) {
     listStudios(pos.lat, pos.lon)
@@ -53,21 +49,21 @@ const Studios = (props) => {
   return (
     <Box >
       <Navigation />
-      <Box style={{ display: 'flex', justifyContent: 'center' }}>
+
+      <Stack style={{ display: 'flex', justifyContent: 'center', alignItems: "center"}}>
+        <Typography variant='h4'>Check our studios</Typography>
+
         {studios.length !== 0 && <StudiosMap
-          mapDefaultProps={mapDefaultProps}
           studios={studios}
           pos={pos}
-        />
+          />
         }
 
-        {/* {studios.length !== 0 && <StudiosMap
-          mapDefaultProps={mapDefaultProps}
+        {studios.length !== 0 && <StudiosList
           studios={studios}
-          pos={pos}
         />
-        } */}
-      </Box>
+        }
+      </Stack>
     </Box>
   )
 

@@ -8,14 +8,20 @@ import UserPin from './UserPin'
 const StudiosMap = (props) => {
     const studios = props.studios;
     const pos = props.pos;  //{lat:xxx, lon:xxx}
-    console.log(pos)
+    const mapDefaultProps = {
+        center: {
+          lat: props.pos.lat,
+          lng: props.pos.lon
+        },
+        zoom: 13
+      };
 
     return (
-        <Box style={{ height: '80vh', width: '80%', margin: 30,  }}>
+        <Box style={{ height: '60vh', width: '80%', margin: 20,  }}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyDqCaJKiXq4ejDBTZOhV0Dbv-FCZiuKpLM' }}
-                defaultCenter={props.mapDefaultProps.center}
-                defaultZoom={props.mapDefaultProps.zoom}
+                defaultCenter={mapDefaultProps.center}
+                defaultZoom={mapDefaultProps.zoom}
             >
                 
                 <UserPin
