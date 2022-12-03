@@ -10,7 +10,7 @@ import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
 
 const Studios = (props) => {
-  const [pos, setPos] = useState({lat: 43.66, lon: -79.38})
+  const [pos, setPos] = useState({lat: 43.653225, lon: -79.383186})
   // const [lat, setLat] = useState(43.66);
   // const [lon, setLon] = useState(-79.38);
   const [studios, setStudios] = useState([]);
