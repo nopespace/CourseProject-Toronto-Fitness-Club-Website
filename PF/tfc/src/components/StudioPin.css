@@ -1,4 +1,5 @@
 .studio-pin {
+    /* refer to https://github.dev/google-map-react/old-examples/blob/master/web/flux/components/examples/x_simple/simple_map_page.jsx */
     position: fixed;
     width: 30px;
     height: 30px;
