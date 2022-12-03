@@ -3,13 +3,15 @@ import * as React from "react";
 const SearchBar = (props) => {
   const {
     placeholder,
+    handleSearch,
     options // TODO: options for searching criteria, e.g. studio name, class name
-  } = props
 
+  } = props
+  
   return (
     <>
       <div>
-        <form>
+        <form onSubmit={handleSearch}>
           <label
             for="default-search"
             class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -36,6 +38,7 @@ const SearchBar = (props) => {
             </div>
             <input
               type="search"
+              name="keyword"
               id="default-search"
               class="block w-full p-4 pl-10 text-sm text-gray-900 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
               placeholder={placeholder}
