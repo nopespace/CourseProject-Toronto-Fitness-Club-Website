@@ -1,34 +1,41 @@
 import { Box, Stack, Typography } from '@mui/material';
 import SearchBar from '../SearchBar';
 import { useEffect, useState } from 'react';
-
+import Geocode from "react-geocode";
 
 const LocSort = (props) => {
-    // var NodeGeocoder = require('node-geocoder');
+    const {
+        setPos
+    } = props
     const handleSearch = async (e) => {
         e.preventDefault()
         var postal = e.target.keyword.value;
-        // // https://www.npmjs.com/package/node-geocoder
-        // const options = {
-        //     provider: 'google',
+        // https://www.npmjs.com/package/react-geocode
+        Geocode.setApiKey("AIzaSyDqCaJKiXq4ejDBTZOhV0Dbv-FCZiuKpLM");
+        Geocode.setLanguage("en");
+        Geocode.setRegion("ca");
 
-        //     // Optional depending on the providers
-        //     fetch: 'customFetchImplementation',
-        //     apiKey: 'AIzaSyDqCaJKiXq4ejDBTZOhV0Dbv-FCZiuKpLM', // for Mapquest, OpenCage, Google Premier
-        //     formatter: null // 'gpx', 'string', ...
-        // };
+        // ROOFTOP, RANGE_INTERPOLATED, GEOMETRIC_CENTER, APPROXIMATE are the accepted values.
+        // And according to the below google docs in description, ROOFTOP param returns the most accurate result.
+        Geocode.setLocationType("ROOFTOP");
 
-        // const geocoder = NodeGeocoder(options);
+        // Enable or disable logs. Its optional.
+        Geocode.enableDebug();
+        Geocode.fromAddress(postal).then(
+            (response) => {
+              const { lat, lng } = response.results[0].geometry.location;
+              setPos({lat: lat, lon: lng})
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
 
-        // // Using callback
-        // const res = await geocoder.geocode(postal);
-
-        // console.log(res)
     }
     return (
         <Box width='80%'>
             <SearchBar
-                placeholder='Wanna check out studios near another place? Click on map OR enter a postal code (e.g. M5S 0C5) '
+                placeholder='Wanna check out studios near another place? Click on map OR enter a postal code/address '
                 handleSearch={handleSearch}
             />
         </Box>
