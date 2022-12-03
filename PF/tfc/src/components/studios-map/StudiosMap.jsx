@@ -2,10 +2,13 @@ import * as React from "react";
 import StudioPin from "./StudioPin";
 import GoogleMapReact from 'google-map-react';
 import Box from '@mui/material/Box';
+import UserPin from './UserPin'
 
 
 const StudiosMap = (props) => {
     const studios = props.studios;
+    const pos = props.pos;  //{lat:xxx, lon:xxx}
+    console.log(pos)
 
     return (
         <Box style={{ height: '80vh', width: '50%', margin: 30 }}>
@@ -14,6 +17,12 @@ const StudiosMap = (props) => {
                 defaultCenter={props.mapDefaultProps.center}
                 defaultZoom={props.mapDefaultProps.zoom}
             >
+                
+                <UserPin
+                    lat={pos.lat}
+                    lng={pos.lon}
+                />
+
                 {studios && studios.map((studio, index) => {
                     return (
                         <StudioPin
@@ -21,7 +30,7 @@ const StudiosMap = (props) => {
                             lat={studio.latitude}
                             lng={studio.longitude}
                             studio={studio}
-                            order={index+1}
+                            order={index + 1}
                         />
                     )
                 })}
