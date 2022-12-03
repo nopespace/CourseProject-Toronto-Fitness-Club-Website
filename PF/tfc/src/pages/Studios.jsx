@@ -1,6 +1,6 @@
 import * as React from "react";
 import Navigation from "../components/Navigation";
-import StudiosList from "../components/studios-map/StudiosList";
+import StudiosTable from "../components/studios-map/StudiosTable";
 import StudiosMap from "../components/studios-map/StudiosMap";
 import axios from "axios";
 import Box from '@mui/material/Box';
@@ -10,6 +10,7 @@ import { Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import StudiosSortByLoc from "../components/studios-map/StudiosSortByLoc";
+import StudiosSearch from "../components/studios-map/StudiosSearch";
 
 const Studios = (props) => {
   const [pos, setPos] = useState({ lat: 43.653225, lon: -79.383186 })
@@ -48,15 +49,28 @@ const Studios = (props) => {
     <Box >
       <Navigation />
 
-      <Stack style={{ display: 'flex', justifyContent: 'center', alignItems: "center", padding: 20}} spacing={2}>
+      <Stack style={{ display: 'flex', justifyContent: 'center', alignItems: "center", padding: 20 }} spacing={2}>
         <Typography variant='h4'>🥳Check Out Our Studios🥳</Typography>
         <StudiosSortByLoc setPos={setPos} />
+
       </Stack>
 
       <Box style={{ display: 'flex', justifyContent: 'center', alignItems: "center" }}>
-        {studios.length !== 0 && <StudiosList
-          studios={studios}
-        />
+        {studios.length !== 0 &&
+          <Stack
+            style={{ height: '60vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: "center", margin:15 }}
+            sx={{
+              // https://mui.com/x/react-data-grid/style/#styling-rows
+              boxShadow: 2,
+              border: 2,
+              borderColor: 'rgba(247, 251, 244, 0.064)'
+            }}
+          >
+            <StudiosSearch />
+            <StudiosTable
+              studios={studios}
+            />
+          </Stack>
         }
 
         {studios.length !== 0 && <StudiosMap

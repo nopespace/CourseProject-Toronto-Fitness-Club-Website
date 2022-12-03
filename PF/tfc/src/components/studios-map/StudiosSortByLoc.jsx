@@ -3,7 +3,7 @@ import SearchBar from '../SearchBar';
 import { useEffect, useState } from 'react';
 import Geocode from "react-geocode";
 
-const LocSort = (props) => {
+const StudiosSortByLoc = (props) => {
     const {
         setPos
     } = props
@@ -42,4 +42,4 @@ const LocSort = (props) => {
     )
 }
 
-export default LocSort;
+export default StudiosSortByLoc;

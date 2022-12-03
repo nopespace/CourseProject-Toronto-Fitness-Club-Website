@@ -17,7 +17,7 @@ const StudiosList = (props) => {
     }
 
     return (
-        <Box style={{ height: '60vh', width: '80%', margin: 20,  }}>
+        <Box style={{height: '90vh', width: '90%'}}>
             <DataGrid
                 rows={rows}
                 columns={columns}

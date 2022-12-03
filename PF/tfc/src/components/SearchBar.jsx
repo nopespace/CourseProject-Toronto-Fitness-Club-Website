@@ -7,11 +7,18 @@ const SearchBar = (props) => {
     options // TODO: options for searching criteria, e.g. studio name, class name
 
   } = props
-  
+
   return (
     <>
       <div>
         <form onSubmit={handleSearch}>
+          {options && <label for="cars">Choose a criterion:</label>}
+          {options && <select name="cars" id="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="opel">Opel</option>
+            <option value="audi">Audi</option>
+          </select>}
           <label
             for="default-search"
             class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -44,6 +51,7 @@ const SearchBar = (props) => {
               placeholder={placeholder}
               required
             />
+
             <button
               type="submit"
               class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
