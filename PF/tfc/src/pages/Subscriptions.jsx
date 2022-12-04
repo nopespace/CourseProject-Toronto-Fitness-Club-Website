@@ -47,7 +47,7 @@ const Subscriptions = () => {
       url: "http://127.0.0.1:8000/subscriptions/list/",
     })
       .then((res) => {
-        data = res.data;
+        data = res.data.results;
         setDetials(data);
       })
       .catch((err) => {});
