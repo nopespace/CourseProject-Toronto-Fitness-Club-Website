@@ -10,6 +10,7 @@ const StudiosList = (props) => {
         { field: 'address', headerName: 'Address', sortable: false, flex: 1 },
         { field: 'phone_number', headerName: 'Phone Number', sortable: false, flex: 0.5},
     ];
+    const [pageSize, setPageSize] = React.useState(5);
 
     const handleRowClick = () => {
         // TODO:
@@ -21,7 +22,9 @@ const StudiosList = (props) => {
             <DataGrid
                 rows={rows}
                 columns={columns}
-                pageSize={5}
+                pageSize={pageSize}
+                onPageSizeChange={(newPage) => setPageSize(newPage)}
+                rowsPerPageOptions={[5, 10, 15]}
                 disableExtendRowFullWidth={false}
                 density='comfortable'
                 sx={{
