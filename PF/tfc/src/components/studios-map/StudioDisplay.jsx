@@ -23,8 +23,9 @@ const StudioDisplay = (props) => {
     })
 
     return (
-        <Box style={{ height: '70vh', width: '90%', margin: 30, justifyContent: 'center' }}>
-            {studio && <Box>
+        <Box >
+             {/* style={{ height: '70vh', width: '90%', margin: 30, alignItems: 'center', justifyContent: 'center' }} */}
+            {studio && <Box className='studio-center-container-box' style={{flexDirection: 'column'}}>
                 <Typography variant='h4'>{studio.name}</Typography>
                 <Typography >
                     <b>📍Address: </b>
