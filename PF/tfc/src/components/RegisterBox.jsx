@@ -1,85 +1,59 @@
 import { alpha } from "@mui/material";
 import * as React from "react";
 import axios from "axios";
-import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RegisterBox = (props) => {
-  const { login } = props;
+  const { isLogin } = props;
+  const navigate = useNavigate();
 
-  const formRef = useRef();
-
-  const login_function = () => {
+  const login = (event) => {
+    const data = new FormData(event.target);
 
     axios({
       method: "post",
-      url: "https://127.0.0.1:8000/accounts/login/",
-      data: formRef.data,
+      url: "http://127.0.0.1:8000/accounts/login/",
+      data: data,
     })
-      .then((res) => {
-        localStorage.setItem("userToken", JSON.stringify(res.data.token));
-        console.log(res.data);
-        const token = JSON.parse(localStorage.getItem("userToken"));
-        // console.log(token);
-        alert("Login success");
-      })
-      .catch((err) => {
-        alert("Login Failed, Please try again later.");
-      });
-
-      // save card
-      let cardinfo;
-
-      console.log("logged in");
-      // save user card info
+    .then((res) => {
+      localStorage.setItem("userToken", JSON.stringify(res.data.token));
+      console.log(res.data);
       const token = JSON.parse(localStorage.getItem("userToken"));
-      axios({
-        method: "get",
-        url: "http://127.0.0.1:8000/subscriptions/card/update/",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-        .then((res) => {
-          cardinfo = res.data;
-          localStorage.setItem("cardInfo", JSON.stringify(res.data));
-          if (cardinfo != null) {
-            console.log("cardinfo is not empty");
-          }
-          console.log(cardinfo);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      console.log(token)
+      alert("Login success");
+      navigate('/')
+    })
+    .catch((err) => {
+      alert("Login Failed, Please try again later.");
+    });
   };
 
-  const register_function = () => {
-    console.log(formRef.data)
-    axios.post({
+  const register = async (event) => {
+    const data = new FormData(event.target);
+
+    axios({
       method: "post",
       url: "http://127.0.0.1:8000/accounts/register/",
-      body: formRef.data,
-      headers: { "Content-Type": "multipart/form-data" },
+      data: data,
     })
-      .then((res) => {
-        localStorage.setItem("userToken", JSON.stringify(res.data.token));
-        console.log(res.data);
-        const token = JSON.parse(localStorage.getItem("userToken"));
-        // console.log(token);
-        alert("Login success");
-      })
-      .catch((err) => {
-        alert("Register Failed, Please try again later.");
-      });
-    return false;
+    .then((res) => {
+      alert("Registration success");
+      navigate('/login/')
+    })
+    .catch((err) => {
+      alert("Registration Failed, Please try again later.");
+    });
+   
   };
 
   return (
     <>
       <div className="grid place-items-center my-20">
         <div className="my-20 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8">
-          <form ref={formRef} class="space-y-6" onSubmit={e => {
-              (login ? login_function : register_function)();
-              e.preventDefault();
+          <div className="font-bold mb-2">{isLogin ? "Login": "Register"}</div>
+          <form class="space-y-6" onSubmit={event => {
+              (isLogin ? login : register)(event);
+              event.preventDefault();
             }}>
             <div>
               <label
@@ -97,7 +71,7 @@ const RegisterBox = (props) => {
                 required
               />
             </div>
-            {!login && (
+            {!isLogin && (
               <>
                 <div>
                   <label
@@ -185,7 +159,7 @@ const RegisterBox = (props) => {
               type="submit"
               class="w-full text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
-              {login ? "Login" : "Register"}
+              {isLogin ? "Login" : "Register"}
             </button>
           </form>
         </div>
