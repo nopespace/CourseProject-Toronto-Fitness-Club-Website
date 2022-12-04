@@ -6,30 +6,14 @@ import { useRef } from "react";
 const RegisterBox = (props) => {
   const { login } = props;
 
-  // datas for user login/register
-  const usernameRef = useRef();
-  const passwordRef = useRef();
-  const emailRef = useRef();
-  const first_nameRef = useRef();
-  const last_nameRef = useRef();
-  const phone_numberRef = useRef();
-  const avatarRef = useRef();
+  const formRef = useRef();
 
   const login_function = () => {
-    const name = usernameRef.current.value;
-    const password = passwordRef.current.value;
-    if (name === "" || password === "") {
-      alert("Please enter username and password");
-      return;
-    }
-    // save token
+
     axios({
       method: "post",
-      url: "http://127.0.0.1:8000/accounts/login/",
-      data: {
-        username: name,
-        password: password,
-      },
+      url: "https://127.0.0.1:8000/accounts/login/",
+      data: formRef.data,
     })
       .then((res) => {
         localStorage.setItem("userToken", JSON.stringify(res.data.token));
@@ -41,76 +25,70 @@ const RegisterBox = (props) => {
       .catch((err) => {
         alert("Login Failed, Please try again later.");
       });
-    // save card
-    let cardinfo;
 
-    console.log("logged in");
-    // save user card info
-    const token = JSON.parse(localStorage.getItem("userToken"));
-    axios({
-      method: "get",
-      url: "http://127.0.0.1:8000/subscriptions/card/update/",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((res) => {
-        cardinfo = res.data;
-        localStorage.setItem("cardInfo", JSON.stringify(res.data));
-        if (cardinfo != null) {
-          console.log("cardinfo is not empty");
-        }
-        console.log(cardinfo);
+      // save card
+      let cardinfo;
+
+      console.log("logged in");
+      // save user card info
+      const token = JSON.parse(localStorage.getItem("userToken"));
+      axios({
+        method: "get",
+        url: "http://127.0.0.1:8000/subscriptions/card/update/",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          cardinfo = res.data;
+          localStorage.setItem("cardInfo", JSON.stringify(res.data));
+          if (cardinfo != null) {
+            console.log("cardinfo is not empty");
+          }
+          console.log(cardinfo);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   };
 
   const register_function = () => {
-    const name = usernameRef.current.value;
-    const password = passwordRef.current.value;
-    // need to figure out the mandatory fields
-    // TODO
-    // axios({
-    //   method: "post",
-    //   url: "http://127.0.0.1:8000/accounts/register/",
-    //   data: {
-    //     username: name,
-    //     email: email,
-    //     first_name: first_name,
-    //     last_name: last_name,
-    //     password: password,
-    //     phone_number: phone_number,
-    //     avatar: avatar,
-    //   },
-    // })
-    //   .then((res) => {
-    //     localStorage.setItem("userToken", JSON.stringify(res.data.token));
-    //     console.log(res.data);
-    //     const token = JSON.parse(localStorage.getItem("userToken"));
-    //     // console.log(token);
-    //     alert("Login success");
-    //   })
-    //   .catch((err) => {
-    //     alert("Register Failed, Please try again later.");
-    //   });
+    console.log(formRef.data)
+    axios.post({
+      method: "post",
+      url: "http://127.0.0.1:8000/accounts/register/",
+      body: formRef.data,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then((res) => {
+        localStorage.setItem("userToken", JSON.stringify(res.data.token));
+        console.log(res.data);
+        const token = JSON.parse(localStorage.getItem("userToken"));
+        // console.log(token);
+        alert("Login success");
+      })
+      .catch((err) => {
+        alert("Register Failed, Please try again later.");
+      });
+    return false;
   };
 
   return (
     <>
       <div className="grid place-items-center my-20">
         <div className="my-20 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8">
-          <form class="space-y-6" action="#">
+          <form ref={formRef} class="space-y-6" onSubmit={e => {
+              (login ? login_function : register_function)();
+              e.preventDefault();
+            }}>
             <div>
               <label
                 for="username"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Username*
+                Username
               </label>
               <input
-                ref={usernameRef}
                 type="text"
                 name="username"
                 id="username"
@@ -126,10 +104,9 @@ const RegisterBox = (props) => {
                     for="email"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Email*
+                    Email
                   </label>
                   <input
-                    ref={emailRef}
                     type="email"
                     name="email"
                     id="email"
@@ -140,18 +117,18 @@ const RegisterBox = (props) => {
                 </div>
                 <div>
                   <label
-                    for="firstname"
+                    for="first_name"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     First Name
                   </label>
                   <input
-                    ref={first_nameRef}
                     type="text"
-                    name="firstname"
-                    id="firstname"
+                    name="first_name"
+                    id="first_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="First Name"
+                    required
                   />
                 </div>
                 <div>
@@ -162,28 +139,28 @@ const RegisterBox = (props) => {
                     Last Name
                   </label>
                   <input
-                    ref={last_nameRef}
                     type="text"
-                    name="lastname"
-                    id="lastname"
+                    name="last_name"
+                    id="last_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="Last Name"
+                    required
                   />
                 </div>
                 <div>
                   <label
-                    for="phonenumber"
+                    for="phone_number"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Phone Number
                   </label>
                   <input
-                    ref={phone_numberRef}
                     type="text"
-                    name="phonenumber"
-                    id="phonenumber"
+                    name="phone_number"
+                    id="phone_number"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="123-456-7890"
+                    required
                   />
                 </div>
               </>
@@ -196,7 +173,6 @@ const RegisterBox = (props) => {
                 Password
               </label>
               <input
-                ref={passwordRef}
                 type="password"
                 name="password"
                 id="password"
@@ -206,7 +182,7 @@ const RegisterBox = (props) => {
               />
             </div>
             <button
-              onClick={login ? login_function : register_function}
+              type="submit"
               class="w-full text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               {login ? "Login" : "Register"}
