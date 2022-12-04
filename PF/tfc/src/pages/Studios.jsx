@@ -5,16 +5,19 @@ import StudiosMap from "../components/studios-map/StudiosMap";
 import axios from "axios";
 import Box from '@mui/material/Box';
 import { Stack, Typography } from '@mui/material';
+import '../index.css'
 
 // For Pagenation
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import StudiosSortByLoc from "../components/studios-map/StudiosSortByLoc";
 import StudiosSearch from "../components/studios-map/StudiosSearch";
+import StudioDisplay from "../components/studios-map/StudioDisplay";
 
 const Studios = (props) => {
   const [pos, setPos] = useState({ lat: 43.653225, lon: -79.383186 })
   const [studios, setStudios] = useState([]);
+  const [studioID, setStudioID] = useState(undefined);  // the specific studio user chose to see
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -43,31 +46,37 @@ const Studios = (props) => {
 
 
   return (
-    <Box >
+    <Box>
       <Navigation />
-
-      <Stack style={{ display: 'flex', justifyContent: 'center', alignItems: "center", padding: 20 }} spacing={2}>
+      {/* style={{ display: 'flex', justifyContent: 'center', alignItems: "center", padding: 20 }} spacing={2} */}
+      <Stack className='studio-center-container-stack' sx={{ p: 5 }} spacing={2}>
         <Typography variant='h4'>🥳Check Out Our Studios🥳</Typography>
         <StudiosSortByLoc setPos={setPos} />
 
       </Stack>
 
-      <Box style={{ display: 'flex', justifyContent: 'center', alignItems: "center" }}>
-        <Stack
-          style={{ height: '60%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: "center", margin: 15 }}
+      {/* style={{ display: 'flex', justifyContent: 'center', alignItems: "center" }} */}
+      <Box className='studio-center-container-box'>
+        <Stack className='studio-center-container-stack'
+          spacing={1}
+          style={{ height: '60%', width: '100%' }}
           sx={{
             // https://mui.com/x/react-data-grid/style/#styling-rows
+            m: 3,
             boxShadow: 2,
             border: 2,
-            borderColor: 'rgba(247, 251, 244, 0.064)'
+            borderColor: 'rgba(247, 251, 244, 0.064)',
           }}
+
         >
           <StudiosSearch
             pos={pos}
             setStudios={setStudios}
           />
+
           <StudiosTable
             studios={studios}
+            setStudioID={setStudioID}
           />
         </Stack>
 
@@ -75,8 +84,14 @@ const Studios = (props) => {
           studios={studios}
           pos={pos}
           setPos={setPos}
+          setStudioID={setStudioID}
         />
       </Box>
+
+      {studioID && <StudioDisplay
+        studioID={studioID}
+        pos={pos}
+      />}
     </Box>
   )
 

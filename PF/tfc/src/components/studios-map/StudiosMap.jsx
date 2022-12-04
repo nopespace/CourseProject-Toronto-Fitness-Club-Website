@@ -16,24 +16,24 @@ const StudiosMap = (props) => {
     } = props
     const mapDefaultProps = {
         center: {
-          lat: props.pos.lat,
-          lng: props.pos.lon
+            lat: props.pos.lat,
+            lng: props.pos.lon
         },
         zoom: 13
-      };
-    
+    };
+
     const handleClick = (e) => {
-        setPos({lat: e.lat, lon: e.lng})
+        setPos({ lat: e.lat, lon: e.lng })
     }
     return (
-        <Box style={{ height: '75vh', width: '80%', margin: 20,  }}>
+        <Box style={{ height: '75vh', width: '80%', margin: 20, }}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyDqCaJKiXq4ejDBTZOhV0Dbv-FCZiuKpLM' }}
                 defaultCenter={mapDefaultProps.center}
                 defaultZoom={mapDefaultProps.zoom}
                 onClick={(e) => handleClick(e)}
             >
-                
+
                 <UserPin
                     lat={pos.lat}
                     lng={pos.lon}
@@ -46,6 +46,8 @@ const StudiosMap = (props) => {
                             lat={studio.latitude}
                             lng={studio.longitude}
                             studio={studio}
+                            setStudioID={props.setStudioID}
+
                         />
                     )
                 })}

@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 
 const StudiosList = (props) => {
     const rows = props.studios
+    const setStudioID = props.setStudioID
     const columns = [
         { field: 'order', headerName: 'Number', sortable: false, width: 70 },
         { field: 'name', headerName: 'Studio Name', sortable: false, flex: 1 },
@@ -12,9 +13,9 @@ const StudiosList = (props) => {
     ];
     const [pageSize, setPageSize] = React.useState(5);
 
-    const handleRowClick = () => {
-        // TODO:
-        alert('go to specific studio page!')
+    const handleRowClick = (e) => {
+        // console.log(e.id)
+        setStudioID(e.id)
     }
 
     return (
@@ -37,7 +38,7 @@ const StudiosList = (props) => {
                       cursor: 'pointer'
                     },
                   }}
-                onRowClick={handleRowClick}
+                onRowClick={(e) => handleRowClick(e)}
                 // checkboxSelection
             />
         </Box>

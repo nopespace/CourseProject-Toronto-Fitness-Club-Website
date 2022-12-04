@@ -3,10 +3,11 @@ import './Pin.css'
 
 const StudioPin = (props) => {
     const studio = props.studio;
+    const setStudioID = props.setStudioID
     // const [mouseOn, sMouseOn] = useState(false);
 
-    const showInfo = (id) => {
-        // TODO:
+    const handleClickPin = (id) => {
+        // setStudioID(id)
     }
 
     return (
@@ -15,7 +16,7 @@ const StudioPin = (props) => {
             {mouseOn && <Typography>{studio.address}</Typography>} */}
             <div className='studio-pin'
                 key={studio.id}
-                // onClick={showInfo(studio.id)}
+                // onClick={handleClickPin(studio.id)}
                 // onMouseEnter={()=>sMouseOn(true)}
                 // onMouseLeave={()=>sMouseOn(false)}
             >

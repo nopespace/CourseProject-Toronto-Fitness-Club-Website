@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.studio-center-container-stack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20;
+}
+
+.studio-center-container-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20;
+}
+
+a {
+  color: rgb(114, 208, 255);
+}
