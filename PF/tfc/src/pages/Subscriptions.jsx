@@ -83,6 +83,7 @@ const Subscriptions = () => {
               return (
                 <SubscriptionBox
                   key={item.id}
+                  id={item.id}
                   billingCycle={item.billing_cycle}
                   price={item.price}
                   disabled={true}
@@ -92,6 +93,7 @@ const Subscriptions = () => {
               return (
                 <SubscriptionBox
                   key={item.id}
+                  id={item.id}
                   billingCycle={item.billing_cycle}
                   price={item.price}
                   disabled={false}
