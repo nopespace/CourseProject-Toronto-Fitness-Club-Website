@@ -7,6 +7,8 @@ import Studios from "./pages/Studios";
 import Subscriptions from "./pages/Subscriptions";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Edit from "./pages/Edit";
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "register/",
     element: <Register />,
+  },
+  {
+    path: "edit/",
+    element: <Edit />,
   },
 ]);
 
