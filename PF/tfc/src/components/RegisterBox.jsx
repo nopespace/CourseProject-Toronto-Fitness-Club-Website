@@ -7,19 +7,14 @@ const RegisterBox = (props) => {
   const { isLogin } = props;
   const navigate = useNavigate();
 
-  const login = (event) => {
-    const data = new FormData(event.target);
-
+  const login = (form) => {
     axios({
-      method: "post",
+      method: "form",
       url: "http://127.0.0.1:8000/accounts/login/",
-      data: data,
+      data: form,
     })
     .then((res) => {
       localStorage.setItem("userToken", JSON.stringify(res.data.token));
-      console.log(res.data);
-      const token = JSON.parse(localStorage.getItem("userToken"));
-      console.log(token)
       alert("Login success");
       navigate('/')
     })
@@ -28,13 +23,11 @@ const RegisterBox = (props) => {
     });
   };
 
-  const register = async (event) => {
-    const data = new FormData(event.target);
-
+  const register = (form) => {
     axios({
       method: "post",
       url: "http://127.0.0.1:8000/accounts/register/",
-      data: data,
+      data: form,
     })
     .then((res) => {
       alert("Registration success");
@@ -43,7 +36,6 @@ const RegisterBox = (props) => {
     .catch((err) => {
       alert("Registration Failed, Please try again later.");
     });
-   
   };
 
   return (
@@ -52,7 +44,7 @@ const RegisterBox = (props) => {
         <div className="my-20 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8">
           <div className="font-bold mb-2">{isLogin ? "Login": "Register"}</div>
           <form class="space-y-6" onSubmit={event => {
-              (isLogin ? login : register)(event);
+              (isLogin ? login : register)(new FormData(event.target));
               event.preventDefault();
             }}>
             <div>
@@ -132,6 +124,23 @@ const RegisterBox = (props) => {
                     type="text"
                     name="phone_number"
                     id="phone_number"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="123-456-7890"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="avatar"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Avatar (Optional)
+                  </label>
+                  <input
+                    type="file"
+                    name="avatar"
+                    id="avatar"
+                    accept="image/*"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="123-456-7890"
                     required
