@@ -41,7 +41,7 @@ from tfc.paginations import SmallResultsSetPagination
 class ListStudiosView(ListAPIView):
     permission_classes = (AllowAny,)    # can access the page without log in
     serializer_class = StudioSerializer
-    pagination_class = SmallResultsSetPagination
+    # pagination_class = SmallResultsSetPagination
     
     def search_filter(self, kw, criterion):
         d = {

@@ -7,13 +7,13 @@ const StudiosList = (props) => {
     const setStudioID = props.setStudioID
     const setPage = props.setPage
     const rowCount = props.rowCount
+    const pageSize = props.pageSize
     const columns = [
         { field: 'order', headerName: 'Number', sortable: false, width: 70 },
         { field: 'name', headerName: 'Studio Name', sortable: false, flex: 1 },
         { field: 'address', headerName: 'Address', sortable: false, flex: 1 },
         { field: 'phone_number', headerName: 'Phone Number', sortable: false, flex: 0.5},
     ];
-    const [pageSize, setPageSize] = React.useState(5);
 
     const handleRowClick = (e) => {
         // console.log(e.id)
@@ -26,13 +26,10 @@ const StudiosList = (props) => {
                 rows={rows}
                 columns={columns}
                 pageSize={pageSize}
-                // onPageSizeChange={(newPage) => setPageSize(newPage)}
-                // rowsPerPageOptions={[5, 10, 15]}
                 paginationMode='server'
                 rowCount={rowCount}
                 onPageChange={(page) => setPage(page + 1)}
                 disableExtendRowFullWidth={false}
-                density='comfortable'
                 sx={{
                     // https://mui.com/x/react-data-grid/style/#styling-rows
                     boxShadow: 2,

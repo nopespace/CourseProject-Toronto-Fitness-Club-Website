@@ -18,10 +18,10 @@ const Studios = (props) => {
   const [pos, setPos] = useState({ lat: 43.653225, lon: -79.383186 })
   /* studios with pagination */
   const [studios, setStudios] = useState([]);
-  const [allStudios, sAllStudios] = useState([]);
   const [studioID, setStudioID] = useState(undefined);  // the specific studio user chose to see
   const [page, setPage] = useState(1);
   const [rowCount, setRowCount] = useState(0);  // total number of rows, for table server-side pagination
+  const [pageSize, setPageSize] = React.useState(10);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -41,14 +41,10 @@ const Studios = (props) => {
     let url = `http://127.0.0.1:8000/studios/list/`
     const { data } = await axios.get(url, { params: { lat: lat, lon: lon, page: page } });
     data.results.map((studio, index) => {
-      studio['order'] = (page - 1) * 5 + index + 1;
+      studio['order'] = (page - 1) * pageSize + index + 1;
     })
     setStudios(data.results);
     setRowCount(data.count)
-    if (page * 5 > allStudios.length) {
-      sAllStudios(allStudios.concat(data.results))
-
-    }
   }
 
 
@@ -83,6 +79,7 @@ const Studios = (props) => {
             setStudios={setStudios}
             setRowCount={setRowCount}
             page={page}
+            pageSize={pageSize}
           />
 
           <StudiosTable
@@ -90,11 +87,12 @@ const Studios = (props) => {
             setStudioID={setStudioID}
             setPage={setPage}
             rowCount={rowCount}
+            pageSize={pageSize}
           />
         </Stack>
 
         <StudiosMap
-          studios={allStudios}
+          studios={studios}
           pos={pos}
           setPos={setPos}
           setStudioID={setStudioID}
