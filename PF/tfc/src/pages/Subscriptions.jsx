@@ -8,13 +8,38 @@ import SubscriptionBox from "../components/SubscriptionBox";
 import axios from "axios";
 import { queryAllByAttribute } from "@testing-library/react";
 
-const LOCAL_STORAGE_KEY = "user";
-
 const Subscriptions = () => {
-  const [details, setDetials] = useState([]);
-  const [userdata, setUserdata] = useState([]);
-  
+  const [details, setDetials] = useState([]); // this data is for plan
+  const [userdata, setUserdata] = useState([]); // this data is for user plan if exists
+
   useEffect(() => {
+    // this useeffect is used to set user data
+    let tmp_userdata;
+    if (localStorage.getItem("userToken") === null) {
+      tmp_userdata = [];
+      setUserdata(tmp_userdata);
+    } else {
+      const token = JSON.parse(localStorage.getItem("userToken"));
+      axios({
+        method: "get",
+        url: "http://127.0.0.1:8000/subscriptions/update/",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((res) => {
+          tmp_userdata = res.data;
+          setUserdata(tmp_userdata);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    if (userdata.length != 0) {
+      console.log("userdata is not empty");
+      console.log(userdata);
+    }
+
     // this use effect is for setting the subscription details
     let data;
     axios({
@@ -41,7 +66,6 @@ const Subscriptions = () => {
   //   localStorage.setItem("user", JSON.stringify(userdata.token));
   // },[]);
 
-
   // pagenation version
   // return (
   //   <>
@@ -53,13 +77,24 @@ const Subscriptions = () => {
     <>
       <Navigation />
       <div className="flex justify-center">
-        {details.map((item) => (
-          <SubscriptionBox
+        {details && details.map((item) => 
+        {
+          if (userdata.billing_cycle === item.billing_cycle) {
+            return <SubscriptionBox
             key={item.id}
             billingCycle={item.billing_cycle}
             price={item.price}
-          />
-        ))}
+            disabled={true}
+          />;
+          } 
+          else {
+            return <SubscriptionBox
+            key={item.id}
+            billingCycle={item.billing_cycle}
+            price={item.price}
+          />;}
+        }
+        )}
       </div>
     </>
   );

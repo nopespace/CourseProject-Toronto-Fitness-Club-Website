@@ -5,6 +5,7 @@ const SubscriptionBox = (props) => {
     id,
     price,
     billingCycle,
+    disabled
   } = props;
   return (
       <div className="w-full max-w-sm p-4 bg-white border rounded-lg shadow-md sm:p-8">
@@ -34,7 +35,7 @@ const SubscriptionBox = (props) => {
               ></path>
             </svg>
             <span className="text-base font-normal leading-tight text-gray-500 ">
-              2 team members
+              A lot of classes
             </span>
           </li>
           <li class="flex space-x-3">
@@ -53,7 +54,7 @@ const SubscriptionBox = (props) => {
               ></path>
             </svg>
             <span class="text-base font-normal leading-tight text-gray-500">
-              20GB Cloud storage
+              So many classes
             </span>
           </li>
           <li class="flex space-x-3">
@@ -72,7 +73,7 @@ const SubscriptionBox = (props) => {
               ></path>
             </svg>
             <span class="text-base font-normal leading-tight text-gray-500">
-              Integration help
+              Infinite number of class
             </span>
           </li>
           <li class="flex space-x-3 line-through decoration-gray-500">
@@ -91,7 +92,7 @@ const SubscriptionBox = (props) => {
               ></path>
             </svg>
             <span class="text-base font-normal leading-tight text-gray-500">
-              Sketch Files
+              Create a class
             </span>
           </li>
           <li class="flex space-x-3 line-through decoration-gray-500">
@@ -110,7 +111,7 @@ const SubscriptionBox = (props) => {
               ></path>
             </svg>
             <span class="text-base font-normal leading-tight text-gray-500">
-              API Access
+              Define a class
             </span>
           </li>
           <li class="flex space-x-3 line-through decoration-gray-500">
@@ -129,7 +130,7 @@ const SubscriptionBox = (props) => {
               ></path>
             </svg>
             <span class="text-base font-normal leading-tight text-gray-500">
-              Complete documentation
+              Go to the Mars
             </span>
           </li>
           <li class="flex space-x-3 line-through decoration-gray-500">
@@ -148,17 +149,23 @@ const SubscriptionBox = (props) => {
               ></path>
             </svg>
             <span class="text-base font-normal leading-tight text-gray-500">
-              24×7 phone & email support
+              Satellite telephone helping
             </span>
           </li>
         </ul>
+        {!disabled ? 
         <button
           onClick={()=>{alert("You clicked on the button")}}
           type="button"
           class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
+        >   Choose plan
+        </button> : 
+        <button disabled
+          type="button"
+          class="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
         >
-          Choose plan
-        </button>
+            Current Plan
+        </button>}
       </div>
   );
 }
