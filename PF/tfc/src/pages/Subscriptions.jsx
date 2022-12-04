@@ -6,11 +6,16 @@ import { Link } from "react-router-dom";
 import PaginatedItems from "../components/Pagenation";
 import SubscriptionBox from "../components/SubscriptionBox";
 import axios from "axios";
+import { queryAllByAttribute } from "@testing-library/react";
+
+const LOCAL_STORAGE_KEY = "user";
 
 const Subscriptions = () => {
-  const [details, setDetials] = React.useState([]);
-
+  const [details, setDetials] = useState([]);
+  const [userdata, setUserdata] = useState([]);
+  
   useEffect(() => {
+    // this use effect is for setting the subscription details
     let data;
     axios({
       method: "get",
@@ -19,11 +24,25 @@ const Subscriptions = () => {
       .then((res) => {
         data = res.data;
         setDetials(data);
-        console.log(data);
       })
       .catch((err) => {});
   }, []);
 
+  // useEffect(() => {
+  //   // this useeffect is used to set user data
+  //   let userdata;
+  //   axios({
+  //     method: "get",
+  //     url: "http://127.0.0.1:8000/subscriptions/update/",
+  //   }).then((res) => {
+  //     userdata = res.data;
+  //     setUserdata(userdata);
+  //   });
+  //   localStorage.setItem("user", JSON.stringify(userdata.token));
+  // },[]);
+
+
+  // pagenation version
   // return (
   //   <>
   //     <Navigation />
