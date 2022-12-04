@@ -15,6 +15,7 @@ class SubscriptionPlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubscriptionPlan
         fields = [
+            "id",
             "price",
             "billing_cycle", 
             # "studio", 

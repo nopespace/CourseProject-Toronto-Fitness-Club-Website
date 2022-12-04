@@ -14,13 +14,15 @@ class SubscriptionPlan(models.Model):
         ('monthly', 'monthly'),
         ('yearly', 'yearly'),
     )
+    
+    id = models.AutoField(primary_key=True)
     price = models.DecimalField(validators=[MinValueValidator(0.0)], max_digits=10, decimal_places=2)
     billing_cycle = models.CharField(max_length=10, choices=CYCLE_CHOICES)
     # studio = models.ForeignKey(Studio, related_name="subscriptions", on_delete=models.CASCADE)
     # user = models.ManyToManyField(User, related_name="subscriptions")
 
     def __str__(self):
-        return f"${self.price} {self.billing_cycle}"
+        return f"${self.id} {self.price} {self.billing_cycle}"
 
 # User's all subscriptions
 # User can subscribe to only one plan
