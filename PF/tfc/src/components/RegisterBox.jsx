@@ -47,29 +47,29 @@ const RegisterBox = (props) => {
     const password = passwordRef.current.value;
     // need to figure out the mandatory fields
     // TODO
-    axios({
-      method: "post",
-      url: "http://127.0.0.1:8000/accounts/register/",
-      data: {
-        username: name,
-        email: email,
-        first_name: first_name,
-        last_name: last_name,
-        password: password,
-        phone_number: phone_number,
-        avatar: avatar,
-      },
-    })
-      .then((res) => {
-        localStorage.setItem("userToken", JSON.stringify(res.data.token));
-        console.log(res.data);
-        const token = JSON.parse(localStorage.getItem("userToken"));
-        // console.log(token);
-        alert("Login success");
-      })
-      .catch((err) => {
-        alert("Register Failed, Please try again later.");
-      });
+    // axios({
+    //   method: "post",
+    //   url: "http://127.0.0.1:8000/accounts/register/",
+    //   data: {
+    //     username: name,
+    //     email: email,
+    //     first_name: first_name,
+    //     last_name: last_name,
+    //     password: password,
+    //     phone_number: phone_number,
+    //     avatar: avatar,
+    //   },
+    // })
+    //   .then((res) => {
+    //     localStorage.setItem("userToken", JSON.stringify(res.data.token));
+    //     console.log(res.data);
+    //     const token = JSON.parse(localStorage.getItem("userToken"));
+    //     // console.log(token);
+    //     alert("Login success");
+    //   })
+    //   .catch((err) => {
+    //     alert("Register Failed, Please try again later.");
+    //   });
   };
 
   return (
