@@ -45,14 +45,8 @@ const RegisterBox = (props) => {
   const register_function = () => {
     const name = usernameRef.current.value;
     const password = passwordRef.current.value;
-    if (name === "" || password === "") {
-      alert("Please enter username and password");
-      return;
-    }
     // need to figure out the mandatory fields
     // TODO
-    // reason for todo: the backend is not working properly
-    // CSRF
     // axios({
     //   method: "post",
     //   url: "http://127.0.0.1:8000/accounts/register/",
@@ -88,7 +82,7 @@ const RegisterBox = (props) => {
                 for="username"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Username
+                Username*
               </label>
               <input
                 ref={usernameRef}
@@ -107,7 +101,7 @@ const RegisterBox = (props) => {
                     for="email"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Email
+                    Email*
                   </label>
                   <input
                     ref={emailRef}
