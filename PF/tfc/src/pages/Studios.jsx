@@ -58,7 +58,7 @@ const Studios = (props) => {
       <Box style={{ display: 'flex', justifyContent: 'center', alignItems: "center" }}>
         {studios.length !== 0 &&
           <Stack
-            style={{ height: '60vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: "center", margin:15 }}
+            style={{ height: '60%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: "center", margin:15 }}
             sx={{
               // https://mui.com/x/react-data-grid/style/#styling-rows
               boxShadow: 2,
