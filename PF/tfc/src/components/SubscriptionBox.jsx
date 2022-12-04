@@ -1,21 +1,43 @@
 import React from 'react'
 import  { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const SubscriptionBox = (props) => {
   const { id, price, billingCycle, disabled } = props;
   let navigate = useNavigate(); 
-  const subscriptionshandler = () => {
+
+  const subscriptionshandler = (plan_id, cancelled) => {
+    console.log(plan_id)
     // check auth
     // localStorage.clear();
+    let cardinfo;
     if (localStorage.getItem("userToken") === null) {
       console.log("not logged in");
       navigate("/login");
     }
     else {
-      console.log("logged in");
-      // TODO 12.3rd
+      // check card
+      const cardinfo = JSON.parse(localStorage.getItem("cardInfo"));
+      if (cardinfo === null) {
+        console.log("card info is empty");
+        navigate("/card");
+      }
+      else {
+        // change the plan
+        const token = JSON.parse(localStorage.getItem("userToken"));
+        // axios({
+        //   method: "put",
+        //   url: "http://127.0.0.1:8000/subscriptions/update/",
+        //   headers: {
+        //     Authorization: "Bearer " + token,
+        //   },
+        //   data: {
+        //     plan_id: ,
+        //     cancelled: false,
+        //   },
+        // })
+      }
     }
-
   };
   return (
     <div className="w-full max-w-sm p-4 bg-white border rounded-lg shadow-md sm:p-8">
@@ -164,7 +186,7 @@ const SubscriptionBox = (props) => {
       </ul>
       {!disabled ? (
         <button
-          onClick={subscriptionshandler}
+          onClick={e => subscriptionshandler(id, false)}
           type="button"
           class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
         >

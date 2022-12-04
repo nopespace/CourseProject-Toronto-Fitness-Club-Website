@@ -22,6 +22,7 @@ const RegisterBox = (props) => {
       alert("Please enter username and password");
       return;
     }
+    // save token
     axios({
       method: "post",
       url: "http://127.0.0.1:8000/accounts/login/",
@@ -39,6 +40,30 @@ const RegisterBox = (props) => {
       })
       .catch((err) => {
         alert("Login Failed, Please try again later.");
+      });
+    // save card
+    let cardinfo;
+
+    console.log("logged in");
+    // save user card info
+    const token = JSON.parse(localStorage.getItem("userToken"));
+    axios({
+      method: "get",
+      url: "http://127.0.0.1:8000/subscriptions/card/update/",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((res) => {
+        cardinfo = res.data;
+        localStorage.setItem("cardInfo", JSON.stringify(res.data));
+        if (cardinfo != null) {
+          console.log("cardinfo is not empty");
+        }
+        console.log(cardinfo);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 

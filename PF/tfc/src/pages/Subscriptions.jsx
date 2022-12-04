@@ -35,7 +35,7 @@ const Subscriptions = () => {
           console.log(err);
         });
     }
-    if (userdata.length != 0) {
+    if (userdata.length !== 0) {
       console.log("userdata is not empty");
       console.log(userdata);
     }
@@ -77,24 +77,28 @@ const Subscriptions = () => {
     <>
       <Navigation />
       <div className="flex justify-center">
-        {details && details.map((item) => 
-        {
-          if (userdata.billing_cycle === item.billing_cycle) {
-            return <SubscriptionBox
-            key={item.id}
-            billingCycle={item.billing_cycle}
-            price={item.price}
-            disabled={true}
-          />;
-          } 
-          else {
-            return <SubscriptionBox
-            key={item.id}
-            billingCycle={item.billing_cycle}
-            price={item.price}
-          />;}
-        }
-        )}
+        {details &&
+          details.map((item) => {
+            if (userdata.billing_cycle === item.billing_cycle) {
+              return (
+                <SubscriptionBox
+                  key={item.id}
+                  billingCycle={item.billing_cycle}
+                  price={item.price}
+                  disabled={true}
+                />
+              );
+            } else {
+              return (
+                <SubscriptionBox
+                  key={item.id}
+                  billingCycle={item.billing_cycle}
+                  price={item.price}
+                  disabled={false}
+                />
+              );
+            }
+          })}
       </div>
     </>
   );
