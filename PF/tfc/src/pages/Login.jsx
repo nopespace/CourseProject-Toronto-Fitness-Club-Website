@@ -8,7 +8,7 @@ const Login = () => {
   return (
     <>
       <Navigation />
-      <RegisterBox isLogin={true} />
+      <RegisterBox type="Login" />
     </>
   );
 };

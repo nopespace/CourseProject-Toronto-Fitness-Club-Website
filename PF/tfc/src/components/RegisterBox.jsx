@@ -4,47 +4,65 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const RegisterBox = (props) => {
-  const { isLogin } = props;
+  const { type } = props;
   const navigate = useNavigate();
 
-  const login = (form) => {
-    axios({
-      method: "form",
-      url: "http://127.0.0.1:8000/accounts/login/",
-      data: form,
-    })
-    .then((res) => {
+  const login = async (form) => {
+    try {
+      const res = await axios({
+        method: "post",
+        url: "http://127.0.0.1:8000/accounts/login/",
+        data: form,
+      });
       localStorage.setItem("userToken", JSON.stringify(res.data.token));
       alert("Login success");
-      navigate('/')
-    })
-    .catch((err) => {
+      navigate('/');
+    } catch (e) {
       alert("Login Failed, Please try again later.");
-    });
+    }
   };
 
-  const register = (form) => {
-    axios({
-      method: "post",
-      url: "http://127.0.0.1:8000/accounts/register/",
-      data: form,
-    })
-    .then((res) => {
+  const register = async (form) => {
+    try {
+      const res = await axios({
+        method: "post",
+        url: "http://127.0.0.1:8000/accounts/register/",
+        data: form,
+      });
       alert("Registration success");
-      navigate('/login/')
-    })
-    .catch((err) => {
+      navigate('/login/');
+    } catch (e) {
       alert("Registration Failed, Please try again later.");
-    });
+    }
+  };
+
+  const edit = async (form) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("userToken"));
+      const res = await axios({
+        method: "post",
+        url: "http://127.0.0.1:8000/accounts/edit/",
+        data: form,
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      alert("Edit success");
+      navigate('/login/');
+    } catch (e) {
+      alert("Edit Failed, Please try again later.");
+    }
   };
 
   return (
     <>
-      <div className="grid place-items-center my-20">
+      <div className="grid place-items-center my-5">
         <div className="my-20 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8">
-          <div className="font-bold mb-2">{isLogin ? "Login": "Register"}</div>
+          <div className="font-bold mb-2">{type}</div>
           <form class="space-y-6" onSubmit={event => {
-              (isLogin ? login : register)(new FormData(event.target));
+              ({
+                "Login": login,
+                "Register": register,
+                "Edit": edit
+              })[type](new FormData(event.target));
               event.preventDefault();
             }}>
             <div>
@@ -63,7 +81,7 @@ const RegisterBox = (props) => {
                 required
               />
             </div>
-            {!isLogin && (
+            {type !== "Login" && (
               <>
                 <div>
                   <label
@@ -168,7 +186,7 @@ const RegisterBox = (props) => {
               type="submit"
               class="w-full text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
-              {isLogin ? "Login" : "Register"}
+              {type}
             </button>
           </form>
         </div>

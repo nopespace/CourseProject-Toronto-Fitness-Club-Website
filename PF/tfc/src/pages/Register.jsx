@@ -6,7 +6,7 @@ const Register = () => {
   return (
     <>
       <Navigation />
-      <RegisterBox />
+      <RegisterBox type="Register" />
     </>
   );
 }
