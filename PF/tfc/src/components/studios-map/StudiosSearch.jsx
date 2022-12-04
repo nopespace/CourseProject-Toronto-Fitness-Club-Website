@@ -9,6 +9,8 @@ const StudiosSearch = (props) => {
     const {
         pos,
         setStudios,
+        setRowCount,
+        page,
     } = props
     const options = [
         'studio name',
@@ -25,10 +27,11 @@ const StudiosSearch = (props) => {
     const searchStudios = async (keyword) => {
         let url = `http://127.0.0.1:8000/studios/list/`
         const { data } = keyword !== '' ? await axios.get(url, { params: { lat: pos.lat, lon: pos.lon, keyword: keyword, criterion: optionChose }}) : await axios.get(url, { params: { lat: pos.lat, lon: pos.lon}})
-        data.map((studio, index) => {
-          studio['order'] = index + 1;
+        data.results.map((studio, index) => {
+          studio['order'] = (page - 1) * 5 + index + 1;
         })
-        setStudios(data);
+        setStudios(data.results);
+        setRowCount(data.count);
       }
 
     const handleSearch = async (e) => {

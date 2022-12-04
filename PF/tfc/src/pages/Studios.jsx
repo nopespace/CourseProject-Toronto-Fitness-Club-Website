@@ -16,7 +16,9 @@ import StudioDisplay from "../components/studios-map/StudioDisplay";
 
 const Studios = (props) => {
   const [pos, setPos] = useState({ lat: 43.653225, lon: -79.383186 })
+  /* studios with pagination */
   const [studios, setStudios] = useState([]);
+  const [allStudios, sAllStudios] = useState([]);
   const [studioID, setStudioID] = useState(undefined);  // the specific studio user chose to see
   const [page, setPage] = useState(1);
   const [rowCount, setRowCount] = useState(0);  // total number of rows, for table server-side pagination
@@ -43,6 +45,10 @@ const Studios = (props) => {
     })
     setStudios(data.results);
     setRowCount(data.count)
+    if (page * 5 > allStudios.length) {
+      sAllStudios(allStudios.concat(data.results))
+
+    }
   }
 
 
@@ -75,6 +81,8 @@ const Studios = (props) => {
           <StudiosSearch
             pos={pos}
             setStudios={setStudios}
+            setRowCount={setRowCount}
+            page={page}
           />
 
           <StudiosTable
@@ -86,7 +94,7 @@ const Studios = (props) => {
         </Stack>
 
         <StudiosMap
-          studios={studios}
+          studios={allStudios}
           pos={pos}
           setPos={setPos}
           setStudioID={setStudioID}
