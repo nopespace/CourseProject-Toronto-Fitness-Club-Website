@@ -25,10 +25,19 @@ from accounts.serializers import LoginSerializer
 from accounts.serializers import UpdateProfileSerializer
 from rest_framework import status
 from django.contrib.auth import authenticate, login
+from logging import warn
 
 
 class RegisterView(CreateAPIView):
     serializer_class = UserSerializer
+
+
+class AccountView(APIView):
+    def get(self, request):
+        try:
+            return JsonResponse(UserSerializer(request.user).data)
+        except:
+            return Response({"error": "Please log in."}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(TokenObtainPairView):
