@@ -11,10 +11,11 @@ import { useEffect, useState } from 'react';
 const SearchDropDownMenu = (props) => {
     const {
         options, // a list of options for searching criteria, e.g. studio name, class name
-        setSearchRequired
+        setSearchRequired,
+        optionChose,
+        setOptionChose,
     } = props
 
-    const [optionChose, setOptionChose] = useState(undefined);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClickDropDown = (event) => {

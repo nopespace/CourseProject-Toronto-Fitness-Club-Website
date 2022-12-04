@@ -41,9 +41,6 @@ const Studios = (props) => {
 
 
 
-  if (studios.length === 0) {
-    listStudios(pos.lat, pos.lon)
-  }
 
   return (
     <Box >
@@ -56,29 +53,29 @@ const Studios = (props) => {
       </Stack>
 
       <Box style={{ display: 'flex', justifyContent: 'center', alignItems: "center" }}>
-        {studios.length !== 0 &&
-          <Stack
-            style={{ height: '60%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: "center", margin:15 }}
-            sx={{
-              // https://mui.com/x/react-data-grid/style/#styling-rows
-              boxShadow: 2,
-              border: 2,
-              borderColor: 'rgba(247, 251, 244, 0.064)'
-            }}
-          >
-            <StudiosSearch />
-            <StudiosTable
-              studios={studios}
-            />
-          </Stack>
-        }
+        <Stack
+          style={{ height: '60%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: "center", margin: 15 }}
+          sx={{
+            // https://mui.com/x/react-data-grid/style/#styling-rows
+            boxShadow: 2,
+            border: 2,
+            borderColor: 'rgba(247, 251, 244, 0.064)'
+          }}
+        >
+          <StudiosSearch
+            pos={pos}
+            setStudios={setStudios}
+          />
+          <StudiosTable
+            studios={studios}
+          />
+        </Stack>
 
-        {studios.length !== 0 && <StudiosMap
+        <StudiosMap
           studios={studios}
           pos={pos}
           setPos={setPos}
         />
-        }
       </Box>
     </Box>
   )

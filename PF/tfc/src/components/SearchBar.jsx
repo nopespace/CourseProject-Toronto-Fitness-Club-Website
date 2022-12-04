@@ -14,6 +14,7 @@ const SearchBar = (props) => {
   const {
     placeholder,
     handleSearch, // refer to StudiosSortByLoc for example
+    handleSearchFieldChange
   } = props
 
   return (
@@ -50,6 +51,7 @@ const SearchBar = (props) => {
               id="default-search"
               class="block w-full p-4 pl-10 text-sm text-gray-900 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
               placeholder={placeholder}
+              onChange={handleSearchFieldChange}
               required
             />
 
