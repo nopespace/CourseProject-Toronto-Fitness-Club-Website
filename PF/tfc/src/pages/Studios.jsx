@@ -18,6 +18,8 @@ const Studios = (props) => {
   const [pos, setPos] = useState({ lat: 43.653225, lon: -79.383186 })
   const [studios, setStudios] = useState([]);
   const [studioID, setStudioID] = useState(undefined);  // the specific studio user chose to see
+  const [page, setPage] = useState(1);
+  const [rowCount, setRowCount] = useState(0);  // total number of rows, for table server-side pagination
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -31,15 +33,16 @@ const Studios = (props) => {
 
   useEffect(() => {
     listStudios(pos.lat, pos.lon);
-  }, [pos])
+  }, [pos, page])
 
   const listStudios = async (lat, lon) => {
     let url = `http://127.0.0.1:8000/studios/list/`
-    const { data } = await axios.get(url, { params: { lat: lat, lon: lon } });
-    data.map((studio, index) => {
-      studio['order'] = index + 1;
+    const { data } = await axios.get(url, { params: { lat: lat, lon: lon, page: page } });
+    data.results.map((studio, index) => {
+      studio['order'] = (page - 1) * 5 + index + 1;
     })
-    setStudios(data);
+    setStudios(data.results);
+    setRowCount(data.count)
   }
 
 
@@ -77,6 +80,8 @@ const Studios = (props) => {
           <StudiosTable
             studios={studios}
             setStudioID={setStudioID}
+            setPage={setPage}
+            rowCount={rowCount}
           />
         </Stack>
 

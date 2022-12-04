@@ -1,8 +1,10 @@
 import * as React from "react";
 import axios from "axios";
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
 import '../../index.css'
 
 const StudioDisplay = (props) => {
@@ -24,6 +26,8 @@ const StudioDisplay = (props) => {
 
     return (
         <Box >
+            {/* TODO: use grid layout */}
+            {/* TODO: 2. jump to here when click studio */}
              {/* style={{ height: '70vh', width: '90%', margin: 30, alignItems: 'center', justifyContent: 'center' }} */}
             {studio && <Box className='studio-center-container-box' style={{flexDirection: 'column'}}>
                 <Typography variant='h4'>{studio.name}</Typography>
@@ -34,6 +38,7 @@ const StudioDisplay = (props) => {
                 </Typography>
 
                 <Typography ><b>📞Phone Number: </b>{studio.phone_number}</Typography>
+                {/* TODO: image list react */}
                 {studio.images.map((image, index) => (
                     <img src={image.image} key={index} />
                 ))}

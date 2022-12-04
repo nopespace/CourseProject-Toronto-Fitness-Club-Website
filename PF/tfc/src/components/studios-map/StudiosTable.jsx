@@ -5,6 +5,8 @@ import Box from '@mui/material/Box';
 const StudiosList = (props) => {
     const rows = props.studios
     const setStudioID = props.setStudioID
+    const setPage = props.setPage
+    const rowCount = props.rowCount
     const columns = [
         { field: 'order', headerName: 'Number', sortable: false, width: 70 },
         { field: 'name', headerName: 'Studio Name', sortable: false, flex: 1 },
@@ -24,8 +26,11 @@ const StudiosList = (props) => {
                 rows={rows}
                 columns={columns}
                 pageSize={pageSize}
-                onPageSizeChange={(newPage) => setPageSize(newPage)}
-                rowsPerPageOptions={[5, 10, 15]}
+                // onPageSizeChange={(newPage) => setPageSize(newPage)}
+                // rowsPerPageOptions={[5, 10, 15]}
+                paginationMode='server'
+                rowCount={rowCount}
+                onPageChange={(page) => setPage(page + 1)}
                 disableExtendRowFullWidth={false}
                 density='comfortable'
                 sx={{
