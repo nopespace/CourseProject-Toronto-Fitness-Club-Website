@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import NavAccount from "./NavAccount";
 
 const Navigation = () => {
   return (
@@ -32,24 +33,7 @@ const Navigation = () => {
           </div>
         </div>
         <div>
-          <ul className="flex p-4 flex-row space-x-8 mt-0 text-sm font-medium border-0">
-            <li>
-              <Link
-                to="/register/"
-                className="block text-gray-700 hover:text-blue-600 p-0 text-sm"
-              >
-                Register
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/login/"
-                className="block text-gray-700 hover:text-blue-600 p-0 text-sm"
-              >
-                Login
-              </Link>
-            </li>
-          </ul>
+          <NavAccount />
         </div>
       </div>
     </nav>

@@ -46,7 +46,6 @@ const RegisterBox = (props) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Edit success");
-      navigate('/login/');
     } catch (e) {
       alert("Edit Failed, Please try again later.");
     }
