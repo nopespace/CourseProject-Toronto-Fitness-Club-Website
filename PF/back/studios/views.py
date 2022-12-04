@@ -13,6 +13,7 @@ from decimal import Decimal
 from rest_framework.permissions import AllowAny
 from classes.models import *
 import json
+from tfc.paginations import SmallResultsSetPagination
 # Create your views here.
 # class ListStudiosView(APIView):
 #     # authentication_classes = [authentication.TokenAuthentication]
@@ -40,7 +41,8 @@ import json
 class ListStudiosView(ListAPIView):
     permission_classes = (AllowAny,)    # can access the page without log in
     serializer_class = StudioSerializer
-
+    pagination_class = SmallResultsSetPagination
+    
     def search_filter(self, kw, criterion):
         d = {
             'class name': 'name',
