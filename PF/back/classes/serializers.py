@@ -53,6 +53,8 @@ class CancelledKlassInstanceSerializer(serializers.ModelSerializer):
 
 
 class EnrolledSerializer(serializers.ModelSerializer):
+    base_klass = serializers.CharField(
+        source='klass_instance.base_klass.id', read_only=True)
     class_name = serializers.CharField(
         source='klass_instance.base_klass.name', read_only=True)
     coach_name = serializers.CharField(
@@ -66,6 +68,7 @@ class EnrolledSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enrolled
         fields = [
+            'base_klass',
             'class_name',
             'coach_name',
             'date',

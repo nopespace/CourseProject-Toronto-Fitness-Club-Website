@@ -1,16 +1,16 @@
 import * as React from "react";
 import {
     DataGrid,
-    GRID_CHECKBOX_SELECTION_COL_DEF,
 } from '@mui/x-data-grid';
-import { useEffect, useState, useRef } from 'react';
 
 
 const ClassTable = (props) => {
     const {
         info,
         setter,
+        sDroppedClass,
     } = props;
+
     const columns = [
         { field: 'class_name', headerName: 'Class', sortable: true, flex: 1 },
         { field: 'coach_name', headerName: 'Coach', sortable: true, flex: 1 },
@@ -18,6 +18,10 @@ const ClassTable = (props) => {
         { field: 'start_time', headerName: 'Start Time', sortable: true, flex: 1 },
         { field: 'end_time', headerName: 'End Time', sortable: true, flex: 1 },
     ];
+
+    const handleRowClick = (e) => {
+        sDroppedClass(e.row)
+    }
 
     return (
         <DataGrid
@@ -30,6 +34,7 @@ const ClassTable = (props) => {
             rowCount={info.rowCount}
             onPageChange={(page) => setter({ ...info, page: page + 1 })}
             disableExtendRowFullWidth={false}
+            onRowClick={(e) => handleRowClick(e)}
             initialState={{
                 pagination: {
                     page: 1,

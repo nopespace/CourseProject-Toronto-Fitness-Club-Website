@@ -12,6 +12,7 @@ import Navigation from "../components/Navigation";
 import StudioAmenity from "../components/StudioAmenity";
 import Classes from "../components/Classes";
 import ClassTable from "../components/ClassTable";
+import ClassDrop from "../components/ClassDrop";
 
 const UserClasses = (props) => {
     const [future, setFuture] = useState({
@@ -27,30 +28,35 @@ const UserClasses = (props) => {
         pageSize: 30
     })
 
+    const [droppedClass, sDroppedClass] = useState(undefined)
+
     const listFutureClass = async () => {
         let url = `http://127.0.0.1:8000/classes/user/future/schedule/`
         let config = {
-            headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem("userToken"))}`},
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem("userToken"))}` },
             params: {
-              page: future.page
+                page: future.page
             },
-          }
+        }
         const { data } = await axios.get(
-            url, 
+            url,
             config
         )
-        data.results.map((class_, index) => class_.id=index)
+        data.results.map((class_, index) => class_.id = index)
         setFuture({ ...future, classes: data.results, rowCount: data.count });
     }
 
     const listPastClass = async () => {
         let url = `http://127.0.0.1:8000/classes/user/past/schedule/`
+        let config = {
+            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem("userToken"))}` },
+            params: {
+                page: past.page
+            },
+        }
         const { data } = await axios.get(
-            url, 
-            { params: { page: past.page }},
-            {
-                headers: {Authorization: `Bearer ${JSON.parse(localStorage.getItem("userToken"))}`},
-            }
+            url,
+            config,
         )
         setPast({ ...past, classes: data.results, rowCount: data.count });
     }
@@ -58,7 +64,7 @@ const UserClasses = (props) => {
     useEffect(() => {
         listFutureClass()
     }, [future.page])
-    
+
     useEffect(() => {
         listPastClass()
     }, [past.page])
@@ -69,9 +75,11 @@ const UserClasses = (props) => {
             <Grid className='myClass-grid' sx={{ mt: 2, m: 5 }}>
                 <Box className='class-schedule-center-container-box' >
                     <Typography variant='h5'>My Future Classes</Typography>
+                    <Typography color='green'>*Click on a class if you want to drop it.</Typography>
                     <ClassTable
                         info={future}
                         setter={setFuture}
+                        sDroppedClass={sDroppedClass}
                     />
                 </Box>
 
@@ -80,9 +88,14 @@ const UserClasses = (props) => {
                     <ClassTable
                         info={past}
                         setter={setPast}
+                        sDroppedClass={() => { }}
                     />
                 </Box>
             </Grid>
+            {droppedClass && <ClassDrop
+                class={droppedClass}
+                listFutureClass={listFutureClass}
+            />}
         </Box>
     )
 }
