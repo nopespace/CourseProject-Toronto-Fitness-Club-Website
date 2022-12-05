@@ -16,11 +16,12 @@ from logging import warning
 from subscriptions.models import UserSubscription
 
 # list class schedule of a specific studio
-
+from tfc.paginations import LargeResultsSetPagination
 
 class ListClassView(ListAPIView):
     # permission_classes = [IsAuthenticated]
     serializer_class = KlassInstanceSerializer
+    pagination_class = LargeResultsSetPagination
 
     def get_queryset(self):
         classes = KlassInstance.objects.filter(
@@ -203,6 +204,7 @@ class SearchClassView(ListAPIView):
 class UserScheduleView(ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = EnrolledSerializer
+    pagination_class = LargeResultsSetPagination
 
     def get_queryset(self):
         enrolls = Enrolled.objects.filter(
@@ -218,6 +220,7 @@ class UserScheduleView(ListAPIView):
 class UserClassHistoryView(ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = EnrolledSerializer
+    pagination_class = LargeResultsSetPagination
 
     def get_queryset(self):
         past = Enrolled.objects.filter(

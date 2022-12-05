@@ -13,7 +13,7 @@ from decimal import Decimal
 from rest_framework.permissions import AllowAny
 from classes.models import *
 import json
-from tfc.paginations import SmallResultsSetPagination
+
 # Create your views here.
 # class ListStudiosView(APIView):
 #     # authentication_classes = [authentication.TokenAuthentication]

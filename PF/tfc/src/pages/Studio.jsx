@@ -10,6 +10,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useNavigate } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import StudioAmenity from "../components/StudioAmenity";
+import Classes from "../components/Classes";
 
 const Studio = (props) => {
     let { studio_id } = useParams();
@@ -23,7 +24,7 @@ const Studio = (props) => {
     const retrieveStudio = async () => {
         let url = `http://127.0.0.1:8000/studios/${studio_id}/`
         const { data } = await axios.get(url, { params: { lat: pos.lat, lon: pos.lon } })
-        data.amenities.map((amenity, index) => amenity.id=index)
+        data.amenities.map((amenity, index) => amenity.id = index)
         setStudio(data);
     }
 
@@ -92,9 +93,7 @@ const Studio = (props) => {
                             {classShow && <KeyboardArrowUpIcon />}
                         </button>
 
-                        {/* {studio.amenities.map((amenity, index) => (
-                            <Typography key={index}>{amenity.name}: {amenity.quantity}</Typography>
-                        ))} */}
+                        {classShow && <Classes studio={studio}></Classes>}
 
                     </Box>
                     <Box className='studio-center-container-box' style={{ flexDirection: 'column', justifyContent: 'start' }}>
