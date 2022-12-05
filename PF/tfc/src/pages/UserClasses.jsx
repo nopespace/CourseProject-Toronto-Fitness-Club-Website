@@ -26,10 +26,6 @@ const UserClasses = (props) => {
         rowCount: 0,
         pageSize: 30
     })
-    // const [futurePage, setFuturePage] = useState(1)
-    // const [futureClass, setFutureClass] = useState([])
-    // const [pastPage, setPastPage] = useState(1)
-    // const [pastClass, setPastClass] = useState([])
 
     const listFutureClass = async () => {
         let url = `http://127.0.0.1:8000/classes/user/future/schedule/`
@@ -62,8 +58,12 @@ const UserClasses = (props) => {
 
     useEffect(() => {
         listFutureClass()
+    }, [future.page])
+    
+    useEffect(() => {
         listPastClass()
-    }, [])
+
+    }, [past.page])
 
 
 
