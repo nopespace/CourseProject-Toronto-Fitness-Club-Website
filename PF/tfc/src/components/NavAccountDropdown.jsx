@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Divider from '@mui/material/Divider';
 
 const NavAccountDropdown = ({ user, logout }) => {
   const [open, setOpen] = React.useState(false);
@@ -24,7 +25,9 @@ const NavAccountDropdown = ({ user, logout }) => {
             <ul className="py-1" aria-labelledby="dropdownDefault">
               <li>
                   <Link to="/edit/" className="text-sm hover:bg-gray-100 text-gray-700 block p-2 rounded">Edit account</Link>
+                  <Divider sx={{my:0.5}}></Divider>
                   <Link to="/myClasses/" className="text-sm hover:bg-gray-100 text-gray-700 block p-2 rounded">My Classes</Link>
+                  <Divider sx={{my:0.5}}></Divider>
                   <Link onClick={logout} className="text-sm hover:bg-gray-100 text-gray-700 block p-2 rounded">Logout</Link>
               </li>
             </ul>

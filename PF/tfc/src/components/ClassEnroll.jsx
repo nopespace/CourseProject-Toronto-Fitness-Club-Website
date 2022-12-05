@@ -46,9 +46,7 @@ const ClassEnroll = (props) => {
                 headers: { Authorization: `Bearer ${token}` },
             })
                 .then(res => {
-                    // TODO: link placeholder
-                    console.log(res)
-                    setMsgLink({ msg: res.data.msg, link: '/' })
+                    setMsgLink({ msg: res.data.msg, link: '/myClasses/' })
                 })
                 .catch(err => {
                     console.log(err)
