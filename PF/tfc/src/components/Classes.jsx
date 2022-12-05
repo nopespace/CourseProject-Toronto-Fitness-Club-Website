@@ -27,14 +27,9 @@ const Classes = (props) => {
     const pageSize = 30;
     const [showClassInfo, sShowClassInfo] = useState(false);
     const [class_, setClass] = useState(undefined);
-    const [searchRequired, setSearchRequired] = useState(false);
     const [optionChose, setOptionChose] = useState(undefined);
-    const options = [
-        'class_name',
-        'coach_name',
-        'date',
-        'time_range'
-    ]
+    const [msgLink, setMsgLink] = useState({ msg: undefined, link: undefined })
+
     const myRef = useRef(null)
 
     const columns = [
@@ -83,6 +78,10 @@ const Classes = (props) => {
     const handleRowClick = (e) => {
         sShowClassInfo(true);
         setClass(e.row);
+        setMsgLink({
+            msg: undefined,
+            link: undefined
+        })
     }
     
 
@@ -108,6 +107,8 @@ const Classes = (props) => {
                 <Typography><b>Capacity</b>: {class_.capacity} students</Typography>
                 <ClassEnroll
                     class={class_}
+                    msgLink={msgLink}
+                    setMsgLink={setMsgLink}
                 />
                 {/* <Typography><b>Current number of Students</b>: {class_.num_students} students</Typography> */}
 

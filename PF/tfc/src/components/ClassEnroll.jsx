@@ -12,10 +12,11 @@ import { Link } from "react-router-dom";
 
 const ClassEnroll = (props) => {
     const class_ = props.class;
+    const msgLink = props.msgLink;
+    const setMsgLink = props.setMsgLink;
     const singleClass = `Single Class: Enroll in ${class_.class_name} only on ${class_.date}?`
     const allClass = `All Classes: Enroll in all ${class_.class_name} classes starting from ${class_.date}?`
     const [enrollChoice, sEnrollChoice] = useState('single-class')
-    const [msgLink, setMsgLink] = useState({ msg: undefined, link: undefined, linkLabel: undefined })
 
     const handleChooseEnroll = (e) => {
         sEnrollChoice(e.target.value)
@@ -25,14 +26,13 @@ const ClassEnroll = (props) => {
         setMsgLink({
             msg: undefined,
             link: undefined,
-            linkLabel: undefined
 
         })
         let url = `http://127.0.0.1:8000/classes/enroll/`
         const token = JSON.parse(localStorage.getItem("userToken"))
         console.log(token)
         if (token === null) {
-            setMsgLink({ msg: `Please login first.`, link: '/login/', linkLabel: 'Login Page' })
+            setMsgLink({ msg: `Please login first.`, link: '/login/' })
         }
         else {
             const all = enrollChoice === 'all-class' ? true : false
@@ -46,13 +46,13 @@ const ClassEnroll = (props) => {
                 },
                 headers: { Authorization: `Bearer ${token}` },
             })
-            .then(res => res.json())
-            .then(json => {
-                console.log(json)
-            })
-            .catch(err => {
-                setMsgLink({ msg: err.response.data.msg, link: '/subscriptions/', linkLabel: 'Add your Subscription' })
-            })
+                .then(res => res.json())
+                .then(json => {
+                    console.log(json)
+                })
+                .catch(err => {
+                    setMsgLink({ msg: err.response.data.msg, link: '/subscriptions/' })
+                })
         }
         // const { data } = await axios.get(url, { params: { page: query.page } });
     }
@@ -80,10 +80,20 @@ const ClassEnroll = (props) => {
                 Enroll
             </button>
 
-            {msgLink.msg && <Typography varint='h6' color='red'>
+            {msgLink.msg && !msgLink.link && <Typography>{msgLink.msg}</Typography>}
+
+            {/* error, show link */}
+            {msgLink.link && 
+            <Typography style={{color: 'red'}}>
+                {msgLink.msg }
+                <Link to={msgLink.link} style={{textDecoration: 'underline'}}>[Link]</Link>
+                </Typography>
+                
+            }
+            {/* {msgLink.msg && <Typography varint='h6' color='red'>
                 {msgLink.msg}
                 {msgLink.link && <Link to={msgLink.link} >  {msgLink.linkLabel}</Link>}
-            </Typography>}
+            </Typography>} */}
 
 
         </Box>

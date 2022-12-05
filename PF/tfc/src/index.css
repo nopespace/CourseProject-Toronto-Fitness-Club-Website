@@ -22,9 +22,10 @@
 }
 
 a {
-  color: rgb(23, 164, 235);
+  color: rgb(23, 118, 235);
+  /* text-decoration: underline; */
 }
 
 a:hover {
-  color:rgb(3, 86, 128)
+  color:rgb(0, 105, 233);
 }
