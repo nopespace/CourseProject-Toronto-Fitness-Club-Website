@@ -1,7 +1,7 @@
 import * as React from 'react';
-import RegisterBox from '../components/RegisterBox';
+import RegisterBox from '../components/accounts/RegisterBox';
 import Navigation from '../components/Navigation';
-import CardBox from '../components/CardBox';
+import CardBox from '../components/accounts/CardBox';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";

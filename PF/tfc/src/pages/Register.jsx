@@ -1,5 +1,5 @@
 import * as React from 'react';
-import RegisterBox from '../components/RegisterBox';
+import RegisterBox from '../components/accounts/RegisterBox';
 import Navigation from '../components/Navigation';
 
 const Register = () => {

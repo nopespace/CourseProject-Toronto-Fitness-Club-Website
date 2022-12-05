@@ -6,7 +6,7 @@ import { useRef } from "react";
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
-const AccountInfo = (props) => {
+const AccountInfo = ({ user }) => {
   
   return (
     <>
