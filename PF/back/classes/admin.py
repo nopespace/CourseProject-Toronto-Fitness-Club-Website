@@ -61,19 +61,21 @@ class BaseKlassAdmin(admin.ModelAdmin):
             super().save_formset(request, form, formset, change)
 
     def save_model(self, request, obj, form, change):
-        ori_base_klass = BaseKlass.objects.get(id=form.instance.id)
-        ori_start_date = ori_base_klass.start_date
-        ori_start_time = ori_base_klass.start_time
-        ori_end_time = ori_base_klass.end_time
+        try:
+            ori_base_klass = BaseKlass.objects.get(id=form.instance.id)
+            ori_start_date = ori_base_klass.start_date
+            ori_start_time = ori_base_klass.start_time
+            ori_end_time = ori_base_klass.end_time
 
-        # delete all existing class instances, if start_date, start_time, end_time changes
-        if (
-            ori_start_date != form.instance.start_date or 
-            ori_start_time != form.instance.start_time or
-            ori_end_time != form.instance.end_time):
-            KlassInstance.objects.filter(base_klass=ori_base_klass).delete()
-            CancelledKlassInstance.objects.filter(base_klass=ori_base_klass).delete()
-
+            # delete all existing class instances, if start_date, start_time, end_time changes
+            if (
+                ori_start_date != form.instance.start_date or 
+                ori_start_time != form.instance.start_time or
+                ori_end_time != form.instance.end_time):
+                KlassInstance.objects.filter(base_klass=ori_base_klass).delete()
+                CancelledKlassInstance.objects.filter(base_klass=ori_base_klass).delete()
+        except:
+            pass
         # save new base class
         super().save_model(request, obj, form, change)
         data = form.cleaned_data
