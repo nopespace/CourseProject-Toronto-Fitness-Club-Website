@@ -15,7 +15,6 @@ const RegisterBox = (props) => {
         data: form,
       });
       localStorage.setItem("userToken", JSON.stringify(res.data.token));
-      alert("Login success");
       navigate('/');
     } catch (e) {
       alert("Login Failed, Please try again later.");

@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavAccountDropdown from './NavAccountDropdown';
 
 const NavAccount = () => {
   const [user, setUser] = useState("loading");
+  const navigate = useNavigate();
 
   const getUserInfo = async () => {
     try {
@@ -21,6 +22,22 @@ const NavAccount = () => {
       setUser(null);
     }
   }
+
+  const logout = async (form) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("userToken"));
+      const res = await axios({
+        method: "get",
+        url: "http://127.0.0.1:8000/accounts/logout/",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    } catch (e) {
+      
+    }
+    localStorage.clear()
+    setUser(null);
+    navigate('/');
+  };
 
   useEffect(() => {
     getUserInfo();
@@ -60,6 +77,7 @@ const NavAccount = () => {
         } else {
           return <NavAccountDropdown
             user={user}
+            logout={logout}
           />
         }
       })()}

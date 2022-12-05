@@ -1,8 +1,8 @@
 import * as React from "react";
-import Navigation from "../components/Navigation";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const NavAccountDropdown = ({ user }) => {
+const NavAccountDropdown = ({ user, logout }) => {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -12,7 +12,7 @@ const NavAccountDropdown = ({ user }) => {
       >
         <img 
           className="h-10 rounded-full hover:brightness-90"
-          src={`http://127.0.0.1:8000/${user.avatar}`}
+          src={user.avatar ? `http://127.0.0.1:8000/${user.avatar}` : '/user.svg'}
         />
       </button>
       {open &&
@@ -24,7 +24,7 @@ const NavAccountDropdown = ({ user }) => {
             <ul className="py-1" aria-labelledby="dropdownDefault">
               <li>
                   <Link to="/edit/" className="text-sm hover:bg-gray-100 text-gray-700 block p-2 rounded">Edit account</Link>
-                  <Link to="/accounts/logout/" className="text-sm hover:bg-gray-100 text-gray-700 block p-2 rounded">Logout</Link>
+                  <Link onClick={logout} className="text-sm hover:bg-gray-100 text-gray-700 block p-2 rounded">Logout</Link>
               </li>
             </ul>
           </div>
