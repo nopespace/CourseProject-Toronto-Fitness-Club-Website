@@ -117,20 +117,8 @@ const Classes = (props) => {
                 p: 2,
                 m: 3,
             }}>
-            {/* <SearchDropDownMenu
-                options={options}
-                setSearchRequired={setSearchRequired}
-                optionChose={optionChose}
-                setOptionChose={setOptionChose}
-            /> */}
+
             <ClassesSearch
-                studio_id={studio.id}
-                setClasses={setClasses}
-                setRowCount={setRowCount}
-                // page={page}
-                pageSize={pageSize}
-                // setPage={setPage}
-                query={query}
                 setQuery={setQuery}
                 setOptionChose={setOptionChose}
                 optionChose={optionChose}
