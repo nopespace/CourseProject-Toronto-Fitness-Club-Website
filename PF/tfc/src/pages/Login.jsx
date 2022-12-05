@@ -8,7 +8,9 @@ const Login = () => {
   return (
     <>
       <Navigation />
-      <RegisterBox type="Login" />
+      <div className="mt-10">
+        <RegisterBox type="Login" />
+      </div>
     </>
   );
 };

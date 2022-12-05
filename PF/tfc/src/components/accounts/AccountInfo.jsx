@@ -3,110 +3,11 @@ import * as React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 
-const RegisterBox = (props) => {
-  const { type } = props;
-  const avatarRef = useRef();
-  const navigate = useNavigate();
-
-  const getErrorMessage = (e) => {
-    console.log(Object.values(e))
-    let fullMessage = "Please fix the following errors: ";
-    e.values().forEach(message => {
-      fullMessage += `- ${message}\n`;
-    })
-    return fullMessage;
-  };
-
-  const isValid = (form) => {
-    console.log(avatarRef);
-
-    if (!avatarRef.current?.value) {
-      form.delete("avatar")
-    }
-
-    let fields = [];
-    if (type === "Login") {
-      fields = [
-        'username',
-        'password'
-      ]
-    } else if (type === "Register") {
-      fields = [
-        'username',
-        'password',
-        'first_name',
-        'last_name',
-        'phone_number',
-      ]
-    } else {
-      return true;
-    }
-
-    let valid = true;
-    fields.forEach(field => {
-      if (!form.get(field)) {
-        valid = false;
-      }
-    })
-    return valid;
-  }
-
-  const login = async (form) => {
-    if (!isValid(form)) {
-      alert("Please fill in all non-optional fields.")
-      return;
-    }
-
-    try {
-      const res = await axios({
-        method: "post",
-        url: "http://127.0.0.1:8000/accounts/login/",
-        data: form,
-      });
-      localStorage.setItem("userToken", JSON.stringify(res.data.token));
-      navigate('/');
-    } catch (e) {
-      alert(getErrorMessage(e));
-    }
-  };
-
-  const register = async (form) => {
-    if (!isValid(form)) {
-      alert("Please fill in all required fields.")
-      return;
-    }
-
-    try {
-      const res = await axios({
-        method: "post",
-        url: "http://127.0.0.1:8000/accounts/register/",
-        data: form,
-      });
-      alert("Registration success");
-      navigate('/login/');
-    } catch (e) {
-      alert(getErrorMessage(e));
-    }
-  };
-
-  const edit = async (form) => {
-    isValid(form);
-
-    try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
-      const res = await axios({
-        method: "patch",
-        url: "http://127.0.0.1:8000/accounts/edit/",
-        data: form,
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      alert("Edit success");
-    } catch (e) {
-      alert("Edit Failed, Please try again later.");
-    }
-  };
-
+const AccountInfo = (props) => {
+  
   return (
     <>
       <div className="grid place-items-center mx-2">

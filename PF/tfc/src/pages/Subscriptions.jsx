@@ -7,9 +7,10 @@ import PaginatedItems from "../components/Pagenation";
 import SubscriptionBox from "../components/SubscriptionBox";
 import axios from "axios";
 import { queryAllByAttribute } from "@testing-library/react";
+import LoadingCircle from "../components/LoadingCircle";
 
 const Subscriptions = () => {
-  const [details, setDetials] = useState([]); // this data is for plan
+  const [details, setDetials] = useState(null); // this data is for plan
   const [userdata, setUserdata] = useState([]); // this data is for user plan if exists
 
   const changeUserData = (newUserData) => {
@@ -56,8 +57,8 @@ const Subscriptions = () => {
         Please choose a subscription plan
       </div>
       <div className="flex justify-center my-10">
-        {details &&
-          details.map((item) => {
+        {details ?
+          (details.map((item) => {
               return <SubscriptionBox
                 key={item.id}
                 id={item.id}
@@ -67,8 +68,8 @@ const Subscriptions = () => {
                 userdata={userdata}
                 changeUserData={changeUserData} 
               />
-            }
-          )
+            }))
+            : <LoadingCircle />
         }
       </div>
     </>

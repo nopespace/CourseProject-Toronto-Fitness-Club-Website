@@ -6,7 +6,9 @@ const Register = () => {
   return (
     <>
       <Navigation />
-      <RegisterBox type="Register" />
+      <div className="mt-10">
+        <RegisterBox type="Register" />
+      </div>
     </>
   );
 }
