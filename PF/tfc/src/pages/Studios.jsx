@@ -68,6 +68,7 @@ const Studios = (props) => {
           sx={{
             // https://mui.com/x/react-data-grid/style/#styling-rows
             m: 3,
+            p: 1,
             boxShadow: 2,
             border: 2,
             borderColor: 'rgba(247, 251, 244, 0.064)',
@@ -91,12 +92,12 @@ const Studios = (props) => {
           />
         </Stack>
 
-        <StudiosMap
+        {/* <StudiosMap
           studios={studios}
           pos={pos}
           setPos={setPos}
           setStudioID={setStudioID}
-        />
+        /> */}
       </Box>
 
       {studioID && <StudioDisplay
