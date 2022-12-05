@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from "axios";
 import { Box, Stack, Typography, Grid } from '@mui/material';
 
@@ -13,6 +13,7 @@ const Classes = (props) => {
     const pageSize = 30;
     const [showClassInfo, sShowClassInfo] = useState(false);
     const [class_, setClass] = useState(undefined);
+    const myRef = useRef(null)
 
     const columns = [
         { field: 'class_name', headerName: 'Class', sortable: true, flex: 1 },
@@ -33,7 +34,8 @@ const Classes = (props) => {
 
     const handleRowClick = (e) => {
         sShowClassInfo(true);
-        setClass(e.row)
+        setClass(e.row);
+        myRef.current.scrollIntoView()
     }
 
     const showClassInfoFunc = () => {
@@ -47,6 +49,7 @@ const Classes = (props) => {
                     p: 3,
                     m: 2
                 }}
+                ref={myRef}
             >
                 <Typography variant='h5' fontWeight='bold' color='green'>{class_.class_name}</Typography>
                 <Typography><b>Description</b>: {class_.description}</Typography>
