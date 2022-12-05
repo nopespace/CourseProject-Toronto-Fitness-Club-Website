@@ -92,12 +92,12 @@ const Studios = (props) => {
           />
         </Stack>
 
-        {/* <StudiosMap
+        <StudiosMap
           studios={studios}
           pos={pos}
           setPos={setPos}
           setStudioID={setStudioID}
-        /> */}
+        />
       </Box>
 
       {studioID && <StudioDisplay
