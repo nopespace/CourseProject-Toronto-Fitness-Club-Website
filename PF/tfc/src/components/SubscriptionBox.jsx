@@ -6,7 +6,7 @@ const SubscriptionBox = (props) => {
   const { id, price, billingCycle, disabled } = props;
   let navigate = useNavigate();
 
-  const subscriptionshandler = (plan_id, cancelled) => {
+  const subscriptionshandler = async (plan_id, cancelled) => {
     // check auth
     // localStorage.clear();
     let cardinfo;
@@ -22,29 +22,31 @@ const SubscriptionBox = (props) => {
         console.log("card info is empty");
         navigate("/card");
       } else {
-        // change the plan
         const token = JSON.parse(localStorage.getItem("userToken"));
-        axios({
-          method: "put",
-          url: "http://127.0.0.1:8000/subscriptions/update/",
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-          data: {
-            // plan_id: plan_id,
-            // cancelled: cancelled,
-            plan_id: plan_id,
-            cancelled: cancelled,
-          },
-        })
-          .then((res) => {
-            console.log(res.data);
-            alert("Subscription updated");
-          })
-          .catch((err) => {
-            alert("Subscription update failed, please try again later.");
-            console.log(err);
-          });
+        const res = await axios.put("http://127.0.0.1:8000/subscriptions/update/", {plan_id: plan_id, cancelled: cancelled},{headers:{Authorization: "Bearer " + token}});
+        // change the plan
+        // const token = JSON.parse(localStorage.getItem("userToken"));
+        // axios({
+        //   method: "put",
+        //   url: "http://127.0.0.1:8000/subscriptions/update/",
+        //   headers: {
+        //     Authorization: "Bearer " + token,
+        //   },
+        //   data: {
+        //     // plan_id: plan_id,
+        //     // cancelled: cancelled,
+        //     plan_id: plan_id,
+        //     cancelled: cancelled,
+        //   },
+        // })
+        //   .then((res) => {
+        //     console.log(res.data);
+        //     alert("Subscription updated");
+        //   })
+        //   .catch((err) => {
+        //     alert("Subscription update failed, please try again later.");
+        //     console.log(err);
+        //   });
       }
     }
   };
@@ -195,7 +197,7 @@ const SubscriptionBox = (props) => {
       </ul>
       {!disabled ? (
         <button
-          onClick={(e) => subscriptionshandler(id, false)}
+          onClick={(e) => subscriptionshandler(id, "false")}
           type="button"
           class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
         >

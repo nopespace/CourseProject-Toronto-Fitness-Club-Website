@@ -66,6 +66,8 @@ class UserSubscriptionSerializer(serializers.ModelSerializer):
 
     
     def update(self, instance, validated_data):
+        # print("meow")
+        # print(instance.cancelled)
         s = UserPaymentHistorySerializer()
         new_plan = SubscriptionPlan.objects.get(id=validated_data['plan']['id'])
         instance.plan = new_plan
