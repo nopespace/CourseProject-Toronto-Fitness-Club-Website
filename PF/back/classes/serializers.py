@@ -55,12 +55,21 @@ class CancelledKlassInstanceSerializer(serializers.ModelSerializer):
 class EnrolledSerializer(serializers.ModelSerializer):
     class_name = serializers.CharField(
         source='klass_instance.base_klass.name', read_only=True)
+    coach_name = serializers.CharField(
+        source='klass_instance.base_klass.coach', read_only=True)
     date = serializers.CharField(source='klass_instance.date', read_only=True)
+    start_time = serializers.TimeField(
+        source='klass_instance.base_klass.start_time', read_only=True)
+    end_time = serializers.TimeField(
+        source='klass_instance.base_klass.end_time', read_only=True)
 
     class Meta:
         model = Enrolled
         fields = [
             'class_name',
+            'coach_name',
             'date',
+            'start_time',
+            'end_time',
             'klass_instance',
             'user']

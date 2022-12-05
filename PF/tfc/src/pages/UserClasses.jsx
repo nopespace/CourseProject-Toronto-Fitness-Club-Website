@@ -41,7 +41,6 @@ const UserClasses = (props) => {
         )
         data.results.map((class_, index) => class_.id=index)
         setFuture({ ...future, classes: data.results, rowCount: data.count });
-        console.log(data)
     }
 
     const listPastClass = async () => {
@@ -62,10 +61,7 @@ const UserClasses = (props) => {
     
     useEffect(() => {
         listPastClass()
-
     }, [past.page])
-
-
 
     return (
         <Box>
