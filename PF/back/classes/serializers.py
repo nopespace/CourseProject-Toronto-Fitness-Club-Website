@@ -18,6 +18,10 @@ class KlassInstanceSerializer(serializers.ModelSerializer):
         source='base_klass.end_time', read_only=True)
     capacity = serializers.IntegerField(
         source='base_klass.capacity', read_only=True)
+    start_date = serializers.DateField(
+        source='base_klass.start_date', read_only=True)
+    end_date = serializers.TimeField(
+        source='base_klass.end_date', read_only=True)
 
     class Meta:
         model = KlassInstance
@@ -33,6 +37,8 @@ class KlassInstanceSerializer(serializers.ModelSerializer):
             'num_students',
             'capacity',
             'base_klass',
+            'start_date',
+            'end_date'
         ]
 
 
