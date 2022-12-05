@@ -44,8 +44,7 @@ const RegisterBox = (props) => {
       })
       .catch((err) => {
         console.log(err);
-      });
-    };
+      })
   };
 
   const register = async (form) => {
