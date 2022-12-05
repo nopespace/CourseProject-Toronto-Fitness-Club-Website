@@ -12,13 +12,13 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import StudiosSortByLoc from "../components/studios-map/StudiosSortByLoc";
 import StudiosSearch from "../components/studios-map/StudiosSearch";
-import StudioDisplay from "../components/studios-map/StudioDisplay";
+import StudioDisplay from "../components/StudioDisplay";
 
 const Studios = (props) => {
   const [pos, setPos] = useState({ lat: 43.653225, lon: -79.383186 })
   /* studios with pagination */
   const [studios, setStudios] = useState([]);
-  const [studioID, setStudioID] = useState(undefined);  // the specific studio user chose to see
+  // const [studioID, setStudioID] = useState(undefined);  // the specific studio user chose to see
   const [page, setPage] = useState(1);
   const [rowCount, setRowCount] = useState(0);  // total number of rows, for table server-side pagination
   const [pageSize, setPageSize] = React.useState(10);
@@ -34,6 +34,7 @@ const Studios = (props) => {
   }, [])
 
   useEffect(() => {
+    localStorage.setItem('pos', JSON.stringify(pos))
     listStudios(pos.lat, pos.lon);
   }, [pos, page])
 
@@ -85,7 +86,7 @@ const Studios = (props) => {
 
           <StudiosTable
             studios={studios}
-            setStudioID={setStudioID}
+            // setStudioID={setStudioID}
             setPage={setPage}
             rowCount={rowCount}
             pageSize={pageSize}
@@ -96,14 +97,14 @@ const Studios = (props) => {
           studios={studios}
           pos={pos}
           setPos={setPos}
-          setStudioID={setStudioID}
+          // setStudioID={setStudioID}
         />
       </Box>
 
-      {studioID && <StudioDisplay
+      {/* {studioID && <StudioDisplay
         studioID={studioID}
         pos={pos}
-      />}
+      />} */}
     </Box>
   )
 

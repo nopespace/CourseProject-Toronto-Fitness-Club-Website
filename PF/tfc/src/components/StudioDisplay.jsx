@@ -5,18 +5,21 @@ import { useEffect, useState } from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import '../../index.css'
-import StudioImageGallery from "./StudioImageGallery";
+import '../index.css'
+import StudioImageGallery from "./studios-map/StudioImageGallery";
+import { Routes, Route, useParams } from 'react-router-dom';
 
 const StudioDisplay = (props) => {
-    const {
-        studioID,
-        pos
-    } = props
+    let { studio_id } = useParams();
+    let pos = JSON.parse(localStorage.getItem('pos'))
+    // const {
+    //     // studioID,
+    //     pos
+    // } = props
     const [studio, setStudio] = useState(undefined);
 
     const retrieveStudio = async () => {
-        let url = `http://127.0.0.1:8000/studios/${studioID}/`
+        let url = `http://127.0.0.1:8000/studios/${studio_id}/`
         const { data } = await axios.get(url, { params: { lat: pos.lat, lon: pos.lon } })
         setStudio(data);
     }

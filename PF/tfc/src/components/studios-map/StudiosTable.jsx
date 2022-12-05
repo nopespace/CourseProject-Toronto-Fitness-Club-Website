@@ -1,10 +1,10 @@
 import * as React from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
+import { useNavigate } from "react-router-dom";
 
-const StudiosList = (props) => {
+const StudiosTable = (props) => {
     const rows = props.studios
-    const setStudioID = props.setStudioID
     const setPage = props.setPage
     const rowCount = props.rowCount
     const pageSize = props.pageSize
@@ -12,16 +12,19 @@ const StudiosList = (props) => {
         { field: 'order', headerName: 'Number', sortable: false, width: 70 },
         { field: 'name', headerName: 'Studio Name', sortable: false, flex: 1 },
         { field: 'address', headerName: 'Address', sortable: false, flex: 1 },
-        { field: 'phone_number', headerName: 'Phone Number', sortable: false, flex: 0.5},
+        { field: 'phone_number', headerName: 'Phone Number', sortable: false, flex: 0.5 },
     ];
+    const navigate = useNavigate();
 
     const handleRowClick = (e) => {
+        // TODO: jump to another page
         // console.log(e.id)
-        setStudioID(e.id)
+        // setStudioID(e.id)
+        navigate(`/studio/${e.id}/`)
     }
 
     return (
-        <Box style={{height: '70vh', width: '90%'}}>
+        <Box style={{ height: '70vh', width: '90%' }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -36,15 +39,15 @@ const StudiosList = (props) => {
                     border: 2,
                     borderColor: 'lightGray',
                     '& .MuiDataGrid-row:hover': {
-                      color: 'primary.main',
-                      cursor: 'pointer'
+                        color: 'primary.main',
+                        cursor: 'pointer'
                     },
-                  }}
+                }}
                 onRowClick={(e) => handleRowClick(e)}
-                // checkboxSelection
+            // checkboxSelection
             />
         </Box>
     )
 }
 
-export default StudiosList;
+export default StudiosTable;
