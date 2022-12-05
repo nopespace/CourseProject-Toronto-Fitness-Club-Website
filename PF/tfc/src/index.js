@@ -8,7 +8,7 @@ import Subscriptions from "./pages/Subscriptions";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Edit from "./pages/Edit";
-import StudioDisplay from "./components/StudioDisplay";
+import Studio from "./pages/Studio";
 
 import {
   createBrowserRouter,
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path: "studio/:studio_id/",
-    element: <StudioDisplay />,
+    element: <Studio />,
   },
   {
     path: "subscriptions/",

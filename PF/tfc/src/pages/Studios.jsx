@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import StudiosSortByLoc from "../components/studios-map/StudiosSortByLoc";
 import StudiosSearch from "../components/studios-map/StudiosSearch";
-import StudioDisplay from "../components/StudioDisplay";
+import StudioDisplay from "./Studio";
 
 const Studios = (props) => {
   const [pos, setPos] = useState({ lat: 43.653225, lon: -79.383186 })

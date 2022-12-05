@@ -6,12 +6,12 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import '../index.css'
-import StudioImageGallery from "./StudioImageGallery";
+import StudioImageGallery from "../components/StudioImageGallery";
 import { Routes, Route, useParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 
-const StudioDisplay = (props) => {
+const Studio = (props) => {
     let { studio_id } = useParams();
     let pos = JSON.parse(localStorage.getItem('pos'))
     // const {
@@ -84,4 +84,4 @@ const StudioDisplay = (props) => {
     )
 }
 
-export default StudioDisplay;
+export default Studio;
