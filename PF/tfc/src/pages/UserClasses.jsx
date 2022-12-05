@@ -11,10 +11,53 @@ import { useNavigate } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import StudioAmenity from "../components/StudioAmenity";
 import Classes from "../components/Classes";
+import ClassTable from "../components/ClassTable";
 
 const UserClasses = (props) => {
-    const listFutureClass = () => {
-        
+    const [future, setFuture] = useState({
+        classes: [],
+        page: 1,
+        rowCount: 0,
+        pageSize: 30
+    })
+    const [past, setPast] = useState({
+        classes: [],
+        page: 1,
+        rowCount: 0,
+        pageSize: 30
+    })
+    // const [futurePage, setFuturePage] = useState(1)
+    // const [futureClass, setFutureClass] = useState([])
+    // const [pastPage, setPastPage] = useState(1)
+    // const [pastClass, setPastClass] = useState([])
+
+    const listFutureClass = async () => {
+        let url = `http://127.0.0.1:8000/classes/user/future/schedule/`
+        let config = {
+            headers: {'Authorization': `Bearer ${JSON.parse(localStorage.getItem("userToken"))}`},
+            params: {
+              page: future.page
+            },
+          }
+        const { data } = await axios.get(
+            url, 
+            config
+        )
+        data.results.map((class_, index) => class_.id=index)
+        setFuture({ ...future, classes: data.results, rowCount: data.count });
+        console.log(data)
+    }
+
+    const listPastClass = async () => {
+        let url = `http://127.0.0.1:8000/classes/user/past/schedule/`
+        const { data } = await axios.get(
+            url, 
+            { params: { page: past.page }},
+            {
+                headers: {Authorization: `Bearer ${JSON.parse(localStorage.getItem("userToken"))}`},
+            }
+        )
+        setPast({ ...past, classes: data.results, rowCount: data.count });
     }
 
     useEffect(() => {
@@ -27,6 +70,26 @@ const UserClasses = (props) => {
     return (
         <Box>
             <Navigation />
+            <Grid className='myClass-grid' sx={{ mt: 2, m: 5 }}>
+                <Box 
+                className='class-schedule-center-container-box' 
+                // style={{ margin: 'auto',width:'100%', height: '100%', flexDirection: 'column' }} 
+                >
+                    <Typography variant='h5'>My Future Classes</Typography>
+                    <ClassTable
+                        info={future}
+                        setter={setFuture}
+                    />
+                </Box>
+
+                <Box style={{ margin: 'auto' }}>
+                    <Typography variant='h5'>My Past Classes</Typography>
+                    <ClassTable
+                        info={past}
+                        setter={setPast}
+                    />
+                </Box>
+            </Grid>
         </Box>
     )
 }

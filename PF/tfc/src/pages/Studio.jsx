@@ -14,7 +14,6 @@ import Classes from "../components/Classes";
 
 const Studio = (props) => {
     let { studio_id, lat, lon } = useParams();
-    // TODO:
     const [studio, setStudio] = useState(undefined);
     const [amenityShow, setAmenityShow] = useState(false);
     const [classShow, setClassShow] = useState(false);

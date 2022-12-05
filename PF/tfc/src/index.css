@@ -16,9 +16,24 @@
     margin: 20;
 }
 
+.class-schedule-center-container-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
 .studio-grid {
   display: grid;
   grid-template-columns: 70% 30%;
+}
+
+.myClass-grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 
 a {
