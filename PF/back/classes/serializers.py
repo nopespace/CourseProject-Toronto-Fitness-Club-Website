@@ -22,6 +22,7 @@ class KlassInstanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = KlassInstance
         fields = [
+            'id',
             'class_name',
             'description',
             'coach_name',
