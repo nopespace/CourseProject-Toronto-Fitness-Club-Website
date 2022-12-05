@@ -56,7 +56,7 @@ const RegisterBox = (props) => {
       <div className="grid place-items-center my-5">
         <div className="my-20 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8">
           <div className="font-bold mb-2">{type}</div>
-          <form class="space-y-6" onSubmit={event => {
+          <form className="space-y-6" onSubmit={event => {
               ({
                 "Login": login,
                 "Register": register,
@@ -67,7 +67,7 @@ const RegisterBox = (props) => {
             <div>
               <label
                 for="username"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Username
               </label>
@@ -75,7 +75,7 @@ const RegisterBox = (props) => {
                 type="text"
                 name="username"
                 id="username"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Username"
                 required
               />
@@ -85,7 +85,7 @@ const RegisterBox = (props) => {
                 <div>
                   <label
                     for="email"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Email
                   </label>
@@ -93,7 +93,7 @@ const RegisterBox = (props) => {
                     type="email"
                     name="email"
                     id="email"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="example@gmail.com"
                     required
                   />
@@ -101,7 +101,7 @@ const RegisterBox = (props) => {
                 <div>
                   <label
                     for="first_name"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     First Name
                   </label>
@@ -109,7 +109,7 @@ const RegisterBox = (props) => {
                     type="text"
                     name="first_name"
                     id="first_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="First Name"
                     required
                   />
@@ -117,7 +117,7 @@ const RegisterBox = (props) => {
                 <div>
                   <label
                     for="lastname"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Last Name
                   </label>
@@ -125,7 +125,7 @@ const RegisterBox = (props) => {
                     type="text"
                     name="last_name"
                     id="last_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="Last Name"
                     required
                   />
@@ -133,7 +133,7 @@ const RegisterBox = (props) => {
                 <div>
                   <label
                     for="phone_number"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Phone Number
                   </label>
@@ -142,7 +142,7 @@ const RegisterBox = (props) => {
                     name="phone_number"
                     id="phone_number"
                     pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="123-456-7890"
                     required
                   />
@@ -150,7 +150,7 @@ const RegisterBox = (props) => {
                 <div>
                   <label
                     for="avatar"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Avatar (Optional)
                   </label>
@@ -159,7 +159,7 @@ const RegisterBox = (props) => {
                     name="avatar"
                     id="avatar"
                     accept="image/*"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="123-456-7890"
                     required
                   />
@@ -169,7 +169,7 @@ const RegisterBox = (props) => {
             <div>
               <label
                 for="password"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Password
               </label>
@@ -178,13 +178,13 @@ const RegisterBox = (props) => {
                 name="password"
                 id="password"
                 placeholder="••••••••"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
               />
             </div>
             <button
               type="submit"
-              class="w-full text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              className="w-full text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               {type}
             </button>
