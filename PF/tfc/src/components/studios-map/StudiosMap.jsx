@@ -26,7 +26,7 @@ const StudiosMap = (props) => {
         setPos({ lat: e.lat, lon: e.lng })
     }
     return (
-        <Box style={{ height: '75vh', width: '80%', margin: 20, }}>
+        <Box style={{ height: '80vh', width: '80%', margin: 20, }}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyDqCaJKiXq4ejDBTZOhV0Dbv-FCZiuKpLM' }}
                 defaultCenter={mapDefaultProps.center}

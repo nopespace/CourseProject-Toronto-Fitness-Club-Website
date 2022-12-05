@@ -24,7 +24,7 @@ const StudiosTable = (props) => {
     }
 
     return (
-        <Box style={{ height: '70vh', width: '90%' }}>
+        <Box style={{ height: '80vh', width: '90%' }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
