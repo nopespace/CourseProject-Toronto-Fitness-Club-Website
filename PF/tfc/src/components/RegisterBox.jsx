@@ -2,12 +2,20 @@ import { alpha } from "@mui/material";
 import * as React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 const RegisterBox = (props) => {
   const { type } = props;
+  const avatarRef = useRef();
   const navigate = useNavigate();
 
   const isValid = (form) => {
+    console.log(avatarRef);
+
+    if (!avatarRef.current?.value) {
+      form.delete("avatar")
+    }
+
     let fields = [];
     if (type === "Login") {
       fields = [
@@ -52,30 +60,6 @@ const RegisterBox = (props) => {
     } catch (e) {
       alert("Login Failed, Please try again later.");
     }
-
-    // save card
-    let cardinfo;
-
-    // save user card info
-    const token = JSON.parse(localStorage.getItem("userToken"));
-    axios({
-      method: "get",
-      url: "http://127.0.0.1:8000/subscriptions/card/update/",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((res) => {
-        cardinfo = res.data;
-        localStorage.setItem("cardInfo", JSON.stringify(res.data));
-        if (cardinfo != null) {
-          console.log("cardinfo is not empty");
-        }
-        console.log(cardinfo);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
   };
 
   const register = async (form) => {
@@ -98,6 +82,8 @@ const RegisterBox = (props) => {
   };
 
   const edit = async (form) => {
+    isValid(form);
+
     try {
       const token = JSON.parse(localStorage.getItem("userToken"));
       const res = await axios({
@@ -130,7 +116,7 @@ const RegisterBox = (props) => {
                 htmlFor="username"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Username
+                Username {type === "Edit" && " (Optional)"}
               </label>
               <input
                 type="text"
@@ -147,7 +133,7 @@ const RegisterBox = (props) => {
                     htmlFor="email"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Email
+                    Email {type === "Edit" && " (Optional)"}
                   </label>
                   <input
                     type="email"
@@ -162,7 +148,7 @@ const RegisterBox = (props) => {
                     htmlFor="first_name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    First Name
+                    First Name {type === "Edit" && " (Optional)"}
                   </label>
                   <input
                     type="text"
@@ -177,7 +163,7 @@ const RegisterBox = (props) => {
                     htmlFor="lastname"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Last Name
+                    Last Name {type === "Edit" && " (Optional)"}
                   </label>
                   <input
                     type="text"
@@ -192,7 +178,7 @@ const RegisterBox = (props) => {
                     htmlFor="phone_number"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Phone Number
+                    Phone Number {type === "Edit" && " (Optional)"}
                   </label>
                   <input
                     type="tel"
@@ -214,6 +200,7 @@ const RegisterBox = (props) => {
                     type="file"
                     name="avatar"
                     id="avatar"
+                    ref={avatarRef}
                     accept="image/*"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="123-456-7890"
@@ -226,7 +213,7 @@ const RegisterBox = (props) => {
                 htmlFor="password"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Password
+                Password {type === "Edit" && " (Optional)"}
               </label>
               <input
                 type="password"
