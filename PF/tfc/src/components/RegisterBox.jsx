@@ -20,8 +20,7 @@ const RegisterBox = (props) => {
         'password',
         'first_name',
         'last_name',
-        'phone',
-        'password'
+        'phone_number',
       ]
     } else {
       return true;
