@@ -9,6 +9,15 @@ const RegisterBox = (props) => {
   const avatarRef = useRef();
   const navigate = useNavigate();
 
+  const getErrorMessage = (e) => {
+    console.log(Object.values(e))
+    let fullMessage = "Please fix the following errors: ";
+    e.values().forEach(message => {
+      fullMessage += `- ${message}\n`;
+    })
+    return fullMessage;
+  };
+
   const isValid = (form) => {
     console.log(avatarRef);
 
@@ -58,7 +67,7 @@ const RegisterBox = (props) => {
       localStorage.setItem("userToken", JSON.stringify(res.data.token));
       navigate('/');
     } catch (e) {
-      alert("Login Failed, Please try again later.");
+      alert(getErrorMessage(e));
     }
   };
 
@@ -77,7 +86,7 @@ const RegisterBox = (props) => {
       alert("Registration success");
       navigate('/login/');
     } catch (e) {
-      alert("Registration Failed, Please try again later.");
+      alert(getErrorMessage(e));
     }
   };
 

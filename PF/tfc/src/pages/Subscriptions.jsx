@@ -12,6 +12,11 @@ const Subscriptions = () => {
   const [details, setDetials] = useState([]); // this data is for plan
   const [userdata, setUserdata] = useState([]); // this data is for user plan if exists
 
+  const changeUserData = (newUserData) => {
+    console.log(newUserData);
+    setUserdata(newUserData);
+  }
+
   useEffect(() => {
     // this useeffect is used to set user data
     let tmp_userdata;
@@ -51,56 +56,26 @@ const Subscriptions = () => {
         setDetials(data);
       })
       .catch((err) => {});
-  }, [userdata]);
+  }, []);
 
-  // useEffect(() => {
-  //   // this useeffect is used to set user data
-  //   let userdata;
-  //   axios({
-  //     method: "get",
-  //     url: "http://127.0.0.1:8000/subscriptions/update/",
-  //   }).then((res) => {
-  //     userdata = res.data;
-  //     setUserdata(userdata);
-  //   });
-  //   localStorage.setItem("user", JSON.stringify(userdata.token));
-  // },[]);
-
-  // pagenation version
-  // return (
-  //   <>
-  //     <Navigation />
-  //     <PaginatedItems type = "subscription" items={details} itemsPerPage={2} />
-  //   </>
-  // );
   return (
     <>
       <Navigation />
       <div className="flex justify-center">
         {details &&
           details.map((item) => {
-            if (userdata.billing_cycle === item.billing_cycle) {
-              return (
-                <SubscriptionBox
-                  key={item.id}
-                  id={item.id}
-                  billingCycle={item.billing_cycle}
-                  price={item.price}
-                  disabled={true}
-                />
-              );
-            } else {
-              return (
-                <SubscriptionBox
-                  key={item.id}
-                  id={item.id}
-                  billingCycle={item.billing_cycle}
-                  price={item.price}
-                  disabled={false}
-                />
-              );
+              return <SubscriptionBox
+                key={item.id}
+                id={item.id}
+                billingCycle={item.billing_cycle}
+                price={item.price}
+                disabled={!(userdata === [] || (userdata.billing_cycle !== item.billing_cycle))}
+                userdata={userdata}
+                changeUserData={changeUserData} 
+              />
             }
-          })}
+          )
+        }
       </div>
     </>
   );

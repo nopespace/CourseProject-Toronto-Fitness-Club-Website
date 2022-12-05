@@ -5,29 +5,16 @@ import axios from "axios";
 import { ContentCutOutlined } from "@mui/icons-material";
 
 const SubscriptionBox = (props) => {
-  const { id, price, billingCycle, disabled } = props;
+  const {
+    id,
+    price,
+    billingCycle,
+    disabled,
+    userdata,
+    changeUserData
+  } = props;
+
   let navigate = useNavigate();
-
-  const [userdata, setUserdata] = useState([]); // this data is for user plan if exists
-
-  const getUserInfo = async () => {
-    try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
-      const { data } = await axios({
-        method: "get",
-        url: "http://127.0.0.1:8000/subscriptions/update/",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setUserdata(data);
-    } catch (e) {
-      console.log(e);
-      setUserdata([]);
-    }
-  }
-
-  useEffect(() => {
-    getUserInfo();
-  }, []);
 
 
   const subscriptionshandler = async (plan_id, cancelled) => {
@@ -42,7 +29,7 @@ const SubscriptionBox = (props) => {
       // save user card info
       await axios({
         method: "get",
-        url: "http://127.0.0.1:8000/subscriptions/card/update/",
+        url: "http://127.0.0.1:8000/subscriptions/update/",
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -77,7 +64,7 @@ const SubscriptionBox = (props) => {
               { plan_id: plan_id },
               { headers: { Authorization: "Bearer " + token } }
             );
-            localStorage.setItem("userdata", JSON.stringify(res.data));
+            changeUserData(res.data);
             alert("Subscription Success");
           }
           catch (e) {
@@ -88,10 +75,11 @@ const SubscriptionBox = (props) => {
         else {
           try{
             const res = await axios.put(
-              "http://127.0.0.1:8000/subscriptions/card/update/",
+              "http://127.0.0.1:8000/subscriptions/update/",
               { plan_id: plan_id, cancelled: cancelled },
               { headers: { Authorization: "Bearer " + token } }
             );
+            changeUserData(res.data);
             alert("Change Subscription Success");
           }
           catch (e) {
@@ -156,7 +144,7 @@ const SubscriptionBox = (props) => {
           >
             <title>Check icon</title>
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
               clipRule="evenodd"
             ></path>
@@ -175,7 +163,7 @@ const SubscriptionBox = (props) => {
           >
             <title>Check icon</title>
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
               clipRule="evenodd"
             ></path>
@@ -194,7 +182,7 @@ const SubscriptionBox = (props) => {
           >
             <title>Check icon</title>
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
               clipRule="evenodd"
             ></path>
@@ -213,7 +201,7 @@ const SubscriptionBox = (props) => {
           >
             <title>Check icon</title>
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
               clipRule="evenodd"
             ></path>
@@ -232,7 +220,7 @@ const SubscriptionBox = (props) => {
           >
             <title>Check icon</title>
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
               clipRule="evenodd"
             ></path>
@@ -251,7 +239,7 @@ const SubscriptionBox = (props) => {
           >
             <title>Check icon</title>
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
               clipRule="evenodd"
             ></path>
@@ -270,7 +258,7 @@ const SubscriptionBox = (props) => {
           >
             <title>Check icon</title>
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
               clipRule="evenodd"
             ></path>
