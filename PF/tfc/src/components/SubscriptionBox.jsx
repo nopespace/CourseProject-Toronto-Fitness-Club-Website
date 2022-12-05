@@ -20,7 +20,8 @@ const SubscriptionBox = (props) => {
       if (cardinfo === null) {
         //todo:  && cancelled === false
         console.log("card info is empty");
-        navigate("/card");
+        navigate("/edit");
+        // TODO: navigate to the card edition
       } else {
         const token = JSON.parse(localStorage.getItem("userToken"));
         const res = await axios.put("http://127.0.0.1:8000/subscriptions/update/", {plan_id: plan_id, cancelled: cancelled},{headers:{Authorization: "Bearer " + token}});
