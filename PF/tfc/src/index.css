@@ -22,5 +22,9 @@
 }
 
 a {
-  color: rgb(75, 183, 237);
+  color: rgb(23, 164, 235);
+}
+
+a:hover {
+  color:rgb(3, 86, 128)
 }

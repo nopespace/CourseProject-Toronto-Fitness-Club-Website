@@ -15,6 +15,7 @@ import axios from "axios";
 import { Box, Stack, Typography, Grid } from '@mui/material';
 import SearchDropDownMenu from "./SearchDropDownMenu";
 import ClassesSearch from "./ClassesSearch";
+import ClassEnroll from "./ClassEnroll";
 
 
 const Classes = (props) => {
@@ -54,12 +55,18 @@ const Classes = (props) => {
         listClasses()
     }, [query])
 
+    useEffect(() => {
+        if (class_) {
+            myRef.current.scrollIntoView()
+        }
+    }, [class_])
+
     const listClasses = async () => {
         let url1 = `http://127.0.0.1:8000/classes/schedule/${studio.id}/`
         let url2 = `http://127.0.0.1:8000/classes/search/`
         let res;
         if (query.keyword === '') {
-            res = await axios.get(url1, { params: { page: query.page } }) 
+            res = await axios.get(url1, { params: { page: query.page } })
         }
         else if (optionChose === 'time range') {
             let start_var = query.keyword.split('-')[0].trim()
@@ -76,9 +83,8 @@ const Classes = (props) => {
     const handleRowClick = (e) => {
         sShowClassInfo(true);
         setClass(e.row);
-        myRef.current.scrollIntoView()
     }
-
+    
 
     const showClassInfoFunc = () => {
         return (
@@ -93,14 +99,17 @@ const Classes = (props) => {
                 }}
                 ref={myRef}
             >
-                <Typography variant='h5' fontWeight='bold' color='green'>{class_.class_name}</Typography>
+                <Typography variant='h5' fontWeight='bold' color='green'>{class_.class_name} [Weekly Class]</Typography>
                 <Typography><b>Description</b>: {class_.description}</Typography>
                 <Typography><b>Keywords</b>: {class_.keywords}</Typography>
                 <Typography><b>Coach</b>: {class_.coach_name}</Typography>
                 <Typography><b>Start Date</b>: {class_.start_date}</Typography>
                 <Typography><b>End Date</b>: {class_.end_date}</Typography>
                 <Typography><b>Capacity</b>: {class_.capacity} students</Typography>
-                <Typography><b>Current number of Students</b>: {class_.num_students} students</Typography>
+                <ClassEnroll
+                    class={class_}
+                />
+                {/* <Typography><b>Current number of Students</b>: {class_.num_students} students</Typography> */}
 
             </Box>
         )
@@ -123,6 +132,7 @@ const Classes = (props) => {
                 setOptionChose={setOptionChose}
                 optionChose={optionChose}
             />
+            <Typography color='green'>*Click on a class to enroll</Typography>
             <DataGrid
                 rows={classes}
                 columns={columns}
