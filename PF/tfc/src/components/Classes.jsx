@@ -12,8 +12,10 @@ const Classes = (props) => {
     const [rowCount, setRowCount] = useState(0);
     const pageSize = 30;
     const columns = [
-        { field: 'class_name', headerName: 'Class Name', sortable: true, flex: 1 },
-        { field: 'coach_name', headerName: 'Coach Name', sortable: true, flex: 1 },
+        { field: 'class_name', headerName: 'Class', sortable: true, flex: 1 },
+        { field: 'coach_name', headerName: 'Coach', sortable: true, flex: 1 },
+        { field: 'description', headerName: 'Description', sortable: true, flex: 1.5 },
+        { field: 'keywords', headerName: 'Keywords', sortable: true, flex: 1.5 },
         { field: 'date', headerName: 'date', sortable: true, flex: 1 },
         { field: 'start_time', headerName: 'Start Time', sortable: true, flex: 1 },
         { field: 'end_time', headerName: 'End Time', sortable: true, flex: 1 },
@@ -32,7 +34,7 @@ const Classes = (props) => {
 
     React.useEffect(() => {
         listClasses();
-    })
+    }, [])
 
     return (
         <Box style={{ height: '100vh', width: '90%' }}>
