@@ -51,7 +51,7 @@ const Subscriptions = () => {
         setDetials(data);
       })
       .catch((err) => {});
-  }, []);
+  }, [userdata]);
 
   // useEffect(() => {
   //   // this useeffect is used to set user data
