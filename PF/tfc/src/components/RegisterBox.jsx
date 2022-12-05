@@ -109,8 +109,8 @@ const RegisterBox = (props) => {
 
   return (
     <>
-      <div className="grid place-items-center my-5">
-        <div className="my-20 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8">
+      <div className="grid place-items-center mx-2">
+        <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8">
           <div className="font-bold mb-2">{type}</div>
           <form className="space-y-6" onSubmit={event => {
               ({

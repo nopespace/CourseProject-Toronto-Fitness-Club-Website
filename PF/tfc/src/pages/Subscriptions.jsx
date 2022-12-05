@@ -17,33 +17,24 @@ const Subscriptions = () => {
     setUserdata(newUserData);
   }
 
-  useEffect(() => {
-    // this useeffect is used to set user data
-    let tmp_userdata;
-    if (localStorage.getItem("userToken") === null) {
-      tmp_userdata = [];
-      setUserdata(tmp_userdata);
-    } else {
-      const token = JSON.parse(localStorage.getItem("userToken"));
-      axios({
+  const getUserData = async () => {
+    const token = JSON.parse(localStorage.getItem("userToken"));
+    try {
+      const res = await axios({
         method: "get",
         url: "http://127.0.0.1:8000/subscriptions/update/",
         headers: {
           Authorization: "Bearer " + token,
-        },
+        }
       })
-        .then((res) => {
-          tmp_userdata = res.data;
-          setUserdata(tmp_userdata);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      setUserdata(res.data);
+    } catch (e) {
+      
     }
-    if (userdata.length !== 0) {
-      console.log("userdata is not empty");
-      console.log(userdata);
-    }
+  }
+
+  useEffect(() => {
+    getUserData();
 
     // this use effect is for setting the subscription details
     let data;
@@ -61,7 +52,10 @@ const Subscriptions = () => {
   return (
     <>
       <Navigation />
-      <div className="flex justify-center">
+      <div className="flex justify-center font-bold my-10 text-2xl">
+        Please choose a subscription plan
+      </div>
+      <div className="flex justify-center my-10">
         {details &&
           details.map((item) => {
               return <SubscriptionBox

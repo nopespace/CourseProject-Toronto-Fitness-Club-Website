@@ -4,7 +4,7 @@ import NavAccount from "./NavAccount";
 
 const Navigation = () => {
   return (
-    <nav className="bg-gray-100 px-2 py-2.5">
+    <nav className="bg-gray-100 px-2 py-2.5 sticky top-0 z-50">
       <div className="container flex flex-wrap items-center justify-between w-full">
         <div className="flex ml-8">
           <Link to="/" className="flex items-center mr-10">

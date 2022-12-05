@@ -51,8 +51,8 @@ const SubscriptionBox = (props) => {
       console.log(JSON.parse(localStorage.getItem("cardInfo"))); // this is null
       console.log(cancelled);
       if (cardinfo === null && cancelled === "false") {
-        console.log("no card info");
-        navigate("/edit");
+        alert("Please add card info");
+        navigate("/edit/");
       } else if (cardinfo !== null && cancelled === "false") {
         // case1: no plan rn
         console.log("has card info");
@@ -124,7 +124,7 @@ const SubscriptionBox = (props) => {
     }
   };
   return (
-    <div className="w-full max-w-sm p-4 bg-white border rounded-lg shadow-md sm:p-8">
+    <div className="w-full max-w-sm p-4 mx-2 bg-white border rounded-lg shadow-md sm:p-8">
       <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
         {billingCycle}
       </h5>
