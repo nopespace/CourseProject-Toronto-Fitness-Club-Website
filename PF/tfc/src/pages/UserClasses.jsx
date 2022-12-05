@@ -71,10 +71,7 @@ const UserClasses = (props) => {
         <Box>
             <Navigation />
             <Grid className='myClass-grid' sx={{ mt: 2, m: 5 }}>
-                <Box 
-                className='class-schedule-center-container-box' 
-                // style={{ margin: 'auto',width:'100%', height: '100%', flexDirection: 'column' }} 
-                >
+                <Box className='class-schedule-center-container-box' >
                     <Typography variant='h5'>My Future Classes</Typography>
                     <ClassTable
                         info={future}
@@ -82,7 +79,7 @@ const UserClasses = (props) => {
                     />
                 </Box>
 
-                <Box style={{ margin: 'auto' }}>
+                <Box className='class-schedule-center-container-box' >
                     <Typography variant='h5'>My Past Classes</Typography>
                     <ClassTable
                         info={past}
