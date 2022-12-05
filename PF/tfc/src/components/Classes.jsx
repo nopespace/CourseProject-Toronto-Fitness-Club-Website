@@ -157,7 +157,6 @@ const Classes = (props) => {
                     },
                 }}
             />
-            {console.log(query.page)}
             {showClassInfo && showClassInfoFunc()}
         </Box>
     )

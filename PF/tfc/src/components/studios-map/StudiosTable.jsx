@@ -37,7 +37,8 @@ const StudiosTable = (props) => {
                     borderColor: 'lightGray',
                     '& .MuiDataGrid-row:hover': {
                         color: 'primary.main',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        textDecoration: 'underline',
                     },
                 }}
                 onRowClick={(e) => handleRowClick(e)}
