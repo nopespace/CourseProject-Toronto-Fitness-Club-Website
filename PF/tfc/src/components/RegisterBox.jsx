@@ -66,7 +66,7 @@ const RegisterBox = (props) => {
             }}>
             <div>
               <label
-                for="username"
+                htmlFor="username"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Username
@@ -84,7 +84,7 @@ const RegisterBox = (props) => {
               <>
                 <div>
                   <label
-                    for="email"
+                    htmlFor="email"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Email
@@ -100,7 +100,7 @@ const RegisterBox = (props) => {
                 </div>
                 <div>
                   <label
-                    for="first_name"
+                    htmlFor="first_name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     First Name
@@ -116,7 +116,7 @@ const RegisterBox = (props) => {
                 </div>
                 <div>
                   <label
-                    for="lastname"
+                    htmlFor="lastname"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Last Name
@@ -132,7 +132,7 @@ const RegisterBox = (props) => {
                 </div>
                 <div>
                   <label
-                    for="phone_number"
+                    htmlFor="phone_number"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Phone Number
@@ -149,7 +149,7 @@ const RegisterBox = (props) => {
                 </div>
                 <div>
                   <label
-                    for="avatar"
+                    htmlFor="avatar"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Avatar (Optional)
@@ -168,7 +168,7 @@ const RegisterBox = (props) => {
             )}
             <div>
               <label
-                for="password"
+                htmlFor="password"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Password
