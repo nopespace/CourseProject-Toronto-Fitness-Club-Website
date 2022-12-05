@@ -24,6 +24,7 @@ const NavAccountDropdown = ({ user, logout }) => {
             <ul className="py-1" aria-labelledby="dropdownDefault">
               <li>
                   <Link to="/edit/" className="text-sm hover:bg-gray-100 text-gray-700 block p-2 rounded">Edit account</Link>
+                  <Link to="/myClasses/" className="text-sm hover:bg-gray-100 text-gray-700 block p-2 rounded">My Classes</Link>
                   <Link onClick={logout} className="text-sm hover:bg-gray-100 text-gray-700 block p-2 rounded">Logout</Link>
               </li>
             </ul>

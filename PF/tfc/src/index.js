@@ -14,6 +14,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import UserClasses from "./pages/UserClasses";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "edit/",
     element: <Edit />,
+  },
+  {
+    path: "myClasses/",
+    element: <UserClasses />,
   },
 ]);
 
