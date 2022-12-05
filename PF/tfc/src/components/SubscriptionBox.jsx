@@ -1,10 +1,34 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
 import axios from "axios";
+import { ContentCutOutlined } from "@mui/icons-material";
 
 const SubscriptionBox = (props) => {
   const { id, price, billingCycle, disabled } = props;
   let navigate = useNavigate();
+
+  const [userdata, setUserdata] = useState([]); // this data is for user plan if exists
+
+  const getUserInfo = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("userToken"));
+      const { data } = await axios({
+        method: "get",
+        url: "http://127.0.0.1:8000/subscriptions/update/",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setUserdata(data);
+    } catch (e) {
+      console.log(e);
+      setUserdata([]);
+    }
+  }
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
 
   const subscriptionshandler = async (plan_id, cancelled) => {
     // check auth
@@ -14,6 +38,7 @@ const SubscriptionBox = (props) => {
       console.log("not logged in");
       navigate("/login");
     } else {
+      let cardinfo;
       // save user card info
       await axios({
         method: "get",
@@ -34,31 +59,51 @@ const SubscriptionBox = (props) => {
           console.log(err);
         });
       // check card
-      const cardinfo = JSON.parse(localStorage.getItem("cardInfo"));
-      if (cardinfo === null && cancelled === false) {
+      cardinfo = JSON.parse(localStorage.getItem("cardInfo"));
+      console.log("debug msg");
+      console.log(JSON.parse(localStorage.getItem("cardInfo"))); // this is null
+      console.log(cancelled);
+      if (cardinfo === null && cancelled === "false") {
+        console.log("no card info");
         navigate("/edit");
-      } else if (cardinfo !== null && cancelled === false) {
+      } else if (cardinfo !== null && cancelled === "false") {
         // case1: no plan rn
-        if (JSON.parse(localStorage.getItem("userdata")) === null) {
-          const res = await axios.put(
-            "http://127.0.0.1:8000/subscriptions/add/",
-            { plan_id: plan_id },
-            { headers: { Authorization: "Bearer " + token } }
-          );
+        console.log("has card info");
+        console.log("case1: no plan rn");
+        if (userdata === null) {
+          try{
+            const res = await axios.post(
+              "http://127.0.0.1:8000/subscriptions/add/",
+              { plan_id: plan_id },
+              { headers: { Authorization: "Bearer " + token } }
+            );
+            localStorage.setItem("userdata", JSON.stringify(res.data));
+            alert("Subscription Success");
+          }
+          catch (e) {
+            alert("Subscription Failed, Please try again later. Branch 1");
+          }
         }
         // case2: has plan rn
         else {
-          const res = await axios.put(
-            "http://127.0.0.1:8000/subscriptions/update/",
-            { plan_id: plan_id, cancelled: cancelled },
-            { headers: { Authorization: "Bearer " + token } }
-          );
+          try{
+            const res = await axios.put(
+              "http://127.0.0.1:8000/subscriptions/card/update/",
+              { plan_id: plan_id, cancelled: cancelled },
+              { headers: { Authorization: "Bearer " + token } }
+            );
+            alert("Change Subscription Success");
+          }
+          catch (e) {
+            alert("Subscription Failed, Please try again later. Branch 2");
+          }
+          
         }
       } else {
         // here is the code for cancelling the subscription
-        if (JSON.parse(localStorage.getItem("userdata")) !== null) {
+        if (userdata !== null) {
           const res = await axios.put(
-            "http://127.0.0.1:8000/subscriptions/update/",
+            "hhttp://127.0.0.1:8000/subscriptions/card/update/",
             { plan_id: plan_id, cancelled: cancelled },
             { headers: { Authorization: "Bearer " + token } }
           );
