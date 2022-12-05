@@ -53,7 +53,7 @@ class EnrollClassView(CreateAPIView):
         if user_plan.cancelled and datetime.date.today() > user_plan.next_billing_date:
             # user has no plan now
             return Response({'msg': 'Please subscribe to our application first.'}, status=status.HTTP_401_UNAUTHORIZED)
-        if all_ == 'True':  # subscribe to all future occurences
+        if str(all_).lower() == 'true':  # subscribe to all future occurences
             end_date = BaseKlass.objects.get(id=class_id).end_date
             if user_plan.cancelled:  # now, user ends plan at next_billing_date
                 # can only enroll courses before current plan ends
@@ -90,7 +90,7 @@ class EnrollClassView(CreateAPIView):
                 class_ins.save()
             date += datetime.timedelta(weeks=1)
         return Response({
-            'msg': 'Please check your enrollment schedule. If you did\'t see that class, that class is full(actually front end disable enrollment). '
+            'msg': 'Please check your class schedule. If you aren\'t successfully enrolled, that means the class is full. '
         }, status=status.HTTP_201_CREATED)
 
 

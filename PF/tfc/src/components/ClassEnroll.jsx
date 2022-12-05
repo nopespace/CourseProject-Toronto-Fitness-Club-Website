@@ -30,7 +30,6 @@ const ClassEnroll = (props) => {
         })
         let url = `http://127.0.0.1:8000/classes/enroll/`
         const token = JSON.parse(localStorage.getItem("userToken"))
-        console.log(token)
         if (token === null) {
             setMsgLink({ msg: `Please login first.`, link: '/login/' })
         }
@@ -46,11 +45,13 @@ const ClassEnroll = (props) => {
                 },
                 headers: { Authorization: `Bearer ${token}` },
             })
-                .then(res => res.json())
-                .then(json => {
-                    console.log(json)
+                .then(res => {
+                    // TODO: link placeholder
+                    console.log(res)
+                    setMsgLink({ msg: res.data.msg, link: '/' })
                 })
                 .catch(err => {
+                    console.log(err)
                     setMsgLink({ msg: err.response.data.msg, link: '/subscriptions/' })
                 })
         }
@@ -62,6 +63,7 @@ const ClassEnroll = (props) => {
     return (
         <Box mt={3}>
             <Typography variant='h5' color='green'>Enroll</Typography>
+            <Typography><b>Current number of students</b>: {class_.num_students}/{class_.capacity}</Typography>
             <FormControl>
                 <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
