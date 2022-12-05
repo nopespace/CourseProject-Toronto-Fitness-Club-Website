@@ -17,9 +17,6 @@ const StudiosTable = (props) => {
     const navigate = useNavigate();
 
     const handleRowClick = (e) => {
-        // TODO: jump to another page
-        // console.log(e.id)
-        // setStudioID(e.id)
         navigate(`/studio/${e.id}/`)
     }
 

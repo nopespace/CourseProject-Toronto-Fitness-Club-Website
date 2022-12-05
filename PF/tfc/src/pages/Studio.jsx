@@ -2,23 +2,21 @@ import * as React from "react";
 import axios from "axios";
 import { Box, Stack, Typography, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
 import '../index.css'
-import StudioImageGallery from "../components/StudioImageGallery";
 import { Routes, Route, useParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useNavigate } from "react-router-dom";
+import Navigation from "../components/Navigation";
 
 const Studio = (props) => {
     let { studio_id } = useParams();
+    // TODO:
     let pos = JSON.parse(localStorage.getItem('pos'))
-    // const {
-    //     // studioID,
-    //     pos
-    // } = props
     const [studio, setStudio] = useState(undefined);
+    const [amenityShow, setAmenityShow] = useState(false);
+    const [classShow, setClassShow] = useState(false);
     const navigate = useNavigate();
 
     const retrieveStudio = async () => {
@@ -31,54 +29,79 @@ const Studio = (props) => {
         navigate('/studios/')
     }
 
+    const handleClickAmenity = () => {
+        setAmenityShow(!amenityShow)
+    }
+
+    const handleClickClass = () => {
+        setClassShow(!classShow)
+    }
+
     useEffect(() => {
         retrieveStudio()
     })
 
-    
+
 
     return (
-        <Box sx={{ m: 3 }}>
-            {/* <Navi /> */}
-            <button
-                className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                onClick={handleClickBack}
-            >
-                <ArrowBackIcon />
-                Back
-            </button>
-            {/* style={{ height: '70vh', width: '90%', margin: 30, alignItems: 'center', justifyContent: 'center' }} */}
-            {/* {studio && <Box className='studio-center-container-box' style={{ flexDirection: 'column' }}>
-                <Typography variant='h4'>{studio.name}</Typography>
-                <Typography >
-                    <b>📍Address: </b>
-                    {studio.address}
-                    <a href={studio.link} target="_blank">  [Get Direction]</a>
-                </Typography>
-
-                <Typography ><b>📞Phone Number: </b>{studio.phone_number}</Typography>
-                
-                <StudioImageGallery
-                    imgs={studio.images}
-                />
-                {studio.amenities}
+        <Box>
+            <Navigation />
+            <Box sx={{ mt: 2, pl: 8 }}>
+                <button
+                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+                    onClick={handleClickBack}
+                >
+                    <ArrowBackIcon />
+                    Back
+                </button>
             </Box>
-            } */}
-            {studio && <Box className='studio-center-container-box' style={{ flexDirection: 'column' }}>
-                <Typography variant='h4'>{studio.name}</Typography>
-                <Typography >
-                    <b>📍Address: </b>
-                    {studio.address}
-                    <a href={studio.link} target="_blank">  [Get Direction]</a>
-                </Typography>
 
-                <Typography ><b>📞Phone Number: </b>{studio.phone_number}</Typography>
+            {studio &&
+                <Grid className='studio-grid' sx={{ mt: 2, m: 5 }}>
+                    <Box className='studio-center-container-box' style={{ flexDirection: 'column', justifyContent: 'start', gap: 10 }}>
+                        <Typography variant='h4'>{studio.name}</Typography>
+                        <Typography >
+                            <b>📍Address: </b>
+                            {studio.address}
+                            <a href={studio.link} target="_blank">  [Get Direction]</a>
+                        </Typography>
 
-                <StudioImageGallery
-                    imgs={studio.images}
-                />
-                {studio.amenities}
-            </Box>
+                        <Typography ><b>📞Phone Number: </b>{studio.phone_number}</Typography>
+
+                        <button
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                            onClick={handleClickAmenity}
+                        >
+                            See Amenities
+                            {!amenityShow && <KeyboardArrowDownIcon />}
+                            {amenityShow && <KeyboardArrowUpIcon />}
+                        </button>
+
+                        {/* {amenityShow && } */}
+
+                        <button
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                            onClick={handleClickClass}
+                        >
+                            Class Schedules
+                            {!classShow && <KeyboardArrowDownIcon />}
+                            {classShow && <KeyboardArrowUpIcon />}
+                        </button>
+
+                        {/* {studio.amenities.map((amenity, index) => (
+                            <Typography key={index}>{amenity.name}: {amenity.quantity}</Typography>
+                        ))} */}
+
+                    </Box>
+                    <Box className='studio-center-container-box' style={{ flexDirection: 'column', justifyContent: 'start' }}>
+                        {studio.images.map((img, index) => (
+                            <img src={img.image} key={index}></img>
+                        ))}
+                        {/* <StudioImageGallery
+                            imgs={studio.images}
+                        /> */}
+                    </Box>
+                </Grid>
             }
         </Box>
     )
