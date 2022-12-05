@@ -138,6 +138,7 @@ class DropClassView(DestroyAPIView):
 
 class SearchClassView(ListAPIView):
     serializer_class = KlassInstanceSerializer
+    pagination_class = LargeResultsSetPagination
 
     def get_queryset(self):
         d = {

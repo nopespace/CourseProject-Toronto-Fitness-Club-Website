@@ -7,6 +7,7 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Divider from '@mui/material/Divider';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useEffect, useState } from 'react';
+import { Box } from "@mui/material";
 
 const SearchDropDownMenu = (props) => {
     const {
@@ -74,7 +75,7 @@ const SearchDropDownMenu = (props) => {
 
     {/* https://mui.com/material-ui/react-menu/ */ }
     return (
-        <div>
+        <Box mb={0.5} mt={1}>
             <Button
                 id="demo-customized-button"
                 aria-controls={open ? 'demo-customized-menu' : undefined}
@@ -87,8 +88,8 @@ const SearchDropDownMenu = (props) => {
                 fontSize='medium'
             >
                 <FilterAltIcon />
-                {!optionChose && <>Filter By:</>}
-                {optionChose && <>Filter By: {optionChose}</>}
+                {!optionChose && <>Search By:</>}
+                {optionChose && <>Search By: {optionChose}</>}
             </Button>
             <StyledMenu
                 id="demo-customized-menu"
@@ -109,7 +110,7 @@ const SearchDropDownMenu = (props) => {
 
                 ))}
             </StyledMenu>
-        </div>
+        </Box>
 
     )
 }

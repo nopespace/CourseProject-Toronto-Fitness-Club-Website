@@ -1,18 +1,39 @@
 import * as React from "react";
-import { DataGrid } from '@mui/x-data-grid';
+import {
+    DataGrid,
+    GridToolbar,
+    GRID_CHECKBOX_SELECTION_COL_DEF,
+    GridToolbarContainer,
+    GridToolbarColumnsButton,
+    GridToolbarFilterButton,
+    GridToolbarExport,
+    GridToolbarDensitySelector,
+} from '@mui/x-data-grid';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from 'react';
 import axios from "axios";
 import { Box, Stack, Typography, Grid } from '@mui/material';
+import SearchDropDownMenu from "./SearchDropDownMenu";
+import ClassesSearch from "./ClassesSearch";
+
 
 const Classes = (props) => {
     const studio = props.studio
-    const [page, setPage] = useState(1);
+    const [query, setQuery] = useState({ keyword: '', page: 1 })
+    // const [page, setPage] = useState(1);
     const [classes, setClasses] = useState([]);
     const [rowCount, setRowCount] = useState(0);
     const pageSize = 30;
     const [showClassInfo, sShowClassInfo] = useState(false);
     const [class_, setClass] = useState(undefined);
+    const [searchRequired, setSearchRequired] = useState(false);
+    const [optionChose, setOptionChose] = useState(undefined);
+    const options = [
+        'class_name',
+        'coach_name',
+        'date',
+        'time_range'
+    ]
     const myRef = useRef(null)
 
     const columns = [
@@ -23,13 +44,33 @@ const Classes = (props) => {
         { field: 'date', headerName: 'date', sortable: true, flex: 1 },
         { field: 'start_time', headerName: 'Start Time', sortable: true, flex: 1 },
         { field: 'end_time', headerName: 'End Time', sortable: true, flex: 1 },
+        {
+            ...GRID_CHECKBOX_SELECTION_COL_DEF,
+            width: 100,
+        },
     ];
 
+    useEffect(() => {
+        listClasses()
+    }, [query])
+
     const listClasses = async () => {
-        let url = `http://127.0.0.1:8000/classes/schedule/${studio.id}/`
-        const { data } = await axios.get(url, { params: { page: page } });
-        setClasses(data.results);
-        setRowCount(data.count)
+        let url1 = `http://127.0.0.1:8000/classes/schedule/${studio.id}/`
+        let url2 = `http://127.0.0.1:8000/classes/search/`
+        let res;
+        if (query.keyword === '') {
+            res = await axios.get(url1, { params: { page: query.page } }) 
+        }
+        else if (optionChose === 'time range') {
+            let start_var = query.keyword.split('-')[0].trim()
+            let end_var = query.keyword.split('-')[1].trim()
+            res = await axios.get(url2, { params: { studio_id: studio.id, start_var: start_var, end_var: end_var, criterion: optionChose, page: query.page } })
+        } else {
+            res = await axios.get(url2, { params: { studio_id: studio.id, keyword: query.keyword, criterion: optionChose, page: query.page } })
+        }
+        // const { data } = await axios.get(url, { params: { page: query.page } });
+        setClasses(res.data.results);
+        setRowCount(res.data.count)
     }
 
     const handleRowClick = (e) => {
@@ -37,6 +78,7 @@ const Classes = (props) => {
         setClass(e.row);
         myRef.current.scrollIntoView()
     }
+
 
     const showClassInfoFunc = () => {
         return (
@@ -64,38 +106,71 @@ const Classes = (props) => {
         )
     }
 
-    React.useEffect(() => {
-        listClasses();
-    }, [])
-
     return (
-        <Box style={{ height: '100vh', width: '90%' }}>
-            {showClassInfo && showClassInfoFunc()}
+        <Box
+            style={{ width: '90%' }}
+            sx={{
+                boxShadow: 2,
+                border: 2,
+                borderColor: 'rgba(247, 251, 244, 0.064)',
+                borderRadius: '5%',
+                p: 2,
+                m: 3,
+            }}>
+            {/* <SearchDropDownMenu
+                options={options}
+                setSearchRequired={setSearchRequired}
+                optionChose={optionChose}
+                setOptionChose={setOptionChose}
+            /> */}
+            <ClassesSearch
+                studio_id={studio.id}
+                setClasses={setClasses}
+                setRowCount={setRowCount}
+                // page={page}
+                pageSize={pageSize}
+                // setPage={setPage}
+                query={query}
+                setQuery={setQuery}
+                setOptionChose={setOptionChose}
+                optionChose={optionChose}
+            />
             <DataGrid
                 rows={classes}
                 columns={columns}
+                page={query.page - 1}
                 pageSize={pageSize}
+                pagination
                 paginationMode='server'
                 rowCount={rowCount}
-                onPageChange={(page) => setPage(page + 1)}
+                onPageChange={(page) => setQuery({ ...query, page: page + 1 })}
                 disableExtendRowFullWidth={false}
                 onRowClick={(e) => handleRowClick(e)}
+                initialState={{
+                    pagination: {
+                        page: 1,
+                    },
+                }}
                 sx={{
                     // https://mui.com/x/react-data-grid/style/#styling-rows
+                    height: '100vh',
                     boxShadow: 2,
                     border: 2,
                     borderRadius: '5%',
                     borderColor: 'lightGray',
                     '& .MuiDataGrid-row:hover': {
                         color: 'primary.main',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        textDecoration: 'underline',
+
                     },
                     '& .MuiDataGrid-columnHeaderTitle': {
                         fontWeight: 'bold'
                     },
                 }}
-            // checkboxSelection
             />
+            {console.log(query.page)}
+            {showClassInfo && showClassInfoFunc()}
         </Box>
     )
 }
