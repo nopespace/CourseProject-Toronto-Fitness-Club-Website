@@ -91,8 +91,8 @@ class StudioView(RetrieveAPIView):
     serializer_class = StudioSerializer
 
     def retrieve(self, request, *args, **kwargs):
-        lat = request.data.get('lat')
-        lon = request.data.get('lon')
+        lat = request.GET.get('lat')
+        lon = request.GET.get('lon')
         response = super().retrieve(request, args, kwargs)
         # reference to generate link google map url:
         # https://developers.google.com/maps/documentation/urls/get-started

@@ -8,6 +8,7 @@ const StudiosTable = (props) => {
     const setPage = props.setPage
     const rowCount = props.rowCount
     const pageSize = props.pageSize
+    const pos = props.pos
     const columns = [
         { field: 'order', headerName: 'Number', sortable: false, width: 70 },
         { field: 'name', headerName: 'Studio Name', sortable: false, flex: 1 },
@@ -17,7 +18,7 @@ const StudiosTable = (props) => {
     const navigate = useNavigate();
 
     const handleRowClick = (e) => {
-        navigate(`/studio/${e.id}/`)
+        navigate(`/studio/${e.id}/${pos.lat}/${pos.lon}`)
     }
 
     return (

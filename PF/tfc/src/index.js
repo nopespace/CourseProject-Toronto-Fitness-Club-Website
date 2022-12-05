@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     element: <Studios />,
   },
   {
-    path: "studio/:studio_id/",
+    path: "studio/:studio_id/:lat/:lon/",
     element: <Studio />,
   },
   {

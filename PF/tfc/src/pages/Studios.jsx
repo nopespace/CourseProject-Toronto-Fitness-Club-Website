@@ -28,6 +28,8 @@ const Studios = (props) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setPos({ lat: position.coords.latitude, lon: position.coords.longitude })
+          localStorage.setItem('pos', JSON.stringify({ lat: position.coords.latitude, lon: position.coords.longitude }))
+
         }
       )
     }
@@ -90,6 +92,7 @@ const Studios = (props) => {
             setPage={setPage}
             rowCount={rowCount}
             pageSize={pageSize}
+            pos={pos}
           />
         </Stack>
 
@@ -97,7 +100,7 @@ const Studios = (props) => {
           studios={studios}
           pos={pos}
           setPos={setPos}
-          // setStudioID={setStudioID}
+        // setStudioID={setStudioID}
         />
       </Box>
 

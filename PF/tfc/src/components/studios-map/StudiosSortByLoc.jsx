@@ -25,6 +25,7 @@ const StudiosSortByLoc = (props) => {
             (response) => {
               const { lat, lng } = response.results[0].geometry.location;
               setPos({lat: lat, lon: lng})
+              localStorage.setItem('pos', JSON.stringify({lat: lat, lon: lng}))
             },
             (error) => {
               console.error(error);

@@ -13,9 +13,8 @@ import StudioAmenity from "../components/StudioAmenity";
 import Classes from "../components/Classes";
 
 const Studio = (props) => {
-    let { studio_id } = useParams();
+    let { studio_id, lat, lon } = useParams();
     // TODO:
-    let pos = JSON.parse(localStorage.getItem('pos'))
     const [studio, setStudio] = useState(undefined);
     const [amenityShow, setAmenityShow] = useState(false);
     const [classShow, setClassShow] = useState(false);
@@ -23,7 +22,7 @@ const Studio = (props) => {
 
     const retrieveStudio = async () => {
         let url = `http://127.0.0.1:8000/studios/${studio_id}/`
-        const { data } = await axios.get(url, { params: { lat: pos.lat, lon: pos.lon } })
+        const { data } = await axios.get(url, { params: { lat: lat, lon: lon } })
         data.amenities.map((amenity, index) => amenity.id = index)
         setStudio(data);
     }

@@ -13,35 +13,13 @@ import StudioAmenity from "../components/StudioAmenity";
 import Classes from "../components/Classes";
 
 const UserClasses = (props) => {
-    let { studio_id } = useParams();
-    // TODO:
-    let pos = JSON.parse(localStorage.getItem('pos'))
-    const [studio, setStudio] = useState(undefined);
-    const [amenityShow, setAmenityShow] = useState(false);
-    const [classShow, setClassShow] = useState(false);
-    const navigate = useNavigate();
-
-    const retrieveStudio = async () => {
-        let url = `http://127.0.0.1:8000/studios/${studio_id}/`
-        const { data } = await axios.get(url, { params: { lat: pos.lat, lon: pos.lon } })
-        data.amenities.map((amenity, index) => amenity.id = index)
-        setStudio(data);
-    }
-
-    const handleClickBack = () => {
-        navigate('/studios/')
-    }
-
-    const handleClickAmenity = () => {
-        setAmenityShow(!amenityShow)
-    }
-
-    const handleClickClass = () => {
-        setClassShow(!classShow)
+    const listFutureClass = () => {
+        
     }
 
     useEffect(() => {
-        retrieveStudio()
+        listFutureClass()
+        listPastClass()
     }, [])
 
 

@@ -24,6 +24,7 @@ const StudiosMap = (props) => {
 
     const handleClick = (e) => {
         setPos({ lat: e.lat, lon: e.lng })
+        localStorage.setItem('pos', JSON.stringify({ lat: e.lat, lon: e.lng }))
     }
     return (
         <Box style={{ height: '80vh', width: '80%', margin: 20, }}>
