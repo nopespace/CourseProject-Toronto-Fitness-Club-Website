@@ -17,7 +17,6 @@ const NavAccount = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(data);
-      console.log(data);
     } catch (e) {
       setUser(null);
     }

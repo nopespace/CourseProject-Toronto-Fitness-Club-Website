@@ -7,7 +7,41 @@ const RegisterBox = (props) => {
   const { type } = props;
   const navigate = useNavigate();
 
+  const isValid = (form) => {
+    let fields = [];
+    if (type === "Login") {
+      fields = [
+        'username',
+        'password'
+      ]
+    } else if (type === "Register") {
+      fields = [
+        'username',
+        'password',
+        'first_name',
+        'last_name',
+        'phone',
+        'password'
+      ]
+    } else {
+      return true;
+    }
+
+    let valid = true;
+    fields.forEach(field => {
+      if (!form.get(field)) {
+        valid = false;
+      }
+    })
+    return valid;
+  }
+
   const login = async (form) => {
+    if (!isValid(form)) {
+      alert("Please fill in all non-optional fields.")
+      return;
+    }
+
     try {
       const res = await axios({
         method: "post",
@@ -23,7 +57,6 @@ const RegisterBox = (props) => {
     // save card
     let cardinfo;
 
-    console.log("logged in");
     // save user card info
     const token = JSON.parse(localStorage.getItem("userToken"));
     axios({
@@ -47,6 +80,11 @@ const RegisterBox = (props) => {
   };
 
   const register = async (form) => {
+    if (!isValid(form)) {
+      alert("Please fill in all required fields.")
+      return;
+    }
+
     try {
       const res = await axios({
         method: "post",
@@ -64,7 +102,7 @@ const RegisterBox = (props) => {
     try {
       const token = JSON.parse(localStorage.getItem("userToken"));
       const res = await axios({
-        method: "post",
+        method: "patch",
         url: "http://127.0.0.1:8000/accounts/edit/",
         data: form,
         headers: { Authorization: `Bearer ${token}` },
@@ -101,7 +139,6 @@ const RegisterBox = (props) => {
                 id="username"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Username"
-                required
               />
             </div>
             {type !== "Login" && (
@@ -119,7 +156,6 @@ const RegisterBox = (props) => {
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="example@gmail.com"
-                    required
                   />
                 </div>
                 <div>
@@ -135,7 +171,6 @@ const RegisterBox = (props) => {
                     id="first_name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="First Name"
-                    required
                   />
                 </div>
                 <div>
@@ -151,7 +186,6 @@ const RegisterBox = (props) => {
                     id="last_name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="Last Name"
-                    required
                   />
                 </div>
                 <div>
@@ -168,7 +202,6 @@ const RegisterBox = (props) => {
                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="123-456-7890"
-                    required
                   />
                 </div>
                 <div>
@@ -185,7 +218,6 @@ const RegisterBox = (props) => {
                     accept="image/*"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="123-456-7890"
-                    required
                   />
                 </div>
               </>
@@ -203,7 +235,6 @@ const RegisterBox = (props) => {
                 id="password"
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                required
               />
             </div>
             <button
