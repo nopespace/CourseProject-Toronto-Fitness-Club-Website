@@ -31,8 +31,8 @@ const SubscriptionBox = ({disabled, plan, changePlan}) => {
             Premium membership perks
           </span>
         </li>
-        <li className={`flex space-x-3 ${plan.plan_id === 1 && "line-through"} decoration-gray-500`}>
-          <CheckIcon />
+        <li className={`flex space-x-3 ${plan.id === 1 && "line-through"} decoration-gray-500`}>
+          <CheckIcon isDisabled={plan.id === 1} />
           <span className="text-base font-normal leading-tight text-gray-500">
             Save $4.66/month
           </span>

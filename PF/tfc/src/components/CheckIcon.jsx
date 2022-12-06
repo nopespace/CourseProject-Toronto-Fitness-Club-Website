@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-const CheckIcon = () => {
+const CheckIcon = ({ isDisabled }) => {
   return (
     <svg
       aria-hidden="true"
-      className="flex-shrink-0 w-5 h-5 text-orange-400"
+      className={`flex-shrink-0 w-5 h-5 ${isDisabled ? "text-gray-500" : "text-orange-400"}`}
       fill="currentColor"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"
