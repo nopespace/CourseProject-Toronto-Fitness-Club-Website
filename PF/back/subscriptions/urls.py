@@ -11,6 +11,7 @@ urlpatterns = [
     path('add/', AddSubscriptionView.as_view()),
     path('update/', UpdateSubscriptionView.as_view()),
     path('paymentsHistory/', PaymentHistoryView.as_view()),
+    path('paymentFuture/', PaymentFutureView.as_view()),
     # # list a specific studio's all subscription plans
     # path('list/<int:studio_id>/', ListStudioSubscriptionsView.as_view()),
     # # list a user's all subscriptions from all studios

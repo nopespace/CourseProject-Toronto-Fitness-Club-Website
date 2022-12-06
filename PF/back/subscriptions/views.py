@@ -9,6 +9,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from tfc.paginations import LargeResultsSetPagination
 
 # Create your views here.
 
@@ -73,22 +74,30 @@ class UpdateSubscriptionView(RetrieveAPIView, UpdateAPIView):
 class PaymentHistoryView(ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = UserPaymentHistorySerializer
+    pagination_class = LargeResultsSetPagination
     
     def get_queryset(self):
         user_obj = self.request.user
         return UserPaymentHistory.objects.filter(user=user_obj)
     
-    def list(self, request, *args, **kwargs):
-        user_obj = self.request.user
-        response = super().list(request, args, kwargs)
-        cancelled = UserSubscription.objects.get(user=user_obj).cancelled
-        if cancelled:
-            response.data.append({
-                "next_billing_date": None,
-                })
+
+class PaymentFutureView(RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSubscriptionSerializer
+
+    def get_object(self):
+        return get_object_or_404(
+            UserSubscription, 
+            user=self.request.user
+            )
+
+    def retrieve(self, request, *args, **kwargs):
+        response = super().retrieve(request, args, kwargs)
+        result = {}
+        print(333, response.data)
+        if response.data["cancelled"]:
+            result['next_billing_date'] = None
         else:
-            response.data.append({
-                "next_billing_date": UserSubscription.objects.get(user=user_obj).next_billing_date,
-                "next_billing_amount": UserSubscription.objects.get(user=user_obj).plan.price
-                })
-        return response
+            result['next_billing_date'] = response.data["next_billing_date"]
+            result['next_billing_amount'] = response.data["price"]
+        return Response(result, status=status.HTTP_200_OK)
