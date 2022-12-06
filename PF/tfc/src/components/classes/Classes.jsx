@@ -6,7 +6,6 @@ import {
 import { useEffect, useState, useRef } from 'react';
 import axios from "axios";
 import { Box, Stack, Typography, Grid } from '@mui/material';
-import SearchDropDownMenu from "./SearchDropDownMenu";
 import ClassesSearch from "./ClassesSearch";
 import ClassEnroll from "./ClassEnroll";
 
@@ -20,7 +19,7 @@ const Classes = (props) => {
     const pageSize = 30;
     const [showClassInfo, sShowClassInfo] = useState(false);
     const [class_, setClass] = useState(undefined);
-    const [optionChose, setOptionChose] = useState(undefined);
+    const [optionChose, setOptionChose] = useState('class name');
     const [msgLink, setMsgLink] = useState({ msg: undefined, link: undefined })
 
     const myRef = useRef(null)

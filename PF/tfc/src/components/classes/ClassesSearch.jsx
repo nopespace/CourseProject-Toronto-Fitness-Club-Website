@@ -1,8 +1,8 @@
 import { Box, Stack, Typography } from '@mui/material';
-import SearchBar from './SearchBar';
+import SearchBar from '../SearchBar';
 import { useEffect, useState } from 'react';
 import Geocode from "react-geocode";
-import SearchDropDownMenu from './SearchDropDownMenu';
+import SearchDropDownMenu from '../SearchDropDownMenu';
 import axios from "axios";
 
 const ClassesSearch = (props) => {
@@ -49,11 +49,11 @@ const ClassesSearch = (props) => {
             />
             {optionChose === 'date' && <Typography color='green'>yyyy-mm-dd</Typography>}
             {optionChose === 'time range' && <Typography color='green'>Enter start time - end time in such format: hh:mm - hh:mm</Typography>}
-            {searchRequired && <SearchBar
+            <SearchBar
                 placeholder='Enter your keyword:'
                 handleSearch={handleSearch}
                 handleSearchFieldChange={handleSearchFieldChange}
-            />}
+            />
         </Box>
     )
 }

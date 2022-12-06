@@ -43,7 +43,7 @@ const ClassTable = (props) => {
             sx={{
                 // https://mui.com/x/react-data-grid/style/#styling-rows
                 height: '100vh',
-                width: '100%',
+                width: '90%',
                 boxShadow: 2,
                 border: 2,
                 borderRadius: '5%',

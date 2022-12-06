@@ -10,7 +10,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useNavigate } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import StudioAmenity from "../components/StudioAmenity";
-import Classes from "../components/Classes";
+import Classes from "../components/classes/Classes";
 
 const Studio = (props) => {
     let { studio_id, lat, lon } = useParams();
@@ -98,9 +98,6 @@ const Studio = (props) => {
                         {studio.images.map((img, index) => (
                             <img src={img.image} key={index}></img>
                         ))}
-                        {/* <StudioImageGallery
-                            imgs={studio.images}
-                        /> */}
                     </Box>
                 </Grid>
             }
