@@ -20,10 +20,12 @@ const CardBox = (props) => {
 
   const add = async (form) => {
     try {
+      const token = JSON.parse(localStorage.getItem("userToken"));
       const res = await axios({
         method: "post",
         url: "http://127.0.0.1:8000/subscriptions/card/add/",
         data: form,
+        headers: { Authorization: `Bearer ${token}` },
       });
       alert("Payment Information Added");
       window.location.replace("/edit/");
@@ -97,25 +99,25 @@ const CardBox = (props) => {
                 Expiry Date
               </label>
               <input
-                type="text"
-                name="exipry_date"
+                type="date"
+                name="expiry_date"
                 id="expiry_date"
-                placeholder="Card Holder"
+                placeholder="1980-01-01"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
               />
             </div>
             <div>
               <label
-                htmlFor="cvv"
+                htmlFor="CVV"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 CVV
               </label>
               <input
                 type="text"
-                name="cvv"
-                id="cvv"
+                name="CVV"
+                id="CVV"
                 placeholder="123"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
