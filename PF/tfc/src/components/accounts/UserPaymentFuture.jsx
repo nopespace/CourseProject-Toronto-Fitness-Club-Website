@@ -16,7 +16,13 @@ const UserPaymentFuture = (props) => {
             url,
             config
         )
-            .then(res => setPayment(res.data))
+            .then(res => {
+                const data = res.data
+                if (data.next_billing_date !== null) {
+
+                    setPayment(res.data)
+                }
+            })
             .catch(err => console.log('No Future Payment'))
 
     }

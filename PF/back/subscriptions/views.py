@@ -91,7 +91,6 @@ class PaymentFutureView(RetrieveAPIView):
     def retrieve(self, request, *args, **kwargs):
         response = super().retrieve(request, args, kwargs)
         result = {}
-        print(333, response.data)
         if response.data["cancelled"]:
             result['next_billing_date'] = None
         else:
