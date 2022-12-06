@@ -9,7 +9,9 @@ const RegisterBox = (props) => {
   const navigate = useNavigate();
 
   const getErrorMessage = (e) => {
-    console.log(e)
+    if (type === "Login") {
+      return "Invalid credentials"
+    }
     let fullMessage = "Please fix the following errors:\n";
     Object.keys(e).forEach(message => {
       fullMessage += `- ${message}: ${e[message][0]}\n`;
