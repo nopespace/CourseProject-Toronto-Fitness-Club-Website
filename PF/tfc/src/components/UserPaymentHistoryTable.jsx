@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 
 
-const UserPaymentsTable = (props) => {
+const UserPaymentsHistoryTable = (props) => {
     const [page, setPage] = useState(1)
     const [rowCount, setRowCount] = useState(0)
     const [payments, setPayments] = useState([])
@@ -34,7 +34,7 @@ const UserPaymentsTable = (props) => {
         )
         data.results.map((payment, index) => {
             payment.amount = '$' + payment.amount
-            payment.billing_datetime = new Date(payment.billing_datetime).toLocaleString('en-GB',{hour12: false})
+            payment.billing_datetime = new Date(payment.billing_datetime).toLocaleString('en-ca',{hour12: false})
         })
         setRowCount(data.count)
         setPayments(data.results)
@@ -82,4 +82,4 @@ const UserPaymentsTable = (props) => {
     )
 }
 
-export default UserPaymentsTable;
+export default UserPaymentsHistoryTable;
