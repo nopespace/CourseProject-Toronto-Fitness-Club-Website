@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
-import SubscriptionBox from './SubscriptionBox';
+import SubscriptionBox from './subscriptions/SubscriptionBox';
 
 function PagenationBar({handlePageClick, pageCount}) {
     return (
