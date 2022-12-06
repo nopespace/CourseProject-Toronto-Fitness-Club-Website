@@ -9,6 +9,7 @@ import SubscriptionInfo from "../components/subscriptions/SubscriptionInfo";
 const Subscriptions = () => {
   const [details, setDetails] = useState(null); // this data is for plan
   const [userData, setUserData] = useState(null); // this data is for user plan if exists
+  const navigate = useNavigate();
 
   const getUserData = async () => {
     const token = JSON.parse(localStorage.getItem("userToken"));
@@ -47,7 +48,7 @@ const Subscriptions = () => {
       await addPlan(plan);
       return;
     }
-    
+
     try {
       const token = JSON.parse(localStorage.getItem("userToken"));
       console.log(plan)
@@ -74,7 +75,10 @@ const Subscriptions = () => {
       });
       alert("Plan has been added");
       window.location.replace("/subscriptions/");
-    } catch (e) { }
+    } catch (e) {
+      alert("Please add payment information");
+      navigate("/edit/");
+    }
   }
 
   useEffect(() => {
