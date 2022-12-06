@@ -21,6 +21,6 @@ class UserCardAdmin(admin.ModelAdmin):
 admin.site.register(SubscriptionPlan, SubscriptionAdmin)
 
 # TODO: comment below, only used for testing
-# admin.site.register(UserSubscription, UserPlanAdmin)
+admin.site.register(UserSubscription, UserPlanAdmin)
 # admin.site.register(UserCard, UserCardAdmin)
 

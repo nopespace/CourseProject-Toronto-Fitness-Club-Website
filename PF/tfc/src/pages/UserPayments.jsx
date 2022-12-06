@@ -9,17 +9,18 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useNavigate } from "react-router-dom";
 import Navigation from "../components/Navigation";
-import StudioAmenity from "../components/StudioAmenity";
-import Classes from "../components/Classes";
-import ClassTable from "../components/ClassTable";
-import ClassDrop from "../components/ClassDrop";
+import UserPaymentsTable from "../components/UserPaymentsTable";
 
 const UserPayments = (props) => {
 
     return (
-        <Box>
+        <Box width='100%'>
             <Navigation />
-        
+            <Box className='payment-history-center-box'>
+                <Typography variant='h5'>My Payment History</Typography>
+
+                <UserPaymentsTable></UserPaymentsTable>
+            </Box>
         </Box>
     )
 }
