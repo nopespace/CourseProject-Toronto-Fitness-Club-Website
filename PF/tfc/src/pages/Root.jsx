@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Navigation from "../components/Navigation";
 import axios from "axios";
 import { Link } from 'react-router-dom'
+import LoadingCircle from "../components/LoadingCircle";
 
 const Root = () => {
   const [user, setUser] = useState(null);
@@ -34,7 +35,7 @@ const Root = () => {
       <div className="flex justify-center font-bold my-10 text-2xl">
         <img src="/logo.png" alt="TFC Logo" />
       </div>
-      { user === "none" &&
+      { user === "none" ?
       <div className="flex justify-center my-10">
         <Link
           to="/register/"
@@ -48,6 +49,11 @@ const Root = () => {
         >
           Login
         </Link>
+      </div>
+      :
+      !user &&
+      <div className="flex justify-center my-10">
+        <LoadingCircle />
       </div>
     }
     </div>
