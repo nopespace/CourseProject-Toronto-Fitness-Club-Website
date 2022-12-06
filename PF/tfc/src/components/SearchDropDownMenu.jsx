@@ -110,7 +110,7 @@ const SearchDropDownMenu = (props) => {
                     [
                         <div key={index}>
                             <MenuItem onClick={handleCloseDropDown} disableRipple>{option}</MenuItem>
-                            <Divider sx={{ my: 0.5 }} />
+                            {index !== options.length - 1 && <Divider sx={{ my: 0.5 }} />}
                         </div>
                     ]
 
