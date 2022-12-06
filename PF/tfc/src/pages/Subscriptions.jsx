@@ -90,7 +90,7 @@ const Subscriptions = () => {
     <>
       <Navigation />
       <div className="flex justify-center font-bold my-10 text-2xl">
-        {userData ? "Current Plan" : "Please login to view subscriptions"}
+        {userData ? "My subscriptions" : "Please login to view subscriptions"}
       </div>
       {userData ?
         <>
@@ -107,7 +107,7 @@ const Subscriptions = () => {
                   <SubscriptionBox
                     plan={item}
                     changePlan={changePlan}
-                    disabled={userData?.billing_cycle === item.billing_cycle}
+                    disabled={userData?.billing_cycle === item.billing_cycle && !userData?.cancelled}
                     userData={userData}
                   />)
                 : <LoadingCircle />
