@@ -138,6 +138,7 @@ class UserPaymentHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = UserPaymentHistory
         fields = [
+            'id',
             'amount',
             'billing_datetime',
             'card_num',
