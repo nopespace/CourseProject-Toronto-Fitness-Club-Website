@@ -13,7 +13,9 @@ import { Link } from "react-router-dom";
 const ClassDrop = (props) => {
     const myRef = useRef(null)
     const class_ = props.class;
-    const listFutureClass = props.listFutureClass;
+    // const listFutureClass = props.listFutureClass;
+    const future = props.future
+    const setFuture = props.setFuture;
     const [msg, setMsg] = useState(undefined);
     const singleClass = `Single Class: Drop ${class_.class_name} on ${class_.date}?`
     const allClass = `All Classes: Drop all ${class_.class_name} classes starting from ${class_.date}?`
@@ -40,9 +42,16 @@ const ClassDrop = (props) => {
         })
             .then(res => {
                 setMsg('Successfully dropped.')
-                listFutureClass()
+                console.log(future)
+                setFuture({
+                    ...future,
+                    dropped: future.dropped + 1
+                })
+                props.sDroppedClass(undefined);
+                // listFutureClass()
             })
             .catch(err => {
+                console.log(err)
                 setMsg(err.response.data.msg)
             })
     }

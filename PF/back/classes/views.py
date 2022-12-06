@@ -115,7 +115,7 @@ class DropClassView(DestroyAPIView):
             # user has no plan now
             return Response({'msg': 'Please subscribe to our application first.'}, status=status.HTTP_401_UNAUTHORIZED)
 
-        if all_ == 'True':  # drop all future occurences
+        if str(all_) == 'True':  # drop all future occurences
             end_date = BaseKlass.objects.get(id=class_id).end_date
         else:   # drop a specific date
             end_date = start_date
@@ -133,7 +133,7 @@ class DropClassView(DestroyAPIView):
                 class_ins.save()
             date += datetime.timedelta(weeks=1)
 
-        return Response({'msg': 'Success. Please check your enrollment schedule.'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({'msg': 'Success. Please check your enrollment schedule.'}, status=status.HTTP_200_OK)
 
 
 class SearchClassView(ListAPIView):

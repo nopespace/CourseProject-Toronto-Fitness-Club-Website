@@ -19,7 +19,8 @@ const UserClasses = (props) => {
         classes: [],
         page: 1,
         rowCount: 0,
-        pageSize: 30
+        pageSize: 30,
+        dropped: 0
     })
     const [past, setPast] = useState({
         classes: [],
@@ -63,7 +64,7 @@ const UserClasses = (props) => {
 
     useEffect(() => {
         listFutureClass()
-    }, [future.page])
+    }, [future.page, future.dropped])
 
     useEffect(() => {
         listPastClass()
@@ -76,7 +77,7 @@ const UserClasses = (props) => {
                 <Box className='class-schedule-center-container-box' >
                     <Typography variant='h5'>My Future Classes</Typography>
                     <Typography color='green'>*Click on a class if you want to drop it.</Typography>
-                    <ClassTable
+                    <ClassTable id='my-future-schedule'
                         info={future}
                         setter={setFuture}
                         sDroppedClass={sDroppedClass}
@@ -94,7 +95,9 @@ const UserClasses = (props) => {
             </Grid>
             {droppedClass && <ClassDrop
                 class={droppedClass}
-                listFutureClass={listFutureClass}
+                future={future}
+                setFuture={setFuture}
+                sDroppedClass={sDroppedClass}
             />}
         </Box>
     )
