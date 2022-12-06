@@ -12,7 +12,7 @@ class BaseKlass(models.Model):
         verbose_name_plural = 'Classes'
     studio = models.ForeignKey(
         Studio, related_name="base_klass", on_delete=models.CASCADE)
-    name = models.CharField(unique=True, max_length=200)
+    name = models.CharField(max_length=200)
     description = models.TextField(max_length=400)
     coach = models.CharField(max_length=200)
     keywords = models.TextField(max_length=400, blank=True)
