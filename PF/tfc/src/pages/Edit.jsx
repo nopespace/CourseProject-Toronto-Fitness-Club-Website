@@ -58,7 +58,7 @@ const Edit = () => {
       </div>
       {user ?
       <div className="grid grid-cols-2">
-        {updateAccount ? <EditBox /> : <AccountInfo user={user} setUpdateAccount={setUpdateAccount} />}
+        {updateAccount ? <EditBox user={user}/> : <AccountInfo user={user} setUpdateAccount={setUpdateAccount} />}
         {updateCard ? <CardBox isAdd={!card?.card_num}/> : <CardInfo card={card} setUpdateCard={setUpdateCard} />}
       </div>
       :

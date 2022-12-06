@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
-const EditBox = (props) => {
+const EditBox = ({user}) => {
   const avatarRef = useRef();
   const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ const EditBox = (props) => {
                 name="username"
                 id="username"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="Username"
+                placeholder={`${user.username}`}
               />
             </div>
             <div>
@@ -72,7 +72,7 @@ const EditBox = (props) => {
                 name="email"
                 id="email"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="example@gmail.com"
+                placeholder={`${user.email}`}
               />
             </div>
             <div>
@@ -87,7 +87,7 @@ const EditBox = (props) => {
                 name="first_name"
                 id="first_name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="First Name"
+                placeholder={`${user.first_name}` != null ? `${user.first_name}` : "First Name"}
               />
             </div>
             <div>
@@ -102,7 +102,7 @@ const EditBox = (props) => {
                 name="last_name"
                 id="last_name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="Last Name"
+                placeholder={`${user.last_name}` != null ? `${user.last_name}` : "Last Name"}
               />
             </div>
             <div>
@@ -118,7 +118,7 @@ const EditBox = (props) => {
                 id="phone_number"
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="123-456-7890"
+                placeholder={`${user.phone_number}`!=null ? `${user.phone_number}` : "123-456-7890"}
               />
             </div>
             <div>
