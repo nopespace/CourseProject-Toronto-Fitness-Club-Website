@@ -70,7 +70,7 @@ const Studio = (props) => {
                         <Typography ><b>📞Phone Number: </b>{studio.phone_number}</Typography>
 
                         <button
-                            class="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold py-2 px-4 rounded-full"
+                            className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold py-2 px-4 rounded-full"
                             onClick={handleClickAmenity}
                         >
                             See Amenities
@@ -83,7 +83,7 @@ const Studio = (props) => {
                         />}
 
                         <button
-                            class="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold py-2 px-4 rounded-full"
+                            className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold py-2 px-4 rounded-full"
                             onClick={handleClickClass}
                         >
                             Class Schedules

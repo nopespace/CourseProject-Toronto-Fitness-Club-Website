@@ -12,11 +12,12 @@ const UserPaymentFuture = (props) => {
             headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem("userToken"))}` },
         }
 
-        const { data } = await axios.get(
+        axios.get(
             url,
             config
         )
-        setPayment(data)
+            .then(res => setPayment(res.data))
+            .catch(err => console.log('No Future Payment'))
 
     }
 
@@ -27,9 +28,13 @@ const UserPaymentFuture = (props) => {
 
     return (
         <Box sx={{ m: 2 }}>
-            {/* <Typography variant='h5' fontWeight='bold'>2. My Next Payment</Typography> */}
-            <Typography><b>Next Billing Date</b>: {payment.next_billing_date}</Typography>
-            <Typography><b>Next Billing Amount</b>: ${payment.next_billing_amount}</Typography>
+            {payment === [] && <Typography>No Future Payment</Typography>}
+            {payment !== [] &&
+                <>
+                    <Typography><b>Next Billing Date</b>: {payment.next_billing_date}</Typography>
+                    <Typography><b>Next Billing Amount</b>: ${payment.next_billing_amount}</Typography>
+                </>
+            }
         </Box>
     )
 }
