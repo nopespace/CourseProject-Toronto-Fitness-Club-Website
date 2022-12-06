@@ -56,7 +56,7 @@ class UpdateSubscriptionView(RetrieveAPIView, UpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = UserSubscriptionSerializer
     def get_serializer_class(self):
-        if self.request.method == 'PUT' and str(self.request.POST.get('cancelled')).lower() == 'true':
+        if self.request.method == 'PUT' and str(self.request.data.get('cancelled')).lower() == 'true':
             return CancelUserSubscriptionSerializer
         else:
             return UserSubscriptionSerializer
