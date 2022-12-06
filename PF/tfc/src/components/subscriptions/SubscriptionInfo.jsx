@@ -12,7 +12,7 @@ const SubscriptionInfo = ({ plan }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Plan has been cancelled");
-      // window.location.replace("/subscriptions/");
+      window.location.replace("/subscriptions/");
     } catch (e) { }
   }
 

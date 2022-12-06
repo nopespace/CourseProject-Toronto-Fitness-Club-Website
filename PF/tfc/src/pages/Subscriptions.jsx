@@ -8,7 +8,7 @@ import SubscriptionInfo from "../components/subscriptions/SubscriptionInfo";
 
 const Subscriptions = () => {
   const [details, setDetails] = useState(null); // this data is for plan
-  const [userData, setUserData] = useState(null); // this data is for user plan if exists
+  const [userData, setUserData] = useState({}); // this data is for user plan if exists
   const navigate = useNavigate();
 
   const getUserData = async () => {
@@ -27,7 +27,7 @@ const Subscriptions = () => {
         headers: { Authorization: "Bearer " + token }
       })
       setUserData(res.data);
-    } catch (e) { 
+    } catch (e) {
       // User is logged in, but has no plans
       setUserData({});
     }
@@ -90,27 +90,41 @@ const Subscriptions = () => {
     <>
       <Navigation />
       <div className="flex justify-center font-bold my-10 text-2xl">
-        Current Plan
+        {userData ? "Current Plan" : "Please login to view subscriptions"}
       </div>
-      <div className="flex justify-center my-10">
-        <SubscriptionInfo plan={userData} />
-      </div>
-      <div className="flex justify-center font-bold my-10 text-2xl">
-        Please choose a subscription plan
-      </div>
-      <div className="flex justify-center my-10">
-      {
-        details ?
-        details.map((item) =>
-          <SubscriptionBox
-            plan={item}
-            changePlan={changePlan}
-            disabled={userData?.billing_cycle === item.billing_cycle}
-            userData={userData}
-          />)
-        : <LoadingCircle />
+      {userData ?
+        <>
+          <div className="flex justify-center my-10">
+            <SubscriptionInfo plan={userData} />
+          </div>
+          <div className="flex justify-center font-bold my-10 text-2xl">
+            Please choose a subscription plan
+          </div>
+          <div className="flex justify-center my-10">
+            {
+              details ?
+                details.map((item) =>
+                  <SubscriptionBox
+                    plan={item}
+                    changePlan={changePlan}
+                    disabled={userData?.billing_cycle === item.billing_cycle}
+                    userData={userData}
+                  />)
+                : <LoadingCircle />
+            }
+          </div>
+        </>
+        :
+        <div className="flex justify-center my-10">
+          <Link
+            to="/login/"
+            className="mt-5 text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          >
+            Login
+          </Link>
+        </div>
+
       }
-      </div>
     </>
   );
 };
