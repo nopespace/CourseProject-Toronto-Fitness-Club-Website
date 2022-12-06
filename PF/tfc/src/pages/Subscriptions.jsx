@@ -98,7 +98,7 @@ const Subscriptions = () => {
             <SubscriptionInfo plan={userData} />
           </div>
           <div className="flex justify-center font-bold my-10 text-2xl">
-            Please choose a subscription plan
+            {userData?.plan_id ? "Change subscription plan" : "Please choose a subscription plan"}
           </div>
           <div className="flex justify-center my-10">
             {

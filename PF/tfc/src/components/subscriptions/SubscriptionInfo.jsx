@@ -23,7 +23,7 @@ const SubscriptionInfo = ({ plan }) => {
           {plan?.plan_id ? `Current Subscription: ${plan.billing_cycle}` : "You currently have no subscription"}
         </div>
         <div className="mt-3">
-          {plan?.plan_id &&
+          {plan?.plan_id && (
             plan.cancelled ?
             <div className="flex justify-center">
               You plan has been cancelled and your benifits will continue until: {plan.next_billing_date}
@@ -38,7 +38,7 @@ const SubscriptionInfo = ({ plan }) => {
                 Cancel Plan
               </button>
             </div>
-          }
+          )}
         </div>
       </div>
     </div>
