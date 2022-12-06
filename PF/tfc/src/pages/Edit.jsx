@@ -12,6 +12,7 @@ import EditBox from '../components/accounts/EditBox';
 
 const Edit = () => {
   const [user, setUser] = useState(null);
+  const [card, setCard] = useState(null);
   const [updateCard, setUpdateCard] = useState(false);
   const [updateAccount, setUpdateAccount] = useState(false);
   const navigate = useNavigate();
@@ -29,9 +30,24 @@ const Edit = () => {
       setUser(null);
     }
   }
+
+  const getCardInfo = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("userToken"));
+      const { data } = await axios({
+        method: "get",
+        url: "http://127.0.0.1:8000/subscriptions/card/update/",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setCard(data);
+    } catch (e) {
+      setCard(null);
+    }
+  }
   
   useEffect(() => {
     getUserInfo();
+    getCardInfo();
   }, []);
 
   return (
@@ -43,7 +59,7 @@ const Edit = () => {
       {user ?
       <div className="grid grid-cols-2">
         {updateAccount ? <EditBox /> : <AccountInfo user={user} setUpdateAccount={setUpdateAccount} />}
-        {/* <CardBox update={updateCard}/> */}
+        {updateCard ? <CardBox isAdd={!card?.card_num}/> : <CardInfo card={card} setUpdateCard={setUpdateCard} />}
       </div>
       :
       <div className="flex justify-center">

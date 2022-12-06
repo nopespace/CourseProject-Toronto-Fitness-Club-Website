@@ -29,8 +29,8 @@ const EditBox = (props) => {
         data: form,
         headers: { Authorization: `Bearer ${token}` },
       });
-      alert("Edit success");
-      navigate("/");
+      alert("Account information updated");
+      window.location.replace("/edit/");
     } catch (e) {
       alert(getErrorMessage(e));
     }

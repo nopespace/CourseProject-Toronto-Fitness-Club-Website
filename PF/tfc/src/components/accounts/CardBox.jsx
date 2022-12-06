@@ -17,51 +17,34 @@ const CardBox = (props) => {
     return fullMessage;
   };
 
-  const login = async (form) => {
+
+  const add = async (form) => {
     try {
       const res = await axios({
         method: "post",
-        url: "http://127.0.0.1:8000/accounts/login/",
+        url: "http://127.0.0.1:8000/subscriptions/card/add/",
         data: form,
       });
-      localStorage.setItem("userToken", JSON.stringify(res.data.token));
-      navigate('/');
+      alert("Payment Information Added");
+      window.location.replace("/edit/");
     } catch (e) {
       alert(getErrorMessage(e));
     }
   };
 
-  const add = () => {
-
-  }
-
-  const update = async (form) => {
-    try {
-      const res = await axios({
-        method: "post",
-        url: "http://127.0.0.1:8000/accounts/register/",
-        data: form,
-      });
-      alert("Registration success");
-      navigate('/login/');
-    } catch (e) {
-      alert(getErrorMessage(e));
-    }
-  };
-
-  const edit = async (form) => {  
-
+  const update = async (form) => {  
     try {
       const token = JSON.parse(localStorage.getItem("userToken"));
       const res = await axios({
-        method: "patch",
-        url: "http://127.0.0.1:8000/accounts/edit/",
+        method: "put",
+        url: "http://127.0.0.1:8000/subscriptions/card/update/",
         data: form,
         headers: { Authorization: `Bearer ${token}` },
       });
-      alert("Edit success");
+      alert("Payment Information Updated");
+      window.location.replace("/edit/");
     } catch (e) {
-      alert("Edit Failed, Please try again later.");
+      alert(getErrorMessage(e));
     }
   };
 
@@ -87,6 +70,7 @@ const CardBox = (props) => {
                 id="card_num"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Card Number"
+                required
               />
             </div>
             <div>
@@ -102,6 +86,7 @@ const CardBox = (props) => {
                 id="cardholder"
                 placeholder="Card Holder"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                required
               />
             </div>
             <div>
@@ -117,6 +102,7 @@ const CardBox = (props) => {
                 id="expiry_date"
                 placeholder="Card Holder"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                required
               />
             </div>
             <div>
@@ -132,13 +118,14 @@ const CardBox = (props) => {
                 id="cvv"
                 placeholder="123"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                required
               />
             </div>
             <button
               type="submit"
               className="w-full text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
-              Update Card
+              {isAdd ? "Add Card" : "Update Card"}
             </button>
           </form>
         </div>

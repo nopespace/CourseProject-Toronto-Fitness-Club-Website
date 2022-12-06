@@ -25,7 +25,7 @@ const RegisterBox = (props) => {
         data: form,
       });
       localStorage.setItem("userToken", JSON.stringify(res.data.token));
-      navigate('/');
+      navigate('/edit/');
     } catch (e) {
       alert(getErrorMessage(e));
     }
