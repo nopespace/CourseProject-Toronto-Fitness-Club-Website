@@ -12,6 +12,13 @@ const Subscriptions = () => {
 
   const getUserData = async () => {
     const token = JSON.parse(localStorage.getItem("userToken"));
+
+    // No user is logged in
+    if (!token) {
+      setUserData(null);
+      return;
+    }
+    
     try {
       const res = await axios({
         method: "get",
@@ -20,7 +27,8 @@ const Subscriptions = () => {
       })
       setUserData(res.data);
     } catch (e) { 
-      setUserData(null)
+      // User is logged in, but has no plans
+      setUserData({});
     }
   }
 
@@ -46,7 +54,7 @@ const Subscriptions = () => {
         Current Plan
       </div>
       <div className="flex justify-center my-10">
-
+        This user has no current plans
       </div>
       <div className="flex justify-center font-bold my-10 text-2xl">
         Please choose a subscription plan
