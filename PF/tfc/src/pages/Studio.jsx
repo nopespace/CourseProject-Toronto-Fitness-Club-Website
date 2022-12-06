@@ -10,7 +10,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useNavigate } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import StudioAmenity from "../components/StudioAmenity";
-import Classes from "../components/classes/Classes";
+import StudioClasses from "../components/classes/StudioClasses";
 
 const Studio = (props) => {
     let { studio_id, lat, lon } = useParams();
@@ -91,7 +91,7 @@ const Studio = (props) => {
                             {classShow && <KeyboardArrowUpIcon />}
                         </button>
 
-                        {classShow && <Classes studio={studio}></Classes>}
+                        {classShow && <StudioClasses studio={studio}></StudioClasses>}
 
                     </Box>
                     <Box className='studio-center-container-box' style={{ flexDirection: 'column', justifyContent: 'start' }}>

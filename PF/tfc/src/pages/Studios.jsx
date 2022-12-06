@@ -22,7 +22,7 @@ const Studios = (props) => {
   const [query, setQuery] = useState({ keyword: '', page: 1 })
   const [rowCount, setRowCount] = useState(0);  // total number of rows, for table server-side pagination
   const [pageSize, setPageSize] = React.useState(10);
-  const [optionChose, setOptionChose] = useState(undefined);
+  const [optionChose, setOptionChose] = useState('studio name');
 
   useEffect(() => {
     if (navigator.geolocation) {

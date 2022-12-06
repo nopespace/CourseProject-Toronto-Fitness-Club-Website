@@ -34,18 +34,18 @@ const StudiosSearch = (props) => {
     }
 
     return (
-        <Box width='90%'>
+        <Box width='90%' m={3}>
             <SearchDropDownMenu
                 options={options}
                 setSearchRequired={setSearchRequired}
                 optionChose={optionChose}
                 setOptionChose={setOptionChose}
             />
-            {searchRequired && <SearchBar
+            <SearchBar
                 placeholder='Enter your keyword:'
                 handleSearch={handleSearch}
                 handleSearchFieldChange={handleSearchFieldChange}
-            />}
+            />
         </Box>
     )
 }

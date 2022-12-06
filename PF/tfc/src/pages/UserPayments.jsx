@@ -3,8 +3,8 @@ import axios from "axios";
 import { Box, Stack, Typography, Grid } from '@mui/material';
 import '../index.css'
 import Navigation from "../components/Navigation";
-import UserPaymentsHistoryTable from "../components/UserPaymentHistoryTable";
-import UserPaymentFuture from "../components/UserPaymentFuture";
+import UserPaymentsHistoryTable from "../components/accounts/UserPaymentHistoryTable";
+import UserPaymentFuture from "../components/accounts/UserPaymentFuture";
 
 const UserPayments = (props) => {
 

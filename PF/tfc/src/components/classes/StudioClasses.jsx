@@ -6,11 +6,11 @@ import {
 import { useEffect, useState, useRef } from 'react';
 import axios from "axios";
 import { Box, Stack, Typography, Grid } from '@mui/material';
-import ClassesSearch from "./ClassesSearch";
+import StudioClassesSearch from "./StudioClassesSearch";
 import ClassEnroll from "./ClassEnroll";
 
 
-const Classes = (props) => {
+const StudioClasses = (props) => {
     const studio = props.studio
     const [query, setQuery] = useState({ keyword: '', page: 1 })
     // const [page, setPage] = useState(1);
@@ -120,7 +120,7 @@ const Classes = (props) => {
                 m: 3,
             }}>
 
-            <ClassesSearch
+            <StudioClassesSearch
                 setQuery={setQuery}
                 setOptionChose={setOptionChose}
                 optionChose={optionChose}
@@ -165,4 +165,4 @@ const Classes = (props) => {
     )
 }
 
-export default Classes;
+export default StudioClasses;

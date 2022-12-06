@@ -5,7 +5,7 @@ import Geocode from "react-geocode";
 import SearchDropDownMenu from '../SearchDropDownMenu';
 import axios from "axios";
 
-const ClassesSearch = (props) => {
+const StudioClassesSearch = (props) => {
     const {
         setQuery,
         optionChose,
@@ -40,7 +40,7 @@ const ClassesSearch = (props) => {
     }
 
     return (
-        <Box width='90%' m={2}>
+        <Box width='90%' m={3}>
             <SearchDropDownMenu
                 options={options}
                 setSearchRequired={setSearchRequired}
@@ -58,4 +58,4 @@ const ClassesSearch = (props) => {
     )
 }
 
-export default ClassesSearch;
+export default StudioClassesSearch;
