@@ -28,8 +28,8 @@ const UserPaymentFuture = (props) => {
 
     return (
         <Box sx={{ m: 2 }}>
-            {payment === [] && <Typography>No Future Payment</Typography>}
-            {payment !== [] &&
+            {payment.length === 0 && <Typography>No Future Payment</Typography>}
+            {payment.length !== 0 &&
                 <>
                     <Typography><b>Next Billing Date</b>: {payment.next_billing_date}</Typography>
                     <Typography><b>Next Billing Amount</b>: ${payment.next_billing_amount}</Typography>
