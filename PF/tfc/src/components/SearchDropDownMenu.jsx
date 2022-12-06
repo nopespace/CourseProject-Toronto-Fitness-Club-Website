@@ -86,6 +86,12 @@ const SearchDropDownMenu = (props) => {
                 onClick={handleClickDropDown}
                 endIcon={<KeyboardArrowDownIcon />}
                 fontSize='medium'
+                sx={{
+                    backgroundColor: 'rgb(239, 122, 20)',
+                    "&:hover": {
+                        backgroundColor: 'rgb(209, 101, 6)'
+                    }
+                }}
             >
                 <FilterAltIcon />
                 {!optionChose && <>Search By:</>}
