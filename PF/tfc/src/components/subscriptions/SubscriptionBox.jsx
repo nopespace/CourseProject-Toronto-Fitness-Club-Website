@@ -1,16 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from 'react';
-import axios from "axios";
-import { ContentCutOutlined } from "@mui/icons-material";
 import CheckIcon from '../CheckIcon';
 
 const SubscriptionBox = ({disabled, plan, changePlan}) => {
-
   return (
     <div className="w-full max-w-sm p-4 mx-2 bg-white border rounded-lg shadow-md sm:p-8">
       <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
-        {plan.billingCycle}
+        {plan.billing_cycle}
       </h5>
       <div className="flex items-baseline text-gray-900">
         <span className="text-3xl font-semibold">$</span>
@@ -36,7 +31,7 @@ const SubscriptionBox = ({disabled, plan, changePlan}) => {
             Premium membership perks
           </span>
         </li>
-        <li className="flex space-x-3 line-through decoration-gray-500">
+        <li className={`flex space-x-3 ${plan.plan_id === 1 && "line-through"} decoration-gray-500`}>
           <CheckIcon />
           <span className="text-base font-normal leading-tight text-gray-500">
             Save $4.66/month
@@ -45,7 +40,7 @@ const SubscriptionBox = ({disabled, plan, changePlan}) => {
       </ul>
       {!disabled ? (
         <button
-          onClick={(e) => {}}
+          onClick={() => {changePlan(plan)}}
           type="button"
           className="text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
         >
