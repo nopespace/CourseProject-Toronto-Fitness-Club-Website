@@ -8,7 +8,8 @@ const CardInfo = ({ card, setUpdateCard }) => {
         <div className="font-bold mb-2 text-xl">Payment Information</div>
           { card?.card_num ?
           <>
-            <span className="block text-sm mt-2">Credit Card: <span className="font-bold">{`***********${card.card_num.substr(-4)}`}</span></span>
+            <span className="block text-sm mt-2">Card Holder: {card.cardholder}</span>
+            <span className="block text-sm mt-2">Card Number: <span className="font-bold">{`***********${card.card_num.substr(-4)}`}</span></span>
             <span className="block text-sm font-medium text-gray-900 truncate mt-2">{}</span>
           </>
           :
