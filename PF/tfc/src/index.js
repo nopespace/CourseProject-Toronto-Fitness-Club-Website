@@ -15,6 +15,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import UserClasses from "./pages/UserClasses";
+import UserPayments from "./pages/userPayments";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "subscriptions/",
     element: <Subscriptions />,
+  },
+  {
+    path: "myPayments/",
+    element: <UserPayments />,
   },
   {
     path: "login/",

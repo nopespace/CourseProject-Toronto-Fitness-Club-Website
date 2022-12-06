@@ -28,6 +28,8 @@ const NavAccountDropdown = ({ user, logout }) => {
                   <Divider sx={{my:0.5}}></Divider>
                   <Link to="/myClasses/" className="text-sm hover:bg-gray-100 text-gray-700 block p-2 rounded">My Classes</Link>
                   <Divider sx={{my:0.5}}></Divider>
+                  <Link to="/myPayments/" className="text-sm hover:bg-gray-100 text-gray-700 block p-2 rounded">My Payments</Link>
+                  <Divider sx={{my:0.5}}></Divider>
                   <Link onClick={logout} className="text-sm hover:bg-gray-100 text-gray-700 block p-2 rounded">Logout</Link>
               </li>
             </ul>
