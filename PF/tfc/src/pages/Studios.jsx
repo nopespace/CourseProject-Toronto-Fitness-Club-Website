@@ -18,10 +18,11 @@ const Studios = (props) => {
   const [pos, setPos] = useState({ lat: 43.653225, lon: -79.383186 })
   /* studios with pagination */
   const [studios, setStudios] = useState([]);
-  // const [studioID, setStudioID] = useState(undefined);  // the specific studio user chose to see
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
+  const [query, setQuery] = useState({ keyword: '', page: 1 })
   const [rowCount, setRowCount] = useState(0);  // total number of rows, for table server-side pagination
   const [pageSize, setPageSize] = React.useState(10);
+  const [optionChose, setOptionChose] = useState(undefined);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -38,16 +39,21 @@ const Studios = (props) => {
   useEffect(() => {
     localStorage.setItem('pos', JSON.stringify(pos))
     listStudios(pos.lat, pos.lon);
-  }, [pos, page])
+  }, [pos, query])
 
   const listStudios = async (lat, lon) => {
     let url = `http://127.0.0.1:8000/studios/list/`
-    const { data } = await axios.get(url, { params: { lat: lat, lon: lon, page: page } });
-    data.results.map((studio, index) => {
-      studio['order'] = (page - 1) * pageSize + index + 1;
+    var res;
+    if (query.keyword == '') {
+      res = await axios.get(url, { params: { lat: lat, lon: lon, page: query.page } });
+    } else {
+      res = await axios.get(url, { params: { lat: pos.lat, lon: pos.lon, keyword: query.keyword, criterion: optionChose, page: query.page }})
+    }
+    res.data.results.map((studio, index) => {
+      studio['order'] = (query.page - 1) * pageSize + index + 1;
     })
-    setStudios(data.results);
-    setRowCount(data.count)
+    setStudios(res.data.results);
+    setRowCount(res.data.count)
   }
 
 
@@ -80,14 +86,18 @@ const Studios = (props) => {
             pos={pos}
             setStudios={setStudios}
             setRowCount={setRowCount}
-            page={page}
+            query={query}
+            setQuery={setQuery}
+            optionChose={optionChose}
+            setOptionChose={setOptionChose}
+            // page={page}
             pageSize={pageSize}
           />
-          <Typography color='green'>*Click on a studio to see more info.</Typography>
+          <Typography color='green'>*Click on a studio to see more info (classes, etc).</Typography>
           <StudiosTable
             studios={studios}
-            // setStudioID={setStudioID}
-            setPage={setPage}
+            query={query}
+            setQuery={setQuery}
             rowCount={rowCount}
             pageSize={pageSize}
             pos={pos}
@@ -98,14 +108,8 @@ const Studios = (props) => {
           studios={studios}
           pos={pos}
           setPos={setPos}
-        // setStudioID={setStudioID}
         />
       </Box>
-
-      {/* {studioID && <StudioDisplay
-        studioID={studioID}
-        pos={pos}
-      />} */}
     </Box>
   )
 

@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const StudiosTable = (props) => {
     const rows = props.studios
-    const setPage = props.setPage
+    const query = props.query
+    const setQuery = props.setQuery
     const rowCount = props.rowCount
     const pageSize = props.pageSize
     const pos = props.pos
@@ -26,10 +27,12 @@ const StudiosTable = (props) => {
             <DataGrid
                 rows={rows}
                 columns={columns}
+                page={query.page - 1}
                 pageSize={pageSize}
+                pagination
                 paginationMode='server'
                 rowCount={rowCount}
-                onPageChange={(page) => setPage(page + 1)}
+                onPageChange={(page) => setQuery({...query, page: page + 1})}
                 disableExtendRowFullWidth={false}
                 sx={{
                     // https://mui.com/x/react-data-grid/style/#styling-rows

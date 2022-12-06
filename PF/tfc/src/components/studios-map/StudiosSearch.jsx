@@ -7,11 +7,9 @@ import axios from "axios";
 
 const StudiosSearch = (props) => {
     const {
-        pos,
-        setStudios,
-        setRowCount,
-        page,
-        pageSize
+        setQuery,
+        optionChose,
+        setOptionChose
     } = props
     const options = [
         'studio name',
@@ -22,29 +20,17 @@ const StudiosSearch = (props) => {
 
     // if user decides to search
     const [searchRequired, setSearchRequired] = useState(false);
-    // which option user chose to filter by
-    const [optionChose, setOptionChose] = useState(undefined);
-
-    const searchStudios = async (keyword) => {
-        let url = `http://127.0.0.1:8000/studios/list/`
-        const { data } = keyword !== '' ? await axios.get(url, { params: { lat: pos.lat, lon: pos.lon, keyword: keyword, criterion: optionChose }}) : await axios.get(url, { params: { lat: pos.lat, lon: pos.lon}})
-        data.results.map((studio, index) => {
-          studio['order'] = (page - 1) * pageSize + index + 1;
-        })
-        setStudios(data.results);
-        setRowCount(data.count);
-      }
 
     const handleSearch = async (e) => {
         e.preventDefault()
         var keyword = e.target.keyword.value
-        searchStudios(keyword)
+        setQuery({keyword: keyword, page: 1})
         
     }
 
     const handleSearchFieldChange = async(e) => {
         var keyword = e.target.value;
-        searchStudios(keyword)
+        setQuery({keyword: keyword, page: 1})
     }
 
     return (
