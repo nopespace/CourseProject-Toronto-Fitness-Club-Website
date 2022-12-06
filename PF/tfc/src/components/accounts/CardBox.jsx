@@ -62,7 +62,7 @@ const CardBox = (props) => {
             <div>
               <label
                 htmlFor="card_num"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Card Number
               </label>
@@ -80,7 +80,7 @@ const CardBox = (props) => {
             <div>
               <label
                 htmlFor="cardholder"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Card Holder
               </label>
@@ -96,7 +96,7 @@ const CardBox = (props) => {
             <div>
               <label
                 htmlFor="expiry_date"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Expiry Date
               </label>
@@ -112,7 +112,7 @@ const CardBox = (props) => {
             <div>
               <label
                 htmlFor="CVV"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 CVV
               </label>

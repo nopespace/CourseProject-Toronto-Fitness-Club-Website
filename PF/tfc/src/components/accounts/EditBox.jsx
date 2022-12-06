@@ -48,7 +48,7 @@ const EditBox = ({user}) => {
             <div>
               <label
                 htmlFor="username"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Username (Optional)
               </label>
@@ -63,7 +63,7 @@ const EditBox = ({user}) => {
             <div>
               <label
                 htmlFor="email"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Email (Optional)
               </label>
@@ -78,7 +78,7 @@ const EditBox = ({user}) => {
             <div>
               <label
                 htmlFor="first_name"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 First Name (Optional)
               </label>
@@ -93,7 +93,7 @@ const EditBox = ({user}) => {
             <div>
               <label
                 htmlFor="lastname"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Last Name (Optional)
               </label>
@@ -108,7 +108,7 @@ const EditBox = ({user}) => {
             <div>
               <label
                 htmlFor="phone_number"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Phone Number (Optional)
               </label>
@@ -124,7 +124,7 @@ const EditBox = ({user}) => {
             <div>
               <label
                 htmlFor="avatar"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Avatar (Optional)
               </label>
@@ -141,7 +141,7 @@ const EditBox = ({user}) => {
             <div>
               <label
                 htmlFor="password"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Password (Optional)
               </label>

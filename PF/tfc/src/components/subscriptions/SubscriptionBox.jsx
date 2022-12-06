@@ -4,7 +4,7 @@ import CheckIcon from '../CheckIcon';
 const SubscriptionBox = ({disabled, plan, changePlan}) => {
   return (
     <div className="w-full max-w-sm p-4 mx-2 bg-white border rounded-lg shadow-md sm:p-8">
-      <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
+      <h5 className="mb-4 text-xl font-medium text-gray-500">
         {plan.billing_cycle}
       </h5>
       <div className="flex items-baseline text-gray-900">
