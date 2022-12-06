@@ -20,7 +20,7 @@ import UserPayments from "./pages/UserPayments";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root/>,
+    element: <Root />,
   },
   {
     path: "studios/",
