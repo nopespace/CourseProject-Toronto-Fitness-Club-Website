@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
 const CardBox = (props) => {
-  const { type } = props;
-  const avatarRef = useRef();
+  const { isAdd } = props;
   const navigate = useNavigate();
 
   const getErrorMessage = (e) => {
@@ -18,46 +17,7 @@ const CardBox = (props) => {
     return fullMessage;
   };
 
-  const isValid = (form) => {
-    console.log(avatarRef);
-
-    if (!avatarRef.current?.value) {
-      form.delete("avatar")
-    }
-
-    let fields = [];
-    if (type === "Login") {
-      fields = [
-        'username',
-        'cardholder'
-      ]
-    } else if (type === "Register") {
-      fields = [
-        'username',
-        'cardholder',
-        'first_name',
-        'last_name',
-        'phone_number',
-      ]
-    } else {
-      return true;
-    }
-
-    let valid = true;
-    fields.forEach(field => {
-      if (!form.get(field)) {
-        valid = false;
-      }
-    })
-    return valid;
-  }
-
   const login = async (form) => {
-    if (!isValid(form)) {
-      alert("Please fill in all non-optional fields.")
-      return;
-    }
-
     try {
       const res = await axios({
         method: "post",
@@ -71,12 +31,11 @@ const CardBox = (props) => {
     }
   };
 
-  const register = async (form) => {
-    if (!isValid(form)) {
-      alert("Please fill in all required fields.")
-      return;
-    }
+  const add = () => {
 
+  }
+
+  const update = async (form) => {
     try {
       const res = await axios({
         method: "post",
@@ -90,8 +49,7 @@ const CardBox = (props) => {
     }
   };
 
-  const edit = async (form) => {
-    isValid(form);
+  const edit = async (form) => {  
 
     try {
       const token = JSON.parse(localStorage.getItem("userToken"));
@@ -113,11 +71,7 @@ const CardBox = (props) => {
         <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8">
           <div className="font-bold mb-2">Card Information</div>
           <form className="space-y-6" onSubmit={event => {
-              ({
-                "Login": login,
-                "Register": register,
-                "Edit": edit
-              })[type](new FormData(event.target));
+              (isAdd ? add : update)(new FormData(event.target));
               event.preventDefault();
             }}>
             <div>
@@ -182,7 +136,7 @@ const CardBox = (props) => {
             </div>
             <button
               type="submit"
-              className="w-full text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              className="w-full text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               Update Card
             </button>

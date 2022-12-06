@@ -1,4 +1,3 @@
-import { alpha } from "@mui/material";
 import * as React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -10,54 +9,16 @@ const RegisterBox = (props) => {
   const navigate = useNavigate();
 
   const getErrorMessage = (e) => {
-    console.log(Object.values(e))
-    let fullMessage = "Please fix the following errors: ";
-    e.values().forEach(message => {
-      fullMessage += `- ${message}\n`;
+    console.log(e)
+    let fullMessage = "Please fix the following errors:\n";
+    Object.keys(e).forEach(message => {
+      fullMessage += `- ${message}: ${e[message][0]}\n`;
     })
     return fullMessage;
   };
 
-  const isValid = (form) => {
-    console.log(avatarRef);
-
-    if (!avatarRef.current?.value) {
-      form.delete("avatar")
-    }
-
-    let fields = [];
-    if (type === "Login") {
-      fields = [
-        'username',
-        'password'
-      ]
-    } else if (type === "Register") {
-      fields = [
-        'username',
-        'password',
-        'first_name',
-        'last_name',
-        'phone_number',
-      ]
-    } else {
-      return true;
-    }
-
-    let valid = true;
-    fields.forEach(field => {
-      if (!form.get(field)) {
-        valid = false;
-      }
-    })
-    return valid;
-  }
-
   const login = async (form) => {
-    if (!isValid(form)) {
-      alert("Please fill in all non-optional fields.")
-      return;
-    }
-
+    
     try {
       const res = await axios({
         method: "post",
@@ -72,11 +33,6 @@ const RegisterBox = (props) => {
   };
 
   const register = async (form) => {
-    if (!isValid(form)) {
-      alert("Please fill in all required fields.")
-      return;
-    }
-
     try {
       const res = await axios({
         method: "post",
@@ -86,12 +42,14 @@ const RegisterBox = (props) => {
       alert("Registration success");
       navigate('/login/');
     } catch (e) {
-      alert(getErrorMessage(e));
+      alert(getErrorMessage(e.response.data));
     }
   };
 
   const edit = async (form) => {
-    isValid(form);
+    if (!avatarRef.current?.value) {
+      form.delete("avatar")
+    }
 
     try {
       const token = JSON.parse(localStorage.getItem("userToken"));
@@ -104,7 +62,7 @@ const RegisterBox = (props) => {
       alert("Edit success");
       navigate("/");
     } catch (e) {
-      alert("Edit Failed, Please try again later.");
+      alert(getErrorMessage(e));
     }
   };
 
@@ -235,7 +193,7 @@ const RegisterBox = (props) => {
             </div>
             <button
               type="submit"
-              className="w-full text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              className="w-full text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               {type}
             </button>

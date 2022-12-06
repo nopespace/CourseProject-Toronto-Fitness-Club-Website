@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoadingCircle from '../components/LoadingCircle';
+import AccountInfo from '../components/accounts/AccountInfo';
+import CardInfo from '../components/accounts/CardInfo';
 
 const Edit = () => {
   const [user, setUser] = useState(null);
@@ -35,12 +37,12 @@ const Edit = () => {
     <>
       <Navigation />
       <div className="flex justify-center font-bold my-10 text-2xl">
-        Change account information
+        My account
       </div>
       {user ?
       <div className="grid grid-cols-2">
-        <RegisterBox type="Edit" />
-        <CardBox />
+        {updateAccount ? <RegisterBox type="Edit" /> : <AccountInfo user={user} setUpdateAccount={setUpdateAccount} />}
+        {/* <CardBox update={updateCard}/> */}
       </div>
       :
       <div className="flex justify-center">
