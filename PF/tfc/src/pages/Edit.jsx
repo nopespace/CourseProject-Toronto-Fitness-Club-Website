@@ -8,6 +8,7 @@ import axios from "axios";
 import LoadingCircle from '../components/LoadingCircle';
 import AccountInfo from '../components/accounts/AccountInfo';
 import CardInfo from '../components/accounts/CardInfo';
+import EditBox from '../components/accounts/EditBox';
 
 const Edit = () => {
   const [user, setUser] = useState(null);
@@ -41,7 +42,7 @@ const Edit = () => {
       </div>
       {user ?
       <div className="grid grid-cols-2">
-        {updateAccount ? <RegisterBox type="Edit" /> : <AccountInfo user={user} setUpdateAccount={setUpdateAccount} />}
+        {updateAccount ? <EditBox /> : <AccountInfo user={user} setUpdateAccount={setUpdateAccount} />}
         {/* <CardBox update={updateCard}/> */}
       </div>
       :

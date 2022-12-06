@@ -18,7 +18,6 @@ const RegisterBox = (props) => {
   };
 
   const login = async (form) => {
-    
     try {
       const res = await axios({
         method: "post",
@@ -46,37 +45,13 @@ const RegisterBox = (props) => {
     }
   };
 
-  const edit = async (form) => {
-    if (!avatarRef.current?.value) {
-      form.delete("avatar")
-    }
-
-    try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
-      const res = await axios({
-        method: "patch",
-        url: "http://127.0.0.1:8000/accounts/edit/",
-        data: form,
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      alert("Edit success");
-      navigate("/");
-    } catch (e) {
-      alert(getErrorMessage(e));
-    }
-  };
-
   return (
     <>
       <div className="grid place-items-center mx-2">
         <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8">
           <div className="font-bold mb-2">{type}</div>
           <form className="space-y-6" onSubmit={event => {
-              ({
-                "Login": login,
-                "Register": register,
-                "Edit": edit
-              })[type](new FormData(event.target));
+              (type === "Login" ? login: register)(new FormData(event.target));
               event.preventDefault();
             }}>
             <div>
@@ -84,7 +59,7 @@ const RegisterBox = (props) => {
                 htmlFor="username"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Username {type === "Edit" && " (Optional)"}
+                Username 
               </label>
               <input
                 type="text"
@@ -92,6 +67,7 @@ const RegisterBox = (props) => {
                 id="username"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Username"
+                required
               />
             </div>
             {type !== "Login" && (
@@ -101,7 +77,7 @@ const RegisterBox = (props) => {
                     htmlFor="email"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Email {type === "Edit" && " (Optional)"}
+                    Email 
                   </label>
                   <input
                     type="email"
@@ -109,6 +85,7 @@ const RegisterBox = (props) => {
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="example@gmail.com"
+                    required
                   />
                 </div>
                 <div>
@@ -116,7 +93,7 @@ const RegisterBox = (props) => {
                     htmlFor="first_name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    First Name {type === "Edit" && " (Optional)"}
+                    First Name 
                   </label>
                   <input
                     type="text"
@@ -124,6 +101,7 @@ const RegisterBox = (props) => {
                     id="first_name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="First Name"
+                    required
                   />
                 </div>
                 <div>
@@ -131,7 +109,7 @@ const RegisterBox = (props) => {
                     htmlFor="lastname"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Last Name {type === "Edit" && " (Optional)"}
+                    Last Name 
                   </label>
                   <input
                     type="text"
@@ -139,6 +117,7 @@ const RegisterBox = (props) => {
                     id="last_name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="Last Name"
+                    required
                   />
                 </div>
                 <div>
@@ -146,7 +125,7 @@ const RegisterBox = (props) => {
                     htmlFor="phone_number"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Phone Number {type === "Edit" && " (Optional)"}
+                    Phone Number 
                   </label>
                   <input
                     type="tel"
@@ -155,6 +134,7 @@ const RegisterBox = (props) => {
                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="123-456-7890"
+                    required
                   />
                 </div>
                 <div>
@@ -181,7 +161,7 @@ const RegisterBox = (props) => {
                 htmlFor="password"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Password {type === "Edit" && " (Optional)"}
+                Password 
               </label>
               <input
                 type="password"
@@ -189,6 +169,7 @@ const RegisterBox = (props) => {
                 id="password"
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                required
               />
             </div>
             <button
