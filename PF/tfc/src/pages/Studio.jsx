@@ -58,7 +58,7 @@ const Studio = (props) => {
             </Box>
 
             {studio &&
-                <Grid className='studio-grid' sx={{ mt: 2, m: 5 }}>
+                <Grid className='left-large-grid' sx={{ mt: 2, m: 5 }}>
                     <Box className='studio-center-container-box' style={{ flexDirection: 'column', justifyContent: 'start', gap: 10 }}>
                         <Typography variant='h4'>{studio.name}</Typography>
                         <Typography >

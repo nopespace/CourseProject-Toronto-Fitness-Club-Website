@@ -27,7 +27,7 @@ const UserPaymentFuture = (props) => {
 
     return (
         <Box sx={{ m: 2 }}>
-            <Typography variant='h5' fontWeight='bold'>2. My Next Payment</Typography>
+            {/* <Typography variant='h5' fontWeight='bold'>2. My Next Payment</Typography> */}
             <Typography><b>Next Billing Date</b>: {payment.next_billing_date}</Typography>
             <Typography><b>Next Billing Amount</b>: ${payment.next_billing_amount}</Typography>
         </Box>

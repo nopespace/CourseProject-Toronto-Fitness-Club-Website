@@ -64,8 +64,8 @@ const UserPaymentsHistoryTable = (props) => {
             }}
             sx={{
                 // https://mui.com/x/react-data-grid/style/#styling-rows
-                height: '100vh',
-                width: '60%',
+                height: '70vh',
+                width: '80%',
                 boxShadow: 2,
                 border: 2,
                 borderRadius: '5%',

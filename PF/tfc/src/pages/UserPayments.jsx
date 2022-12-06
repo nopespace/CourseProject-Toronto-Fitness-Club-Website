@@ -11,11 +11,16 @@ const UserPayments = (props) => {
     return (
         <Box width='100%'>
             <Navigation />
-            <Box className='payment-history-center-box'>
-                <Typography variant='h5' fontWeight='bold'>1. My Payment History</Typography>
-                <UserPaymentsHistoryTable></UserPaymentsHistoryTable>
-                <UserPaymentFuture></UserPaymentFuture>
-            </Box>
+            <Grid className='left-large-grid' sx={{ m: 2 }}>
+                <Box className='payment-history-center-box' sx={{gap:'1em'}}>
+                    <Typography variant='h5' fontWeight='bold' color='rgb(237, 147, 21)'>My Payment History</Typography>
+                    <UserPaymentsHistoryTable></UserPaymentsHistoryTable>
+                </Box>
+                <Box className='payment-history-center-box'>
+                    <Typography variant='h5' fontWeight='bold' color='rgb(237, 147, 21)'>My Next Payment</Typography>
+                    <UserPaymentFuture></UserPaymentFuture>
+                </Box>
+            </Grid>
         </Box>
     )
 }
