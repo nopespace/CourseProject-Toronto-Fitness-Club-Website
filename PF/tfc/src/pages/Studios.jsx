@@ -56,14 +56,12 @@ const Studios = (props) => {
   return (
     <Box>
       <Navigation />
-      {/* style={{ display: 'flex', justifyContent: 'center', alignItems: "center", padding: 20 }} spacing={2} */}
       <Stack className='studio-center-container-stack' sx={{ p: 5 }} spacing={2}>
         <Typography variant='h4'>🥳Check Out Our Studios🥳</Typography>
         <StudiosSortByLoc setPos={setPos} />
 
       </Stack>
 
-      {/* style={{ display: 'flex', justifyContent: 'center', alignItems: "center" }} */}
       <Box className='studio-center-container-box'>
         <Stack className='studio-center-container-stack'
           spacing={1}
@@ -85,7 +83,7 @@ const Studios = (props) => {
             page={page}
             pageSize={pageSize}
           />
-
+          <Typography color='green'>*Click on a studio to see more info.</Typography>
           <StudiosTable
             studios={studios}
             // setStudioID={setStudioID}

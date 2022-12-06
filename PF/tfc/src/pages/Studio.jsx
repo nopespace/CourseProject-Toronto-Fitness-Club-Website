@@ -49,7 +49,7 @@ const Studio = (props) => {
             <Navigation />
             <Box sx={{ mt: 2, pl: 8 }}>
                 <button
-                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+                    className="text-white bg-orange-400 hover:bg-orange-600 text-gray-800 font-bold py-2 px-4 rounded"
                     onClick={handleClickBack}
                 >
                     <ArrowBackIcon />
@@ -70,7 +70,7 @@ const Studio = (props) => {
                         <Typography ><b>📞Phone Number: </b>{studio.phone_number}</Typography>
 
                         <button
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                            class="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold py-2 px-4 rounded-full"
                             onClick={handleClickAmenity}
                         >
                             See Amenities
@@ -83,7 +83,7 @@ const Studio = (props) => {
                         />}
 
                         <button
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                            class="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold py-2 px-4 rounded-full"
                             onClick={handleClickClass}
                         >
                             Class Schedules
