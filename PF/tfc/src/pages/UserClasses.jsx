@@ -6,8 +6,11 @@ import '../index.css'
 import Navigation from "../components/Navigation";
 import ClassTable from "../components/classes/ClassTable";
 import ClassDrop from "../components/classes/ClassDrop";
+import { Navigate } from "react-router";
+import { useNavigate } from "react-router-dom"
 
 const UserClasses = (props) => {
+    const navigate = useNavigate();
     const [future, setFuture] = useState({
         classes: [],
         page: 1,
@@ -66,9 +69,21 @@ const UserClasses = (props) => {
     return (
         <Box>
             <Navigation />
+            <Stack sx={{ m: 3 }} className="studio-center-container-stack">
+                <Typography variant='h6' fontWeight='bold'>
+                    🎊Wanna enroll in more class? Check out our studios and classes they offer!
+                </Typography>
+                <button
+                    className="w-full text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    onClick={() => navigate('/studios/')}
+                    style={{ width: '15%' }}
+                >
+                    Click me
+                </button>
+            </Stack>
             <Grid className='myClass-grid' sx={{ mt: 2, m: 5 }}>
                 <Box className='class-schedule-center-container-box' >
-                    <Typography variant='h5'>My Future Classes</Typography>
+                    <Typography variant='h5' fontWeight='bold'>My Future Classes</Typography>
                     <Typography color='green'>*Click on a class if you want to drop it.</Typography>
                     <ClassTable id='my-future-schedule'
                         info={future}
@@ -78,7 +93,7 @@ const UserClasses = (props) => {
                 </Box>
 
                 <Box className='class-schedule-center-container-box' >
-                    <Typography variant='h5'>My Past Classes</Typography>
+                    <Typography variant='h5' fontWeight='bold'>My Past Classes</Typography>
                     <ClassTable
                         info={past}
                         setter={setPast}
