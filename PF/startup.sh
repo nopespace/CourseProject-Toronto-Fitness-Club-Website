@@ -1,2 +1,2 @@
-(cd back && sh startup.sh)
+(cd back && source startup.sh)
 (cd tfc && sh startup.sh)
