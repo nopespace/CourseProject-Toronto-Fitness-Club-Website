@@ -90,7 +90,7 @@ class EnrollClassView(CreateAPIView):
                 class_ins.save()
             date += datetime.timedelta(weeks=1)
         return Response({
-            'msg': 'Please check your class schedule. If you aren\'t successfully enrolled, that means the class is full. '
+            'msg': 'Please check your class schedule. If you aren\'t successfully enrolled in some classes, check if that class is full or your subscription plan is valid on that day. '
         }, status=status.HTTP_201_CREATED)
 
 

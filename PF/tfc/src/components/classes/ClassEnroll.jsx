@@ -12,17 +12,45 @@ import { Link } from "react-router-dom";
 
 const ClassEnroll = (props) => {
     const class_ = props.class;
+    const [enrollEligible, setEnrollEligible] = useState(undefined);
+    const [planEndDate, setPlanEndDate] = useState(undefined)
     const msgLink = props.msgLink;
     const setMsgLink = props.setMsgLink;
     const singleClass = `Single Class: Enroll in ${class_.class_name} only on ${class_.date}?`
     const allClass = `All Classes: Enroll in all ${class_.class_name} classes starting from ${class_.date}?`
     const [enrollChoice, sEnrollChoice] = useState('single-class')
+    const token = JSON.parse(localStorage.getItem("userToken"))
+
+    useEffect(() => {
+        checkEnroll();
+    }, [])
+
+    const checkEnroll = async () => {
+        try {
+            const {data} = await axios({
+                method: "get",
+                url: "http://127.0.0.1:8000/subscriptions/update/",
+                headers: { Authorization: "Bearer " + token }
+            })
+            setEnrollEligible(true)
+            if (data.cancelled === true) {
+                console.log(data)
+                setPlanEndDate(data.next_billing_date)
+            }
+        } catch (e) {
+            // User is logged in, but has no plans
+            setEnrollEligible(false)
+        }
+    }
 
     const handleChooseEnroll = (e) => {
         sEnrollChoice(e.target.value)
     }
 
     const enroll = async () => {
+        if (!checkEnroll) {
+            setEnrollEligible(false);
+        }
         setMsgLink({
             msg: undefined,
             link: undefined,
@@ -53,7 +81,6 @@ const ClassEnroll = (props) => {
                     setMsgLink({ msg: err.response.data.msg, link: '/subscriptions/' })
                 })
         }
-        // const { data } = await axios.get(url, { params: { page: query.page } });
     }
 
 
@@ -61,41 +88,45 @@ const ClassEnroll = (props) => {
     return (
         <Box mt={3}>
             <Typography variant='h5' color='green'>Enroll</Typography>
-            <Typography><b>Current number of students</b>: {class_.num_students}/{class_.capacity}</Typography>
-            <FormControl>
-                <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    name="radio-buttons-group"
-                    value={enrollChoice}
-                    onChange={handleChooseEnroll}
+            {enrollEligible === false && <Box>
+                <Typography color='red'>You cannot enroll our classes. Please subscribe to our plan first.</Typography>
+                <Link to={'/subscriptions/'} style={{ textDecoration: 'underline' }}>[Link]</Link>
+            </Box>}
+            {enrollEligible === true && <Box>
+                <Typography><b>Current number of students</b>: {class_.num_students}/{class_.capacity}</Typography>
+                <FormControl>
+                    <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        name="radio-buttons-group"
+                        value={enrollChoice}
+                        onChange={handleChooseEnroll}
+                    >
+                        <FormControlLabel value="single-class" control={<Radio />} label={singleClass} />
+                        <FormControlLabel value="all-class" control={<Radio />} label={allClass} />
+                        {planEndDate && <Typography color='red'><b>Note</b>: You are not able to enroll in classes that is beyond {planEndDate} (end date for your current subscription plan).</Typography>}
+
+                    </RadioGroup>
+                </FormControl>
+
+                <button
+                    className="w-full text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    onClick={enroll}
+                    style={{marginTop: 20, marginBottom: 20}}
                 >
-                    <FormControlLabel value="single-class" control={<Radio />} label={singleClass} />
-                    <FormControlLabel value="all-class" control={<Radio />} label={allClass} />
-                </RadioGroup>
-            </FormControl>
+                    Enroll
+                </button>
 
-            <button
-                className="w-full text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                onClick={enroll}
-            >
-                Enroll
-            </button>
+                {msgLink.msg && !msgLink.link && <Typography>{msgLink.msg}</Typography>}
 
-            {msgLink.msg && !msgLink.link && <Typography>{msgLink.msg}</Typography>}
+                {/* error, show link */}
+                {msgLink.link &&
+                    <Typography style={{ color: 'red' }}>
+                        {msgLink.msg}
+                        <Link to={msgLink.link} style={{ textDecoration: 'underline' }}>[Link]</Link>
+                    </Typography>
 
-            {/* error, show link */}
-            {msgLink.link &&
-                <Typography style={{ color: 'red' }}>
-                    {msgLink.msg}
-                    <Link to={msgLink.link} style={{ textDecoration: 'underline' }}>[Link]</Link>
-                </Typography>
-
-            }
-            {/* {msgLink.msg && <Typography varint='h6' color='red'>
-                {msgLink.msg}
-                {msgLink.link && <Link to={msgLink.link} >  {msgLink.linkLabel}</Link>}
-            </Typography>} */}
-
+                }
+            </Box>}
 
         </Box>
     )

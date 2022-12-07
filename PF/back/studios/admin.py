@@ -20,6 +20,6 @@ class StudioAdmin(admin.ModelAdmin):
         ImageInLine,
         AmenityInLine,
     ]
-    list_display = ["name", "address", "latitude", "longitude", "postal_code", "phone_number"]
+    list_display = ["id", "name", "address", "latitude", "longitude", "postal_code", "phone_number"]
     
 admin.site.register(Studio, StudioAdmin)
